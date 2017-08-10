@@ -6,13 +6,14 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap'
 import { FormlyModule, FormlyBootstrapModule } from 'ng-formly'
 import { ToastyModule } from 'ng2-toasty'
 import { Ng2BreadcrumbModule, BreadcrumbService } from 'ng2-breadcrumb/ng2-breadcrumb'
+import { NgxDatatableModule } from '@swimlane/ngx-datatable'
 
 import { LayoutComponent, BodyComponent, FooterComponent,
   HeaderComponent, SidebarComponent
 } from './layout'
 
-import { FormComponent, CardComponent,
-  CardHeaderComponent, CardHeaderBrandComponent, CardHeaderTabsComponent,
+import { FormComponent, CardComponent, CardHeaderComponent,
+  CardHeaderBrandComponent, CardHeaderTabsComponent, CardHeaderTitleComponent,
   ModalComponent, DashCardComponent, ToolbarComponent, TableComponent
 } from './components'
 
@@ -30,6 +31,7 @@ const components = [
   CardHeaderComponent,
   CardHeaderBrandComponent,
   CardHeaderTabsComponent,
+  CardHeaderTitleComponent,
   FormComponent,
   ModalComponent,
   DashCardComponent,
@@ -49,6 +51,7 @@ const components = [
     NgbModule.forRoot(),
     ToastyModule,
     Ng2BreadcrumbModule.forRoot(),
+    NgxDatatableModule
   ],
   declarations: [
     ...components,

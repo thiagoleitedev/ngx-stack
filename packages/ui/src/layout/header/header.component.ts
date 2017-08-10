@@ -3,7 +3,7 @@ import { Router } from '@angular/router'
 import { NgxUiService } from '../../services/ngx-ui'
 
 @Component({
-  selector: 'admin-header',
+  selector: 'ngx-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })

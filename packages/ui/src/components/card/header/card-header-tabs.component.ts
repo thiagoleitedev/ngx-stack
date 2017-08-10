@@ -2,7 +2,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core'
 import { NavItem } from '../../../services/ngx-ui'
 
 @Component({
-  selector: 'admin-card-header-tabs',
+  selector: 'ngx-card-header-tabs',
   template: `
     <ul class="nav nav-tabs card-header-tabs">
       <li *ngFor="let item of nav.items"

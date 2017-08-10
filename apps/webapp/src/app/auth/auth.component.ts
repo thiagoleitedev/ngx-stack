@@ -1,22 +1,22 @@
 import { Component, OnInit, OnDestroy } from '@angular/core'
 import { Router } from '@angular/router'
 import { NgxUiService, NavItem } from '@ngx-plus/ngx-ui'
-import { RealTime, AccountApi, FireLoopRef, Account, SDKToken } from '@ngx-plus/admin-sdk'
+import { RealTime, AccountApi, FireLoopRef, Account, SDKToken } from '@ngx-plus/ngx-sdk'
 import { Subscription } from 'rxjs/Subscription'
 
 import { AuthService } from './auth.service'
 
 @Component({
-  selector: 'admin-auth',
+  selector: 'ngx-auth',
   template: `
     <div class="row align-items-center justify-content-center auth-root">
       <div class="col-12 col-lg-6">
-        <admin-card [nav]="nav"
+        <ngx-card [nav]="nav"
                     [headerImg]="data.headerImg"
                     [preHeaderImg]="data.preHeaderImg"
                     [postHeaderImg]="data.postHeaderImg">
           <router-outlet></router-outlet>
-        </admin-card>
+        </ngx-card>
       </div>
     </div>
   `,

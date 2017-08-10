@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store'
-import { SDKToken } from '@ngx-plus/admin-sdk'
+import { SDKToken } from '@ngx-plus/ngx-sdk'
 
 export const LOG_IN = '[Auth] LogIn'
 export const LOG_IN_SUCCESS = '[Auth] LogIn Success'

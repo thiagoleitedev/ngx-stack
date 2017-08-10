@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core'
 import { Store } from '@ngrx/store'
-import { Account } from '@ngx-plus/admin-sdk'
+import { Account } from '@ngx-plus/ngx-sdk'
 import { NgxUiService } from '@ngx-plus/ngx-ui'
 import { Observable } from 'rxjs/Observable'
 
@@ -10,15 +10,15 @@ import { UserActions, RoleActions, ControlActions, AuthActions } from './state'
 @Component({
   selector: 'ngx-root',
   template: `
-    <admin-header [hidden]="!(user$ | async)"
+    <ngx-header [hidden]="!(user$ | async)"
                   [user]="user$ | async"
                   (action)="handleAction($event)">
-    </admin-header>
-    <admin-sidebar *ngIf="user$ | async"></admin-sidebar>
-    <admin-body>
+    </ngx-header>
+    <ngx-sidebar *ngIf="user$ | async"></ngx-sidebar>
+    <ngx-body>
       <router-outlet></router-outlet>
-    </admin-body>
-    <admin-footer *ngIf="user$ | async"></admin-footer>
+    </ngx-body>
+    <ngx-footer *ngIf="user$ | async"></ngx-footer>
   `,
 })
 export class AppComponent implements OnInit {

@@ -3,7 +3,7 @@ import { NgxUiService } from '../../services/ngx-ui'
 import { BreadcrumbService } from 'ng2-breadcrumb/ng2-breadcrumb'
 
 @Component({
-  selector: 'admin-body',
+  selector: 'ngx-body',
   templateUrl: './body.component.html',
   styleUrls: ['./body.component.scss']
 })

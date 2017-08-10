@@ -2,10 +2,10 @@ import { Component, OnInit, OnDestroy } from '@angular/core'
 import { NgxUiService, NavItem } from '@ngx-plus/ngx-ui'
 import { Subscription } from 'rxjs/Subscription'
 
-import { AccountApi } from '@ngx-plus/admin-sdk'
+import { AccountApi } from '@ngx-plus/ngx-sdk'
 
 @Component({
-  selector: 'admin-home',
+  selector: 'ngx-home',
   template: `
       <router-outlet></router-outlet>
   `,

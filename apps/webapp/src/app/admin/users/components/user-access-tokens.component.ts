@@ -5,7 +5,7 @@ import { Subscription } from 'rxjs/Subscription'
 import { UsersService } from '../users.service'
 
 @Component({
-  selector: 'admin-user-access-tokens',
+  selector: 'ngx-user-access-tokens',
   templateUrl: './user-access-tokens.component.html',
 })
 export class UserAccessTokensComponent implements OnInit {

@@ -5,15 +5,15 @@ import { NavItem } from '@ngx-plus/ngx-ui'
 import { UsersService } from '../users.service'
 
 @Component({
-  selector: 'admin-user-detail',
+  selector: 'ngx-user-detail',
   template: `
-    <admin-card *ngIf="item"
-                [cardTitle]="item?.fullName"
-                [subTitle]="item?.email"
-                icon="fa fa-fw fa-user-circle"
-                [nav]="tabs">
+    <ngx-card *ngIf="item"
+              [cardTitle]="item?.fullName"
+              [subTitle]="item?.email"
+              icon="fa fa-fw fa-user-circle"
+              [nav]="tabs">
       <router-outlet></router-outlet>
-    </admin-card>
+    </ngx-card>
   `,
 })
 export class UserDetailComponent implements OnInit {

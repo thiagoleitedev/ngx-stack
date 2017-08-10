@@ -5,15 +5,15 @@ import { NavItem } from '@ngx-plus/ngx-ui'
 import { RolesService } from '../roles.service'
 
 @Component({
-  selector: 'admin-role-detail',
+  selector: 'ngx-role-detail',
   template: `
-    <admin-card *ngIf="item"
+    <ngx-card *ngIf="item"
                 [cardTitle]="item?.name"
                 [subTitle]="item?.description"
                 icon="fa fa-fw fa-tag"
                 [nav]="tabs">
       <router-outlet></router-outlet>
-    </admin-card>
+    </ngx-card>
   `,
 })
 export class RoleDetailComponent implements OnInit {

@@ -1,7 +1,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core'
 
 @Component({
-  selector: 'admin-card-header-brand',
+  selector: 'ngx-card-header-brand',
   template: `
     <h1 class="text-center mb-3">
       {{ preHeaderImg || '' }}

@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core'
 import { DashCard, NgxUiService, NavItem } from '@ngx-plus/ngx-ui'
-import { AccountApi, RoleApi, ACLApi } from '@ngx-plus/admin-sdk'
+import { AccountApi, RoleApi, ACLApi } from '@ngx-plus/ngx-sdk'
 import { Observable } from 'rxjs/Observable'
 import { Subscription } from 'rxjs/Subscription'
 import 'rxjs/add/operator/map'
@@ -10,9 +10,11 @@ import { UserActions, RoleActions, ControlActions } from '../state'
 @Component({
   selector: 'dashboard',
   template: `
-  <admin-card icon="fa fa-fw fa-tachometer" cardTitle="Dashboard" [nav]="nav">
-    <router-outlet></router-outlet>
-  </admin-card>
+    <ngx-card icon="fa fa-fw fa-tachometer"
+              cardTitle="Dashboard"
+              [nav]="nav">
+      <router-outlet></router-outlet>
+    </ngx-card>
   `,
   styleUrls: ['./dashboard.component.scss']
 })

@@ -2,7 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core'
 import { NgxUiService } from '../../services/ngx-ui'
 
 @Component({
-  selector: 'admin-modal',
+  selector: 'ngx-modal',
   templateUrl: './modal.component.html',
 })
 export class ModalComponent implements OnInit {

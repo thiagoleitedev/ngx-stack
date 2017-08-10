@@ -4,7 +4,7 @@ import { AccountApi, Account } from '@ngx-plus/admin-sdk'
 import { NgxUiService } from '../../services/ngx-ui'
 
 @Component({
-  selector: 'admin-table',
+  selector: 'ngx-table',
   templateUrl: './table.component.html',
   styles: [`
 

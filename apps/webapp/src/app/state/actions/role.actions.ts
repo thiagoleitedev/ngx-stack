@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store'
-import { Role, LoopBackFilter } from '@ngx-plus/admin-sdk'
+import { Role, LoopBackFilter } from '@ngx-plus/ngx-sdk'
 
 export const CREATE_ROLE = '[Admin] CreateRole'
 export const CREATE_ROLE_SUCCESS = '[Admin] CreateRole Success'

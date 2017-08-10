@@ -3,23 +3,23 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap'
 import { Router, ActivatedRoute } from '@angular/router'
 import { Subscription } from 'rxjs/Subscription'
 import { NgxUiService, ModalComponent } from '@ngx-plus/ngx-ui'
-import { Role, RoleApi } from '@ngx-plus/admin-sdk'
+import { Role, RoleApi } from '@ngx-plus/ngx-sdk'
 import { orderBy, values, includes, filter, isMatch, keysIn } from 'lodash'
 
 import { RolesService } from '../roles.service'
 
 @Component({
-  selector: 'admin-role-list',
+  selector: 'ngx-role-list',
   template: `
-    <admin-card cardTitle="Roles"
-                icon="fa fa-fw fa-tags"
-                [createButton]="service.getCardButtons()"
-                (action)="create()">
+    <ngx-card cardTitle="Roles"
+              icon="fa fa-fw fa-tags"
+              [createButton]="service.getCardButtons()"
+              (action)="create()">
       <ngx-grid [columns]="service.tableColumns"
-                 [items]="items"
-                 (action)="handleAction($event)">
+                [items]="items"
+                (action)="handleAction($event)">
       </ngx-grid>
-    </admin-card>
+    </ngx-card>
   `,
 })
 export class RoleListComponent implements OnInit, OnDestroy {

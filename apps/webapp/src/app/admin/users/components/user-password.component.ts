@@ -6,7 +6,7 @@ import { Subscription } from 'rxjs/Subscription'
 import { UsersService } from '../users.service'
 
 @Component({
-  selector: 'admin-user-password',
+  selector: 'ngx-user-password',
   templateUrl: './user-password.component.html',
 })
 export class UserPasswordComponent implements OnInit {

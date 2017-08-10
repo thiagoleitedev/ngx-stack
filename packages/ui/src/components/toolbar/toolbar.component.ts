@@ -1,10 +1,10 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core'
 import { Router } from '@angular/router'
-import { AccountApi, Account } from '@ngx-plus/admin-sdk'
+import { AccountApi, Account } from '@ngx-plus/ngx-sdk'
 import { NgxUiService } from '../../services/ngx-ui'
 
 @Component({
-  selector: 'admin-toolbar',
+  selector: 'ngx-toolbar',
   template: `
   <div class="row align-items-center justify-content-center toolbar-wrapper">
     <div class="col align-self-center">

@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core'
 import { FormGroup } from '@angular/forms'
 
 @Component({
-  selector: 'admin-form',
+  selector: 'ngx-form',
   templateUrl: './form.component.html',
 })
 export class FormComponent {

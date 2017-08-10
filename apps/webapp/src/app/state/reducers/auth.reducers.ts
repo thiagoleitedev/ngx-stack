@@ -1,5 +1,5 @@
 import { Action, ActionReducer } from '@ngrx/store'
-import { SDKToken, Account } from '@ngx-plus/admin-sdk'
+import { SDKToken, Account } from '@ngx-plus/ngx-sdk'
 import * as Auth from '../actions/auth.actions'
 
 export interface State {

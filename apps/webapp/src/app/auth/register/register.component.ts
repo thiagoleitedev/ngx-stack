@@ -2,15 +2,15 @@ import { Component } from '@angular/core'
 import { Router } from '@angular/router'
 import { Subscription } from 'rxjs/Subscription'
 import { NgxUiService } from '@ngx-plus/ngx-ui'
-import { Account, AccountApi } from '@ngx-plus/admin-sdk'
+import { Account, AccountApi } from '@ngx-plus/ngx-sdk'
 
 @Component({
-  selector: 'admin-auth-register',
+  selector: 'ngx-auth-register',
   template: `
-    <admin-form [config]="formConfig"
-                [item]="registration"
-                (action)="submit($event)">
-    </admin-form>
+    <ngx-form [config]="formConfig"
+              [item]="registration"
+              (action)="submit($event)">
+    </ngx-form>
   `,
   styles: []
 })

@@ -2,12 +2,12 @@ import { Component } from '@angular/core'
 import { NgxUiService } from '../services'
 
 @Component({
-  selector: 'admin-layout',
+  selector: 'ngx-layout',
   template: `
-    <admin-header></admin-header>
-    <admin-sidebar></admin-sidebar>
-    <admin-body></admin-body>
-    <admin-footer></admin-footer>
+    <ngx-header></ngx-header>
+    <ngx-sidebar></ngx-sidebar>
+    <ngx-body></ngx-body>
+    <ngx-footer></ngx-footer>
   `,
 })
 export class LayoutComponent {

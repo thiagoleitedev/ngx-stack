@@ -2,24 +2,20 @@ import { Component, Input, Output, EventEmitter } from '@angular/core'
 import { NavItem } from '../../../services/ngx-ui'
 
 @Component({
-  selector: 'admin-card-header',
+  selector: 'ngx-card-header',
   template: `
     <div class="row align-items-center justify-content-center">
       <div *ngIf="headerImg"
            class="col-12">
-        <admin-card-header-brand [headerImg]="headerImg"
+        <ngx-card-header-brand [headerImg]="headerImg"
                                  [postHeaderImg]="postHeaderImg"
                                  [preHeaderImg]="preHeaderImg">
-        </admin-card-header-brand>
+        </ngx-card-header-brand>
       </div>
       <div class="col">
-        <h4 *ngIf="cardTitle"
-            class="card-title text-uppercase mb-0">
-          {{ cardTitle }}
-        </h4>
-        <p *ngIf="subTitle"
-           class="card-subtitle lead text-left">{{ subTitle }}
-        </p>
+        <ngx-card-header-title [cardTitle]="cardTitle"
+                               [subTitle]="subTitle">
+        </ngx-card-header-title>
         <hr *ngIf="subTitle || (nav && !headerImg) || createButton" />
       </div>
       <div *ngIf="createButton"
@@ -37,7 +33,7 @@ import { NavItem } from '../../../services/ngx-ui'
       </div>
       <div *ngIf="nav"
            class="col-12">
-        <admin-card-header-tabs [nav]="nav"></admin-card-header-tabs>
+        <ngx-card-header-tabs [nav]="nav"></ngx-card-header-tabs>
       </div>
     </div>
   `,

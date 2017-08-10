@@ -1,13 +1,13 @@
 import { Component, OnInit, OnDestroy } from '@angular/core'
 import { DashCard, NgxUiService, NavItem } from '@ngx-plus/ngx-ui'
-import { AccountApi, RoleApi, ACLApi } from '@ngx-plus/admin-sdk'
+import { AccountApi, RoleApi, ACLApi } from '@ngx-plus/ngx-sdk'
 import { Observable } from 'rxjs/Observable'
 import { Subscription } from 'rxjs/Subscription'
 import 'rxjs/add/operator/map'
 
 @Component({
-  selector: 'admin-dashboard',
-  template: `<admin-dash-cards [dashCards]="dashCards"></admin-dash-cards>`,
+  selector: 'ngx-dashboard',
+  template: `<ngx-dash-cards [dashCards]="dashCards"></ngx-dash-cards>`,
 })
 
 export class AdminDashboardComponent implements OnInit, OnDestroy {

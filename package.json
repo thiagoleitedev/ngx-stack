@@ -28,6 +28,7 @@
     "node",
     "ngx",
     "ngx-plus",
+    "ngx-admin",
     "express",
     "static",
     "lerna"

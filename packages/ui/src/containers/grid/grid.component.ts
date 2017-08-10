@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter, AfterViewInit, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core'
 import { Router } from '@angular/router'
-import { AccountApi, Account } from '@ngx-plus/admin-sdk'
+import { AccountApi, Account } from '@ngx-plus/ngx-sdk'
 import { NgxUiService } from '../../services/ngx-ui'
 
 @Component({
@@ -9,16 +9,16 @@ import { NgxUiService } from '../../services/ngx-ui'
     <div class="row align-items-center justify-content-center page-wrapper">
       <div *ngIf="rows"
            class="col-12">
-        <admin-toolbar [rowsPerPage]="rows"
-                       (action)="handleAction($event)">
-        </admin-toolbar>
+        <ngx-toolbar [rowsPerPage]="rows"
+                     (action)="handleAction($event)">
+        </ngx-toolbar>
       </div>
       <div *ngIf="displayed"
            class="col-12">
-        <admin-table [columns]="columns"
+        <ngx-table [columns]="columns"
                      [rows]="displayed"
                      (action)="handleAction($event)">
-        </admin-table>
+        </ngx-table>
       </div>
       <div *ngIf="items"
            class="col-12 pagination-wrapper">

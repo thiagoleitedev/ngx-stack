@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core'
-import { SDKBrowserModule, LoopBackConfig } from '@ngx-plus/admin-sdk'
+import { SDKBrowserModule, LoopBackConfig } from '@ngx-plus/ngx-sdk'
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap'
 
 import { AuthService } from './auth'

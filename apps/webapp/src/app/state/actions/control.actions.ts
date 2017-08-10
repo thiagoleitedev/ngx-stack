@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store'
-import { ACL, LoopBackFilter } from '@ngx-plus/admin-sdk'
+import { ACL, LoopBackFilter } from '@ngx-plus/ngx-sdk'
 
 export const CREATE_CONTROL = '[Admin] CreateControl'
 export const CREATE_CONTROL_SUCCESS = '[Admin] CreateControl Success'

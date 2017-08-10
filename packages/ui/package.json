@@ -8,7 +8,7 @@
     "@angular/forms": "^4.3.3",
     "@angular/router": "^4.3.3",
     "@ng-bootstrap/ng-bootstrap": "^1.0.0-alpha.30",
-    "@ngx-plus/admin-sdk": "^0.0.0",
+    "@ngx-plus/ngx-sdk": "^0.0.0",
     "@swimlane/ngx-datatable": "^10.0.3",
     "bootstrap": "^4.0.0-alpha.6",
     "coreui-styles": "^1.0.2",

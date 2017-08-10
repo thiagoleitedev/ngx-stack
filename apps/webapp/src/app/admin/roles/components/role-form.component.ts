@@ -8,13 +8,13 @@ import { RoleActions } from '../../../state'
 import { Role, RolesService } from '../roles.service'
 
 @Component({
-  selector: 'admin-role-form',
+  selector: 'ngx-role-form',
   template: `
-    <admin-form *ngIf="item"
-                [config]="formConfig"
-                [item]="item"
-                (action)="handleAction($event)">
-    </admin-form>
+    <ngx-form *ngIf="item"
+              [config]="formConfig"
+              [item]="item"
+              (action)="handleAction($event)">
+    </ngx-form>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
 })

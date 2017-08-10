@@ -1,13 +1,13 @@
 import { Component, OnDestroy } from '@angular/core'
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap'
-import { RealTime, FireLoopRef, ACL, Role } from '@ngx-plus/admin-sdk'
+import { RealTime, FireLoopRef, ACL, Role } from '@ngx-plus/ngx-sdk'
 import { NgxUiService, ModalComponent } from '@ngx-plus/ngx-ui'
 import { Subscription } from 'rxjs/Subscription'
 
 import { ControlService } from './control.service'
 
 @Component({
-  selector: 'admin-control',
+  selector: 'ngx-control',
   templateUrl: './control.component.html',
 })
 export class ControlComponent implements OnDestroy {
@@ -27,7 +27,7 @@ export class ControlComponent implements OnDestroy {
   ) {
     this.subscriptions.push(
       this.rt.onReady().subscribe(
-        (admin: any) => {
+        (ngx: any) => {
           this.controlRef = this.rt.FireLoop.ref<ACL>(ACL)
           this.subscriptions.push(this.controlRef.on('change').subscribe(
             (controls: ACL[]) => {

@@ -4,7 +4,7 @@ import { NgxUiService } from '@ngx-plus/ngx-ui'
 import { Observable } from 'rxjs/Observable'
 import { sortBy } from 'lodash'
 
-import { SDKModels, RoleApi, Models, Role } from '@ngx-plus/admin-sdk'
+import { SDKModels, RoleApi, Models, Role } from '@ngx-plus/ngx-sdk'
 
 @Injectable()
 export class ControlService {
@@ -14,7 +14,7 @@ export class ControlService {
   roles: Role[]
 
   constructor(
-    private adminUi: NgxUiService,
+    private ui: NgxUiService,
     private sdkModels: SDKModels,
     private roleApi: RoleApi
   ) {
@@ -63,7 +63,7 @@ export class ControlService {
     this.models.forEach((model: any) => (models.push({ label: model, value: model })))
     options.roles.forEach((role: any) => (roles.push({ label: role.name, value: role.name })))
     let fields = [
-      this.adminUi.form.select('model', {
+      this.ui.form.select('model', {
         label: 'Model',
         className: 'col-12 col-lg-6',
         addonLeft: {
@@ -71,7 +71,7 @@ export class ControlService {
         },
         options: models
       }),
-      this.adminUi.form.select('property', {
+      this.ui.form.select('property', {
         label: 'Property',
         className: 'col-12 col-lg-6',
         addonLeft: {
@@ -92,7 +92,7 @@ export class ControlService {
           }
         ]
       }),
-      this.adminUi.form.select('accessType', {
+      this.ui.form.select('accessType', {
         label: 'Access Type',
         className: 'col-12 col-lg-6',
         addonLeft: {
@@ -117,7 +117,7 @@ export class ControlService {
           }
         ]
       }),
-      this.adminUi.form.select('permission', {
+      this.ui.form.select('permission', {
         label: 'Permission',
         className: 'col-12 col-lg-6',
         addonLeft: {
@@ -134,7 +134,7 @@ export class ControlService {
           }
         ]
       }),
-      this.adminUi.form.select('principalType', {
+      this.ui.form.select('principalType', {
         label: 'Principal Type',
         className: 'col-12 col-lg-6',
         addonLeft: {
@@ -147,7 +147,7 @@ export class ControlService {
           }
         ]
       }),
-      this.adminUi.form.select('principalId', {
+      this.ui.form.select('principalId', {
         label: 'Principal ID',
         className: 'col-12 col-lg-6',
         addonLeft: {

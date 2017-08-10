@@ -8,13 +8,13 @@ import { UserActions } from '../../../state'
 import { User, UsersService } from '../users.service'
 
 @Component({
-  selector: 'admin-user-form',
+  selector: 'ngx-user-form',
   template: `
-    <admin-form *ngIf="item"
+    <ngx-form *ngIf="item"
                 [config]="formConfig"
                 [item]="item"
                 (action)="handleAction($event)">
-    </admin-form>
+    </ngx-form>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
 })

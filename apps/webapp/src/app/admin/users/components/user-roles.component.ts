@@ -1,12 +1,12 @@
 import { Component, OnInit, AfterViewInit, OnDestroy } from '@angular/core'
 import { NgxUiService } from '@ngx-plus/ngx-ui'
-import { RoleApi, Role } from '@ngx-plus/admin-sdk'
+import { RoleApi, Role } from '@ngx-plus/ngx-sdk'
 import { Subscription } from 'rxjs/Subscription'
 
 import { UsersService } from '../users.service'
 
 @Component({
-  selector: 'admin-user-roles',
+  selector: 'ngx-user-roles',
   templateUrl: './user-roles.component.html',
   styles: [`
       .dropdown-menu {

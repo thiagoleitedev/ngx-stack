@@ -3,12 +3,12 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap'
 import { Router, ActivatedRoute } from '@angular/router'
 import { Subscription } from 'rxjs/Subscription'
 import { NgxUiService, ModalComponent } from '@ngx-plus/ngx-ui'
-import { Account, AccountApi } from '@ngx-plus/admin-sdk'
+import { Account, AccountApi } from '@ngx-plus/ngx-sdk'
 
 import { UsersService } from '../users.service'
 
 @Component({
-  selector: 'admin-user-list',
+  selector: 'ngx-user-list',
   templateUrl: './user-list.component.html',
 })
 export class UserListComponent implements OnInit, OnDestroy {

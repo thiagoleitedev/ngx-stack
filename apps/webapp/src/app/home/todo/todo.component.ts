@@ -1,12 +1,12 @@
 import { Component, OnDestroy } from '@angular/core'
 import { NgxUiService } from '@ngx-plus/ngx-ui'
-import { RealTime, FireLoopRef, Todo } from '@ngx-plus/admin-sdk'
+import { RealTime, FireLoopRef, Todo } from '@ngx-plus/ngx-sdk'
 import { Subscription } from 'rxjs/Subscription'
 
 import { TodoService } from './todo.service'
 
 @Component({
-  selector: 'admin-todo',
+  selector: 'ngx-todo',
   templateUrl: './todo.component.html',
 })
 export class TodoComponent implements OnDestroy {
@@ -18,13 +18,13 @@ export class TodoComponent implements OnDestroy {
   private subscriptions: Subscription[] = new Array<Subscription>()
 
   constructor(
-    public adminUi: NgxUiService,
+    public ui: NgxUiService,
     public todoService: TodoService,
     private rt: RealTime
   ) {
     this.subscriptions.push(
       this.rt.onReady().subscribe(
-        (admin: any) => {
+        (ngx: any) => {
           this.todoRef = this.rt.FireLoop.ref<Todo>(Todo)
           this.subscriptions.push(this.todoRef.on('change').subscribe(
             (todos: Todo[]) => {
@@ -59,7 +59,7 @@ export class TodoComponent implements OnDestroy {
       `,
       confirmButtonText: 'Yes, Delete'
     }
-    this.adminUi.alertError(question, () => this.handleAction({ type: 'delete', payload: todo }), () => { })
+    this.ui.alertError(question, () => this.handleAction({ type: 'delete', payload: todo }), () => { })
   }
 
   handleAction(event) {
@@ -68,11 +68,11 @@ export class TodoComponent implements OnDestroy {
         this.subscriptions.push(this.todoRef.create(event.payload).subscribe(
           () => {
             this.modalRef.close()
-            this.adminUi.toastSuccess('Todo Created', 'The Todo was created successfully.')
+            this.ui.toastSuccess('Todo Created', 'The Todo was created successfully.')
           },
           (err) => {
             this.modalRef.close()
-            this.adminUi.toastError('Create Todo Failed', err.message || err.error.message)
+            this.ui.toastError('Create Todo Failed', err.message || err.error.message)
           },
         ))
         break
@@ -80,21 +80,21 @@ export class TodoComponent implements OnDestroy {
         this.subscriptions.push(this.todoRef.upsert(event.payload).subscribe(
           () => {
             this.modalRef.close()
-            this.adminUi.toastSuccess('Todo Updated', 'The Todo was updated successfully.')
+            this.ui.toastSuccess('Todo Updated', 'The Todo was updated successfully.')
           },
           (err) => {
             this.modalRef.close()
-            this.adminUi.toastError('Update Todo Failed', err.message || err.error.message)
+            this.ui.toastError('Update Todo Failed', err.message || err.error.message)
           },
         ))
         break
       case 'delete':
         this.subscriptions.push(this.todoRef.remove(event.payload).subscribe(
           () => {
-            this.adminUi.toastSuccess('Todo Deleted', 'The Todo was deleted successfully.')
+            this.ui.toastSuccess('Todo Deleted', 'The Todo was deleted successfully.')
           },
           (err) => {
-            this.adminUi.toastError('Delete Todo Failed', err.message || err.error.message)
+            this.ui.toastError('Delete Todo Failed', err.message || err.error.message)
           },
         ))
         break

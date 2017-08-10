@@ -23,7 +23,7 @@
     "@ngrx/effects": "^4.0.2",
     "@ngrx/store": "^4.0.2",
     "@ngrx/store-devtools": "^4.0.0",
-    "@ngx-plus/admin-sdk": "^0.0.0",
+    "@ngx-plus/ngx-sdk": "^0.0.0",
     "@ngx-plus/ngx-ui": "^0.0.0",
     "babel-polyfill": "^6.23.0",
     "classlist.js": "^1.1.20150312",

@@ -2,7 +2,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core'
 import { DashCard } from '../../services/ngx-ui'
 
 @Component({
-  selector: 'admin-dash-cards',
+  selector: 'ngx-dash-cards',
   template: `
     <div class="container-fluid">
       <div *ngIf="dashCards"

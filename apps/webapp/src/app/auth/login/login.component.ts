@@ -1,18 +1,18 @@
 import { Component, OnInit } from '@angular/core'
 import { Router } from '@angular/router'
 import { NgxUiService } from '@ngx-plus/ngx-ui'
-import { AccountApi } from '@ngx-plus/admin-sdk'
+import { AccountApi } from '@ngx-plus/ngx-sdk'
 import { Store } from '@ngrx/store'
 
 import { AuthActions } from '../../state'
 
 @Component({
-  selector: 'admin-auth-login',
+  selector: 'ngx-auth-login',
   template: `
-    <admin-form [config]="formConfig"
+    <ngx-form [config]="formConfig"
                 [item]="credentials"
                 (action)="login($event)">
-    </admin-form>
+    </ngx-form>
   `,
 
 })

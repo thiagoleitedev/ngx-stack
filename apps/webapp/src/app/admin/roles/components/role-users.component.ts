@@ -1,12 +1,12 @@
 import { Component, OnInit, AfterViewInit, OnDestroy } from '@angular/core'
 import { NgxUiService } from '@ngx-plus/ngx-ui'
-import { RoleApi, Role } from '@ngx-plus/admin-sdk'
+import { RoleApi, Role } from '@ngx-plus/ngx-sdk'
 import { Subscription } from 'rxjs/Subscription'
 
 import { RolesService } from '../roles.service'
 
 @Component({
-  selector: 'admin-role-users',
+  selector: 'ngx-role-users',
   templateUrl: './role-users.component.html',
 })
 export class RoleUsersComponent implements OnInit, OnDestroy {

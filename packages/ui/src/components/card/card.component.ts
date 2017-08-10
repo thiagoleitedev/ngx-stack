@@ -2,12 +2,12 @@ import { Component, Input, Output, EventEmitter } from '@angular/core'
 import { NavItem } from '../../services/ngx-ui'
 
 @Component({
-  selector: 'admin-card',
+  selector: 'ngx-card',
   template: `
     <div class="card">
       <div *ngIf="cardTitle || nav"
            [class]="'card-header bg-' + (headerBg || 'primary')">
-        <admin-card-header [cardTitle]="cardTitle"
+        <ngx-card-header [cardTitle]="cardTitle"
                            [createButton]="createButton"
                            [headerBg]="headerBg"
                            [headerImg]="headerImg"
@@ -17,7 +17,7 @@ import { NavItem } from '../../services/ngx-ui'
                            [preHeaderImg]="preHeaderImg"
                            [subTitle]="subTitle"
                            (action)="action.emit($event)">
-        </admin-card-header>
+        </ngx-card-header>
       </div>
       <div class="card-block">
         <ng-content></ng-content>
