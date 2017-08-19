@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core'
-import { NavItem } from '../../../services/ngx-ui'
+import { NavItem } from '../../../interfaces'
 
 @Component({
   selector: 'ngx-card-header',

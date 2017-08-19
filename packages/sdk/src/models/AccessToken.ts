@@ -50,6 +50,7 @@ export class AccessToken implements AccessTokenInterface {
     return {
       name: 'AccessToken',
       plural: 'AccessTokens',
+      path: 'AccessTokens',
       properties: {
         "id": {
           name: 'id',

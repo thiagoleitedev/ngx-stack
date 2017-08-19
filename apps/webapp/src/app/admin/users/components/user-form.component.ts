@@ -1,7 +1,7 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core'
 import { Router } from '@angular/router'
 import { Store } from '@ngrx/store'
-import { NgxUiService } from '@ngx-plus/ngx-ui'
+import { NgxUiService } from '../../../ui'
 import { Subscription } from 'rxjs/Subscription'
 
 import { UserActions } from '../../../state'
@@ -16,10 +16,9 @@ import { User, UsersService } from '../users.service'
                 (action)="handleAction($event)">
     </ngx-form>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserFormComponent implements OnInit {
-
   private subscriptions: Subscription[]
   public formConfig: any = {}
   public item: any
@@ -28,23 +27,32 @@ export class UserFormComponent implements OnInit {
     public service: UsersService,
     private ui: NgxUiService,
     private router: Router,
-    private store: Store<any>,
+    private store: Store<any>
   ) {
     this.subscriptions = []
   }
 
   ngOnInit() {
-    this.formConfig = this.service.getFormConfig(true)
+    this.formConfig = {}
     this.subscriptions.push(
       this.service.selected$.subscribe(
-        (user) => this.item = user,
-        (err) => console.log(err)))
+        user => (this.item = user),
+        err => console.log(err)
+      )
+    )
   }
 
   handleAction(event) {
     switch (event.type) {
       case 'update':
-        const fullName = event.payload.firstName + ' ' + (event.payload.middleName || '') + ' ' + event.payload.lastName + ' ' + (event.payload.suffix || '')
+        const fullName =
+          event.payload.firstName +
+          ' ' +
+          (event.payload.middleName || '') +
+          ' ' +
+          event.payload.lastName +
+          ' ' +
+          (event.payload.suffix || '')
         event.payload.fullName = fullName.replace('  ', ' ')
         this.handleAction({ type: 'cancel' })
         return this.service.upsert(event.payload)
@@ -54,5 +62,4 @@ export class UserFormComponent implements OnInit {
         return console.log('Unknown Event Action:', event)
     }
   }
-
 }

@@ -1,17 +1,17 @@
 import { Component, OnInit, OnDestroy } from '@angular/core'
-import { DashCard, NgxUiService, NavItem } from '@ngx-plus/ngx-ui'
+import { DashCard, NgxUiService, NavItem } from '../../ui'
 import { AccountApi, RoleApi, ACLApi } from '@ngx-plus/ngx-sdk'
 import { Observable } from 'rxjs/Observable'
 import { Subscription } from 'rxjs/Subscription'
 import 'rxjs/add/operator/map'
 
 @Component({
-  selector: 'ngx-dashboard',
-  template: `<ngx-dash-cards [dashCards]="dashCards"></ngx-dash-cards>`,
+  selector: 'ngx-admin-dashboard',
+  template: `
+    <ngx-dash-cards [items]="dashCards"></ngx-dash-cards>
+  `,
 })
-
 export class AdminDashboardComponent implements OnInit, OnDestroy {
-
   public dashCards: DashCard[]
   private subscriptions: Subscription[] = new Array<Subscription>()
 
@@ -19,17 +19,17 @@ export class AdminDashboardComponent implements OnInit, OnDestroy {
     private ui: NgxUiService,
     private users: AccountApi,
     private roles: RoleApi,
-    private controls: ACLApi,
-  ) {
-
-  }
+    private controls: ACLApi
+  ) {}
 
   ngOnInit() {
     this.setDashCards()
   }
 
   ngOnDestroy() {
-    this.subscriptions.forEach((subscription: Subscription) => subscription.unsubscribe())
+    this.subscriptions.forEach((subscription: Subscription) =>
+      subscription.unsubscribe()
+    )
   }
 
   setDashCards() {
@@ -37,25 +37,24 @@ export class AdminDashboardComponent implements OnInit, OnDestroy {
       {
         name: 'Users',
         icon: 'users',
-        data: this.users.count().map(c => c.count),
+        data: this.users.count().map(c => c.count.toString()),
         link: '/admin/users',
         class: 'success',
       },
       {
         name: 'Roles',
         icon: 'tags',
-        data: this.roles.count().map(c => c.count),
+        data: this.roles.count().map(c => c.count.toString()),
         link: '/admin/roles',
         class: 'warning',
       },
       {
         name: 'Controls',
         icon: 'ban',
-        data: this.controls.count().map(c => c.count),
+        data: this.controls.count().map(c => c.count.toString()),
         link: '/admin/controls',
         class: 'danger',
-      }
+      },
     ]
   }
-
 }

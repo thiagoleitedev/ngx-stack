@@ -1,7 +1,7 @@
 {
   "name": "@ngx-plus/ngx-admin",
   "version": "0.0.0",
-  "description": "Realtime Angular Admin",
+  "description": "Advanced Angular Admin",
   "scripts": {
     "build": "cd apps/webapp/ && npm run build",
     "clean": "node bin/clean",

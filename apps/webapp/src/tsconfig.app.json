@@ -1,30 +1,15 @@
 {
+  "extends": "../tsconfig.json",
   "compilerOptions": {
-    "sourceMap": true,
-    "declaration": false,
-    "moduleResolution": "node",
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "lib": [
-      "es2016",
-      "dom"
-    ],
     "outDir": "../out-tsc/app",
-    "target": "es5",
+    "baseUrl": "./",
     "module": "es2015",
-    "baseUrl": ".",
-    "types": [
-      "webpack-env"
-    ],
     "paths": {
-      "@angular/*": [ "../node_modules/@angular/*" ],
-      "@ngx-plus/*": [ "../node_modules/@ngx-plus/*" ],
-      "@ngrx/*": [ "../node_modules/@ngrx/*" ],
-      "rxjs/*": [ "../node_modules/rxjs/*" ]
-    },
-    "typeRoots": [
-      "../node_modules/@types"
-    ]
+      "@angular/*": ["../node_modules/@angular/*"],
+      "@ngx-plus/*": ["../node_modules/@ngx-plus/*"],
+      "@ngrx/*": ["../node_modules/@ngrx/*"],
+      "rxjs/*": ["../node_modules/rxjs/*"]
+    }
   },
   "exclude": [
     "test.ts",

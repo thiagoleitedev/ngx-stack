@@ -49,6 +49,7 @@ export class ACL implements ACLInterface {
     return {
       name: 'ACL',
       plural: 'ACLs',
+      path: 'ACLs',
       properties: {
         "model": {
           name: 'model',

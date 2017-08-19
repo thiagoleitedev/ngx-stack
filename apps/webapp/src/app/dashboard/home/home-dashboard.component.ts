@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core'
-import { DashCard, NgxUiService, NavItem } from '@ngx-plus/ngx-ui'
+import { DashCard, NgxUiService, NavItem } from '../../ui'
 import { AccountApi, RoleApi, ACLApi } from '@ngx-plus/ngx-sdk'
 import { Observable } from 'rxjs/Observable'
 import { Subscription } from 'rxjs/Subscription'
@@ -8,12 +8,10 @@ import 'rxjs/add/operator/map'
 @Component({
   selector: 'home-dashboard',
   template: `
-    <ngx-dash-cards [dashCards]="dashCards"></ngx-dash-cards>
+    <ngx-dash-cards [items]="dashCards"></ngx-dash-cards>
   `,
 })
-
 export class HomeDashboardComponent implements OnInit, OnDestroy {
-
   public dashCards: DashCard[]
   private subscriptions: Subscription[] = new Array<Subscription>()
 
@@ -21,17 +19,17 @@ export class HomeDashboardComponent implements OnInit, OnDestroy {
     private ui: NgxUiService,
     private users: AccountApi,
     private roles: RoleApi,
-    private controls: ACLApi,
-  ) {
-
-  }
+    private controls: ACLApi
+  ) {}
 
   ngOnInit() {
     this.setDashCards()
   }
 
   ngOnDestroy() {
-    this.subscriptions.forEach((subscription: Subscription) => subscription.unsubscribe())
+    this.subscriptions.forEach((subscription: Subscription) =>
+      subscription.unsubscribe()
+    )
   }
 
   setDashCards() {
@@ -59,5 +57,4 @@ export class HomeDashboardComponent implements OnInit, OnDestroy {
       // }
     ]
   }
-
 }

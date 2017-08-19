@@ -1,0 +1,19 @@
+@import '../../styles/variables';
+
+.app-body {
+  background: lighten($success, 35%);
+  border-top: 1px solid #ccc;
+  height: calc(100vh - 90px);
+  margin-left: -15px;
+  padding: 15px 15px 40px 15px;
+  width: calc(100% + 30px);
+
+  &.open {
+    margin-left: 235px;
+    width: calc(100vw - 250px);
+  }
+
+  &.no-header {
+    height: 100vh;
+  }
+}

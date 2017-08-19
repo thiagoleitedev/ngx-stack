@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core'
 import { Store } from '@ngrx/store'
 import { AccountApi, Account, RoleApi, Role, AccessToken } from '@ngx-plus/ngx-sdk'
 export { Account as Role } from '@ngx-plus/ngx-sdk'
-import { NgxUiService } from '@ngx-plus/ngx-ui'
+import { NgxUiService } from '../../ui'
 import { Observable } from 'rxjs/Observable'
 import { Subscription } from 'rxjs/Subscription'
 import 'rxjs/add/operator/distinctUntilChanged'
@@ -20,8 +20,8 @@ export class RolesService {
   public roles$: Observable<any>
   public selected$: Observable<any>
   public tableColumns = [
-    { field: 'name', label: 'Name', action: 'update' },
-    { field: 'description', label: 'Description' },
+    { field: 'name', name: 'Name', action: 'update' },
+    { field: 'description', name: 'Description' },
   ]
 
   constructor(
@@ -35,43 +35,6 @@ export class RolesService {
     this.roles$ = this.admin$.map(a => a.roles)
     this.selected$ = this.roles$.map(u => u.selected)
     this.subscriptions = []
-  }
-
-  getCardButtons() {
-    return {
-      class: 'btn btn-outline-success btn-block focus',
-      icon: 'plus',
-      text: 'Create'
-    }
-  }
-
-  getFormConfig(editForm = false): any {
-    return {
-      fields: this.getFormFields(editForm),
-      showCancel: true,
-      buttonColClass: 'col-12',
-      action: editForm ? 'update' : 'create',
-    }
-  }
-
-  getFormFields(editForm = false) {
-    const fields = [
-      this.ui.form.input('name', {
-        label: 'Name',
-        addonLeft: {
-          class: 'fa fa-fw fa-tag'
-        },
-        className: 'col-12',
-      }),
-      this.ui.form.input('description', {
-        label: 'Description',
-        addonLeft: {
-          class: 'fa fa-fw fa-info-circle'
-        },
-        className: 'col-12',
-      }),
-    ]
-    return fields
   }
 
   setSelected(item) {

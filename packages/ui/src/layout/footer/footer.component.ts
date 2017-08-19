@@ -16,7 +16,7 @@ export class FooterComponent {
   ngOnInit() {
     if (!this.footerRight) {
       const ngVersion = VERSION.full
-      this.footerRight = `Angular: <i>v${ngVersion}</i>`
+      this.footerRight = `@angular: v${ngVersion}`
     }
   }
 }

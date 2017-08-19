@@ -5,20 +5,22 @@ import { SharedModule } from '../shared.module'
 
 import { AdminComponent } from './admin.component'
 import { AdminRoutingModule } from './admin.routing'
-import { ControlModule } from './controls/control.module'
+// import { ControlModule } from './controls/control.module'
 
-import { AdminReducer, UserEffects, RoleEffects, ControlEffects } from '../state'
+import {
+  AdminReducer,
+  UserEffects,
+  RoleEffects,
+  ControlEffects,
+} from '../state'
 
 @NgModule({
   imports: [
     SharedModule,
-    ControlModule,
+    // ControlModule,
     StoreModule.forFeature('admin', AdminReducer),
-    AdminRoutingModule
+    AdminRoutingModule,
   ],
-  declarations: [
-    AdminComponent,
-  ],
+  declarations: [AdminComponent],
 })
-
-export class AdminModule { }
+export class AdminModule {}

@@ -21,8 +21,6 @@ import { RoleUsersComponent } from './components/role-users.component'
     RoleFormComponent,
     RoleUsersComponent,
   ],
-  exports: [
-  ],
   providers: [
     RolesService,
     RoleResolver,

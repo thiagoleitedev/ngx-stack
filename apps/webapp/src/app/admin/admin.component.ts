@@ -1,7 +1,7 @@
 import { Component } from '@angular/core'
 import { Observable } from 'rxjs/Observable'
 import { Store } from '@ngrx/store'
-import { NgxUiService, NavItem } from '@ngx-plus/ngx-ui'
+import { NgxUiService, NavItem } from '../ui'
 
 import { UserActions, RoleActions, ControlActions } from '../state'
 
@@ -9,7 +9,7 @@ import { UserActions, RoleActions, ControlActions } from '../state'
   selector: 'admin-main',
   template: `
     <div class="row justify-content-center">
-      <div class="col-12 col-lg-10">
+      <div class="col-12">
         <router-outlet></router-outlet>
       </div>
     </div>

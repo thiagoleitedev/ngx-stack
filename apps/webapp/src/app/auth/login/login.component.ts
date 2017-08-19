@@ -1,77 +1,59 @@
 import { Component, OnInit } from '@angular/core'
 import { Router } from '@angular/router'
-import { NgxUiService } from '@ngx-plus/ngx-ui'
+import { NgxFormConfig } from '@ngx-plus/ngx-forms'
 import { AccountApi } from '@ngx-plus/ngx-sdk'
 import { Store } from '@ngrx/store'
 
+import { NgxUiService } from '../../ui'
 import { AuthActions } from '../../state'
 
 @Component({
   selector: 'ngx-auth-login',
   template: `
     <ngx-form [config]="formConfig"
-                [item]="credentials"
-                (action)="login($event)">
+              [item]="credentials"
+              (action)="handleAction($event)">
     </ngx-form>
   `,
-
 })
 export class LoginComponent {
-
   public credentials = {
     email: null,
     password: null,
   }
 
-  public formConfig: {}
+  public formConfig: {} = {
+    fields: {
+      email: 'email',
+      password: 'password',
+    },
+    buttons: [
+      {
+        label: 'Log In',
+        type: 'submit',
+        classNames: 'btn btn-success btn-block text-white',
+        click: { type: 'LogIn' },
+      },
+    ],
+  }
 
   constructor(
     private ui: NgxUiService,
     private api: AccountApi,
     private router: Router,
-    private store: Store<any>,
+    private store: Store<any>
   ) { }
 
-  ngOnInit() {
-    this.formConfig = this.getFormConfig()
-    this.ui.deactivateSidebar()
-  }
-
-  getFormConfig() {
-    return {
-      fields: this.getFormFields(),
-      showCancel: false,
-      action: 'login',
-      submitButtonText: 'Log In'
+  handleAction(event) {
+    this.store.dispatch(new AuthActions.LogIn(event.payload))
+    switch (event.type) {
+      default: {
+        return console.log('$event', event)
+      }
     }
   }
 
-  getFormFields() {
-    return [
-      this.ui.form.email('email', {
-        label: 'Email',
-        className: 'col-12',
-        addonLeft: {
-          class: 'fa fa-fw fa-envelope-o'
-        }
-      }),
-      this.ui.form.password('password', {
-        label: 'Password',
-        className: 'col-12',
-        addonLeft: {
-          class: 'fa fa-fw fa-key'
-        }
-      })
-    ]
-  }
-
-  login(event) {
-    this.store
-      .dispatch(new AuthActions.LogIn(event.payload))
-  }
-
   logout() {
-    this.store
-      .dispatch(new AuthActions.LogOut({}))
+    this.store.dispatch(new AuthActions.LogOut({}))
   }
 }

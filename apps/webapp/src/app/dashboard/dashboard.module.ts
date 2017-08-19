@@ -11,9 +11,6 @@ import { DashboardRoutingModule } from './dashboard.routing'
     SharedModule,
     DashboardRoutingModule
   ],
-  exports: [
-
-  ],
   providers: [
 
   ],

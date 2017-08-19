@@ -3,15 +3,19 @@ import { ToastyService, ToastyConfig } from 'ng2-toasty'
 import { assign, noop } from 'lodash'
 import swal, { SweetAlertOptions } from 'sweetalert2'
 import { BreadcrumbService } from 'ng2-breadcrumb/ng2-breadcrumb'
-import { NgbModal, NgbActiveModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap'
+import {
+  NgbModal,
+  NgbActiveModal,
+  NgbModalRef,
+} from '@ng-bootstrap/ng-bootstrap'
 import { Observable } from 'rxjs/Observable'
 
-import { NgxFormService } from './ngx-form'
+import { NgxFormsService } from '@ngx-plus/ngx-forms'
 import { ModalComponent } from '../components/modal/modal.component'
+import { NavItem } from '../interfaces'
 
 @Injectable()
 export class NgxUiService {
-
   public isLargeScreen: boolean
 
   // public modalRef: NgbModalRef
@@ -29,8 +33,8 @@ export class NgxUiService {
   constructor(
     public toastyService: ToastyService,
     public toastyConfig: ToastyConfig,
-    public form: NgxFormService,
-    public breadcrumb: BreadcrumbService,
+    // public form: NgxFormsService,
+    public breadcrumb: BreadcrumbService
   ) {
     this.checkLargeScreen()
     this.toastyConfig.limit = 10
@@ -173,18 +177,22 @@ export class NgxUiService {
       title: options.title || null,
       text: options.text || null,
       buttonsStyling: options.buttonsStyling || false,
-      confirmButtonClass: options.confirmButtonClass || 'btn btn-lg btn-secondary',
+      confirmButtonClass:
+      options.confirmButtonClass || 'btn btn-lg btn-secondary',
       animation: options.animation || true,
       customClass: options.customClass || '',
     }
 
     if (closeCb !== noop) {
       defaultOptions.showCancelButton = options.showCancelButton || true
-      defaultOptions.cancelButtonClass = options.cancelButtonClass || 'btn btn-lg btn-secondary'
+      defaultOptions.cancelButtonClass =
+        options.cancelButtonClass || 'btn btn-lg btn-secondary'
     }
 
-    return swal(assign(defaultOptions, options))
-      .then(res => successCb(res), dismiss => closeCb(dismiss))
+    return swal(assign(defaultOptions, options)).then(
+      res => successCb(res),
+      dismiss => closeCb(dismiss)
+    )
   }
 
   alertSuccess(options: any = {}, successCb = noop, closeCb = noop) {
@@ -238,59 +246,13 @@ export class NgxUiService {
       animation: options.animation || true,
       customClass: options.customClass || '',
       showCancelButton: options.showCancelButton || true,
-      cancelButtonClass: options.cancelButtonClass || 'btn btn-lg btn-secondary'
+      cancelButtonClass:
+      options.cancelButtonClass || 'btn btn-lg btn-secondary',
     }
 
-    return swal(assign(defaultOptions, options))
-      .then(res => successCb(res), dismiss => closeCb(dismiss))
+    return swal(assign(defaultOptions, options)).then(
+      res => successCb(res),
+      dismiss => closeCb(dismiss)
+    )
   }
-
-}
-
-export interface NavItemInterface {
-  title?: string
-  items: {
-    name: string
-    icon: string
-    link: string
-    isNew?: boolean
-  }[]
-}
-
-export class NavItem implements NavItemInterface {
-  title?: string
-  items: {
-    name: string
-    icon: string
-    link: string
-    isNew?: boolean
-  }[]
-}
-
-export interface DashCardInterface {
-  name: string
-  icon: string
-  data: Observable<any>
-  link: string
-  class: string
-}
-
-export class DashCard implements DashCardInterface {
-  name: string
-  icon: string
-  data: Observable<any>
-  link: string
-  class: string
-}
-
-export interface CardButtonInterface {
-  class: string
-  icon: string
-  text: string
-}
-
-export class CardButton implements CardButtonInterface {
-  class: string
-  icon: string
-  text: string
 }

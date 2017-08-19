@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core'
-import { NavItem } from '../../services/ngx-ui'
+import { NavItem } from '../../interfaces'
 
 @Component({
   selector: 'ngx-card',
@@ -8,15 +8,15 @@ import { NavItem } from '../../services/ngx-ui'
       <div *ngIf="cardTitle || nav"
            [class]="'card-header bg-' + (headerBg || 'primary')">
         <ngx-card-header [cardTitle]="cardTitle"
-                           [createButton]="createButton"
-                           [headerBg]="headerBg"
-                           [headerImg]="headerImg"
-                           [icon]="icon"
-                           [nav]="nav"
-                           [postHeaderImg]="postHeaderImg"
-                           [preHeaderImg]="preHeaderImg"
-                           [subTitle]="subTitle"
-                           (action)="action.emit($event)">
+                         [createButton]="createButton"
+                         [headerBg]="headerBg"
+                         [headerImg]="headerImg"
+                         [icon]="icon"
+                         [nav]="nav"
+                         [postHeaderImg]="postHeaderImg"
+                         [preHeaderImg]="preHeaderImg"
+                         [subTitle]="subTitle"
+                         (action)="action.emit($event)">
         </ngx-card-header>
       </div>
       <div class="card-block">

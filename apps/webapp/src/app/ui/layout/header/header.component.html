@@ -1,0 +1,47 @@
+<nav class="navbar navbar-light fixed-top bg-faded">
+  <div class="row align-items-center justify-content-between w-100">
+    <div class="col">
+      <button class="btn sidebar-toggle"
+              (click)="ui.toggleSidebar()">
+           <i [class]="'fa fa-fw fa-' + (ui.sidebarOpen ? 'chevron-circle-left' : 'bars')"></i>
+      </button>
+      <div class="navbar-brand">
+        {{ ui.preHeaderImg }}
+        <img *ngIf="ui.headerImg"
+             [src]="ui.headerImg"
+             height="44px" /> {{ ui.postHeaderImg }}
+      </div>
+    </div>
+    <div class="col text-right">
+      <div *ngIf="user"
+           ngbDropdown
+           class="d-inline-block">
+        <button class="btn btn-outline-secondary"
+                id="dropdownBasic2"
+                ngbDropdownToggle>
+                <div class="img-wrap">
+                  <img src="assets/img/id.jpg"
+                       height="44px"
+                       width="44px"
+                       class="img-avatar" />
+                </div>
+                &nbsp; {{ user.fullName }}
+        </button>
+        <div ngbDropdownMenu
+             class="dropdown-menu-right"
+             aria-labelledby="dropdownBasic2">
+          <button class="dropdown-item"
+                  (click)="logout()">
+               <i class="fa fa-fw fa-sign-out"></i> Log Out
+             </button>
+        </div>
+      </div>
+      <button class="btn morebar-toggle"
+              (click)="ui.toggleMorebar()">
+           <i [class]="'fa fa-fw fa-ellipsis-v'"></i>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<breadcrumb [class.open]="ui.sidebarOpen"></breadcrumb>

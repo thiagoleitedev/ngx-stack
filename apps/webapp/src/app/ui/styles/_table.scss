@@ -1,0 +1,27 @@
+ngx-datatable {
+  display: flex;
+  width: 100%;
+}
+
+.datatable-header {
+  border-bottom: 3px solid #e7e7e7 !important;
+  padding: 5px 0;
+  vertical-align: middle;
+  .datatable-header-cell {
+    font-size: 16px;
+    font-weight: 500;
+  }
+}
+
+.datatable-row-even {
+  background-color: #f7f7f7;
+}
+
+ngx-table-footer {
+  background: #f7f7f7;
+  display: flex;
+  margin-bottom: -20px;
+  margin-left: -15px;
+  padding: 10px 20px;
+  width: calc(100% + 30px);
+}

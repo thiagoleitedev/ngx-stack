@@ -1,7 +1,7 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core'
 import { Router } from '@angular/router'
 import { Store } from '@ngrx/store'
-import { NgxUiService } from '@ngx-plus/ngx-ui'
+import { NgxUiService } from '../../../ui'
 import { Subscription } from 'rxjs/Subscription'
 
 import { RoleActions } from '../../../state'
@@ -34,9 +34,7 @@ export class RoleFormComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.formConfig = this.service.getFormConfig(true)
-    this.formConfig.buttonColClass = 'col-12 col-lg-6'
-    this.formConfig.fields.forEach(field => field.className = 'col-12 col-lg-6')
+    this.formConfig = {}
     this.subscriptions.push(
       this.service.selected$.subscribe(
         (role) => this.item = role,

@@ -1,21 +1,11 @@
 import { NgModule } from '@angular/core'
 import { CommonModule } from '@angular/common'
-import { FormsModule, ReactiveFormsModule } from '@angular/forms'
-import { NgxUiModule } from '@ngx-plus/ngx-ui'
+import { NgxUiModule } from './ui'
 
-const modules = [
-  CommonModule,
-  FormsModule,
-  ReactiveFormsModule,
-  NgxUiModule,
-]
+const modules = [CommonModule, NgxUiModule]
 
 @NgModule({
-  imports: [
-    ...modules,
-  ],
-  exports: [
-    ...modules,
-  ],
+  imports: [...modules],
+  exports: [...modules],
 })
-export class SharedModule { }
+export class SharedModule {}

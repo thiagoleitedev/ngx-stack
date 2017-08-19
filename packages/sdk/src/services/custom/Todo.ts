@@ -50,7 +50,7 @@ export class TodoApi extends BaseLoopBackApi {
   public patchOrCreate(data: any = {}, customHeaders?: Function): Observable<any> {
     let _method: string = "PATCH";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/todos";
+    "/Todos";
     let _routeParams: any = {};
     let _postBody: any = {
       data: data
@@ -81,7 +81,7 @@ export class TodoApi extends BaseLoopBackApi {
   public patchAttributes(id: any, data: any = {}, customHeaders?: Function): Observable<any> {
     let _method: string = "PATCH";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/todos/:id";
+    "/Todos/:id";
     let _routeParams: any = {
       id: id
     };
@@ -109,7 +109,7 @@ export class TodoApi extends BaseLoopBackApi {
   public myRemote(customHeaders?: Function): Observable<any> {
     let _method: string = "GET";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/todos/my-remote";
+    "/Todos/my-remote";
     let _routeParams: any = {};
     let _postBody: any = {};
     let _urlParams: any = {};
@@ -140,7 +140,7 @@ export class TodoApi extends BaseLoopBackApi {
   public stats(range: any, custom: any = {}, where: any = {}, groupBy: any = {}, customHeaders?: Function): Observable<any> {
     let _method: string = "GET";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/todos/stats";
+    "/Todos/stats";
     let _routeParams: any = {};
     let _postBody: any = {};
     let _urlParams: any = {};

@@ -45,7 +45,7 @@
      inkscape:window-x="1535"
      inkscape:window-y="1064"
      inkscape:window-maximized="1"
-     inkscape:current-layer="svg81732" />
+     inkscape:current-layer="angular" />
   <defs
      id="defs81719">
     <symbol
@@ -60,36 +60,32 @@
   </defs>
   <g
      id="Symbols"
-     stroke-width="1"
-     stroke="none"
-     fill-rule="evenodd"
-     fill="none">
+     style="fill:none;fill-rule:evenodd;stroke:none;stroke-width:1">
     <g
        id="ngx-plus">
       <g
          id="Group-2">
         <g
            id="Group"
-           fill-rule="nonzero">
+           style="fill-rule:nonzero">
           <g
              id="angular">
             <polygon
                id="Shape"
-               points="313 0 313 0 313 0 0.0255319149 111.552 47.7617021 525.168 313 672 313 672 313 672 578.238298 525.168 625.974468 111.552"
-               fill="#011F4B" />
+               points="313,0 0.025531915,111.552 47.761702,525.168 313,672 578.2383,525.168 625.97447,111.552 "
+               style="fill:#011f4b;fill-opacity:0.68627453" />
             <polygon
                id="polygon81722"
-               points="313 0 313 74.592 313 74.256 313 414.624 313 414.624 313 672 313 672 578.238298 525.168 625.974468 111.552"
-               fill="#011533" />
+               points="313,74.256 313,414.624 313,672 578.2383,525.168 625.97447,111.552 313,0 313,74.592 "
+               style="fill:#011533;fill-opacity:0.78431374"
+               inkscape:label="polygon81722" />
           </g>
         </g>
         <text
            id="f067"
            font-size="300"
            font-weight="normal"
-           font-family="FontAwesome"
-           fill="#FFFFFF"
-           opacity="0.917119565">
+           style="font-weight:normal;font-size:300px;font-family:FontAwesome;opacity:0.91711958;fill:#ffffff">
           <tspan
              x="195"
              y="442"

@@ -69,6 +69,7 @@ export class Account implements AccountInterface {
     return {
       name: 'Account',
       plural: 'Accounts',
+      path: 'Accounts',
       properties: {
         "firstName": {
           name: 'firstName',

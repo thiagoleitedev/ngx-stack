@@ -50,7 +50,7 @@
   color         : darken($brand-info, 10%);
   padding       : 3px 15px;
   text-transform: capitalize;
-
+  margin-right: 50px;
   &:hover {
     background: #e3e3e3;
   }
@@ -80,4 +80,30 @@
 
 .dropdown-menu {
   margin-top: 50px;
+}
+
+.morebar-toggle {
+  background: #e3e3e3;
+  box-shadow: none;
+  color     : $brand-info !important;
+  height    : 50px;
+  z-index   : 3000;
+  padding   : 0;
+  position: absolute;
+  right: 15px;
+  width     : 50px;
+
+  i {
+    border-radius: 10px;
+    font-size    : 22px;
+    height       : 36px;
+    opacity      : 0.9;
+    padding      : 7px;
+    width        : 36px;
+
+    &:hover {
+      background: #aaa;
+      color     : #eee;
+    }
+  }
 }

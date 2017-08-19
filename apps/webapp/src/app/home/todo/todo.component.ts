@@ -1,5 +1,5 @@
 import { Component, OnDestroy } from '@angular/core'
-import { NgxUiService } from '@ngx-plus/ngx-ui'
+import { NgxUiService } from '../../ui'
 import { RealTime, FireLoopRef, Todo } from '@ngx-plus/ngx-sdk'
 import { Subscription } from 'rxjs/Subscription'
 
@@ -31,7 +31,6 @@ export class TodoComponent implements OnDestroy {
               this.todos = todos
             }))
         }))
-    this.buttons = this.todoService.getCardButtons()
   }
 
   ngOnDestroy() {
@@ -59,7 +58,7 @@ export class TodoComponent implements OnDestroy {
       `,
       confirmButtonText: 'Yes, Delete'
     }
-    this.ui.alertError(question, () => this.handleAction({ type: 'delete', payload: todo }), () => { })
+    this.ui.alerts.alertError(question, () => this.handleAction({ type: 'delete', payload: todo }), () => { })
   }
 
   handleAction(event) {
@@ -68,11 +67,11 @@ export class TodoComponent implements OnDestroy {
         this.subscriptions.push(this.todoRef.create(event.payload).subscribe(
           () => {
             this.modalRef.close()
-            this.ui.toastSuccess('Todo Created', 'The Todo was created successfully.')
+            this.ui.alerts.toastSuccess('Todo Created', 'The Todo was created successfully.')
           },
           (err) => {
             this.modalRef.close()
-            this.ui.toastError('Create Todo Failed', err.message || err.error.message)
+            this.ui.alerts.toastError('Create Todo Failed', err.message || err.error.message)
           },
         ))
         break
@@ -80,21 +79,21 @@ export class TodoComponent implements OnDestroy {
         this.subscriptions.push(this.todoRef.upsert(event.payload).subscribe(
           () => {
             this.modalRef.close()
-            this.ui.toastSuccess('Todo Updated', 'The Todo was updated successfully.')
+            this.ui.alerts.toastSuccess('Todo Updated', 'The Todo was updated successfully.')
           },
           (err) => {
             this.modalRef.close()
-            this.ui.toastError('Update Todo Failed', err.message || err.error.message)
+            this.ui.alerts.toastError('Update Todo Failed', err.message || err.error.message)
           },
         ))
         break
       case 'delete':
         this.subscriptions.push(this.todoRef.remove(event.payload).subscribe(
           () => {
-            this.ui.toastSuccess('Todo Deleted', 'The Todo was deleted successfully.')
+            this.ui.alerts.toastSuccess('Todo Deleted', 'The Todo was deleted successfully.')
           },
           (err) => {
-            this.ui.toastError('Delete Todo Failed', err.message || err.error.message)
+            this.ui.alerts.toastError('Delete Todo Failed', err.message || err.error.message)
           },
         ))
         break

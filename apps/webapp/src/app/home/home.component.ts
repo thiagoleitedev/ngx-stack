@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core'
-import { NgxUiService, NavItem } from '@ngx-plus/ngx-ui'
+import { NgxUiService, NavItem } from '../ui'
 import { Subscription } from 'rxjs/Subscription'
 
 import { AccountApi } from '@ngx-plus/ngx-sdk'

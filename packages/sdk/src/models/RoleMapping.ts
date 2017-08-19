@@ -48,6 +48,7 @@ export class RoleMapping implements RoleMappingInterface {
     return {
       name: 'RoleMapping',
       plural: 'RoleMappings',
+      path: 'RoleMappings',
       properties: {
         "id": {
           name: 'id',

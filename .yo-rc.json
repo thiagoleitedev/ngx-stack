@@ -3,7 +3,7 @@
     "version": "1.0.0-beta.2.5",
     "clients": {
       "api": {
-        "path": "./apps/api-server",
+        "path": "./apps/api",
         "type": "server"
       },
       "webapp": {

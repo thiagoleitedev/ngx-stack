@@ -99,26 +99,26 @@ const hasSubDir = (p, filter) =>
  * Clean the node_modules dir from a path
  */
 const clean = () => {
-  const p = getProjectPath()
+ const p = getProjectPath()
 
-  console.log(`[clean] Cleaning up project path ${p}`)
+ console.log(`[clean] Cleaning up project path ${p}`)
 
-  const paths = [p, ...getLernaPaths(p)]
+ const paths = [p, ...getLernaPaths(p)]
 
-  hasSubDir(paths, 'node_modules').forEach(dir => {
-    console.log(`[clean] Remove ${dir}`)
-    rmDirRecursive(dir)
-  })
+ hasSubDir(paths, 'node_modules').forEach(dir => {
+   rmDirRecursive(dir)
+   console.log(`[clean] Removed ${dir}`)
+ })
 
-  paths.forEach(p => {
-    const file = path.join(p, 'package-lock.json')
-    console.log(`[clean] Remove ${file}`)
-    if (exists(file)) {
-      fs.unlinkSync(file)
-    }
-  })
+ paths.forEach(p => {
+   const lockFile = path.join(p, 'package-lock.json')
+   if (exists(lockFile)) {
+     rmFile(lockFile)
+     console.log(`[clean] Removed ${lockFile}`)
+   }
+ })
 
-  console.log('[clean] Done.')
+ console.log('[clean] Done.')
 }
 
 module.exports = {

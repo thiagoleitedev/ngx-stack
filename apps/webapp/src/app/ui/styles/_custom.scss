@@ -1,0 +1,174 @@
+@import 'mixins';
+
+.app-body,
+.breadcrumb,
+.footer,
+.sidebar,
+.sidebar-toggle,
+admin-sidebar,
+body,
+breadcrumb {
+  @include transition(all 0.33s ease-in-out);
+}
+
+breadcrumb.open .breadcrumb {
+  border-left: 1px solid #ccc;
+  border-radius: 0;
+  margin-left: 235px;
+  width: calc(100vw - 250px);
+  z-index: 1000;
+}
+
+.breadcrumb {
+  background: #f5f5f5;
+  height: 40px;
+  line-height: 40px;
+  margin-bottom: 0;
+  margin-left: -15px;
+  margin-top: 50px;
+  padding: 0 0 0 20px;
+  width: 100vw;
+}
+
+.breadcrumb-item {
+  color: $primary;
+  font-weight: 500;
+
+  &.active {
+    font-weight: 400;
+  }
+
+  a {
+    @include ripple($primary);
+    &:hover {
+      color: $success !important;
+    }
+  }
+}
+
+button,
+a {
+  cursor: pointer;
+}
+
+button {
+  text-transform: uppercase;
+}
+
+.btn-outline-primary {
+  border: 1px solid $primary;
+  box-shadow: none;
+}
+
+label {
+  margin-bottom: 0;
+}
+
+.input-group .form-control,
+[contenteditable].form-control,
+[type=email].form-control,
+[type=password].form-control,
+[type=tel].form-control,
+[type=text].form-control,
+formly-field-input,
+formly-field-select,
+input.form-control,
+input[type=email],
+input[type=number],
+input[type=password],
+input[type=text],
+select,
+textarea,
+textarea.form-control {
+  width: 100%;
+}
+
+.card {
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14),
+    0 2px 1px -1px rgba(0, 0, 0, 0.12);
+}
+
+.card-header,
+.modal-header {
+  color: #f7f7f7;
+
+  hr {
+    border-top: 1px solid #f7f7f7;
+    float: left;
+    width: 30px;
+  }
+}
+
+.modal-header button {
+  color: #eee;
+
+  &:hover {
+    color: #fff;
+  }
+}
+
+th {
+  font-weight: 500;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: #f9f9f9;
+}
+
+.table-hover tbody tr:hover {
+  background-color: #ddd;
+}
+
+.input-group-addon {
+  background: transparent;
+  border: transparent;
+}
+
+.has-danger .input-group-addon {
+  background: transparent;
+}
+
+.nav-tabs {
+  box-shadow: none;
+
+  .nav-link {
+    border: 1px solid transparent;
+    color: #ddd;
+    margin-left: 3px;
+  }
+
+  .nav-item.show .nav-link,
+  .nav-link.active,
+  .nav-link.active:focus,
+  .nav-link.active:focus:hover,
+  .nav-link.active:hover {
+    border: 1px solid;
+    box-shadow: none;
+    color: $primary;
+    background-color: #fff;
+    border-color: #ddd #ddd #fff #ddd;
+  }
+
+  .nav-link,
+  .nav-link:focus {
+    box-shadow: none;
+  }
+
+  .nav-link:focus:hover,
+  .nav-link:hover {
+    background-color: hsla(0, 0%, 100%, .10);
+    border: 1px solid $success;
+    border-bottom: 0;
+    color: #fff;
+  }
+}
+
+.page-wrapper {
+  margin-left: -20px;
+  margin-right: -20px;
+}
+
+.pagination {
+  align-items: center;
+  margin-bottom: 0;
+}

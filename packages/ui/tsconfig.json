@@ -1,24 +1,25 @@
 {
-  "compileOnSave": false,
   "compilerOptions": {
-    "baseUrl": ".",
-    "noEmit": true,
+    "baseUrl": "",
+    "module": "es2015",
+    "outDir": "./dist",
+    "sourceMap": true,
+    "declaration": false,
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "skipLibCheck": true,
     "target": "es5",
+    "typeRoots": [
+      "../node_modules/@types"
+    ],
     "lib": [
-      "es2016",
+      "es2017",
       "dom"
     ],
     "paths": {
-      "@angular/*": [ "node_modules/@angular/*" ],
-      "@ngx-plus/*": [ "node_modules/@ngx-plus/*" ],
-      "rxjs/*": [ "node_modules/rxjs/*" ]
-    },
-    "typeRoots": [
-      "node_modules/@types"
-    ]
+      "@angular/*": ["../node_modules/@angular/*"],
+      "@ngx-plus/*": ["../node_modules/@ngx-plus/*"],
+      "rxjs/*": ["../node_modules/rxjs/*"]
+    }
   }
 }

@@ -1,0 +1,109 @@
+@import "mixins";
+
+$white: #fff !default;
+$gray-100: #f8f9fa !default;
+$gray-200: #e9ecef !default;
+$gray-300: #dee2e6 !default;
+$gray-400: #ced4da !default;
+$gray-500: #adb5bd !default;
+$gray-600: #868e96 !default;
+$gray-700: #495057 !default;
+$gray-800: #343a40 !default;
+$gray-900: #212529 !default;
+$black: #000 !default;
+
+$grays: (
+    100: $gray-100,
+    200: $gray-200,
+    300: $gray-300,
+    400: $gray-400,
+    500: $gray-500,
+    600: $gray-600,
+    700: $gray-700,
+    800: $gray-800,
+    900: $gray-900
+  )
+  !default;
+$blue: #007bff !default;
+$indigo: #6610f2 !default;
+$purple: #6f42c1 !default;
+$pink: #e83e8c !default;
+$red: #dc3545 !default;
+$orange: #fd7e14 !default;
+$yellow: #ffc107 !default;
+$green: #28a745 !default;
+$teal: #20c997 !default;
+$cyan: #17a2b8 !default;
+$colors: (
+    blue: $blue,
+    indigo: $indigo,
+    purple: $purple,
+    pink: $pink,
+    red: $red,
+    orange: $orange,
+    yellow: $yellow,
+    green: $green,
+    teal: $teal,
+    cyan: $cyan,
+    white: $white,
+    gray: $gray-600,
+    gray-dark: $gray-800
+  )
+  !default;
+$primary: #011f4b;
+$success: #61b5d9;
+$info: $gray-700;
+$warning: #ffa700;
+$danger: #d62d20;
+$theme-colors: (
+    primary: $primary,
+    secondary: $gray-200,
+    success: $success,
+    info: $info,
+    warning: $warning,
+    danger: $danger,
+    light: $gray-100,
+    dark: $gray-800
+  )
+  !default;
+// Set a specific jump point for requesting color jumps
+$theme-color-interval: 8% !default;
+// Options
+//
+// Quickly modify global styling by enabling or disabling optional features.
+$enable-rounded: true !default;
+$enable-shadows: true !default;
+$enable-gradients: true !default;
+$enable-transitions: true !default;
+$enable-hover-media-query: true !default;
+$enable-grid-classes: true !default;
+$enable-print-styles: true !default;
+// Spacing
+//
+// Control the default styling of most Bootstrap elements by modifying these
+// variables. Mostly focused on spacing.
+// You can add more entries to the $spacers map, should you need more variation.
+$spacer: 1rem !default;
+$spacers: (
+    0: 0,
+    1: ($spacer * .25),
+    2: ($spacer * .5),
+    3: $spacer,
+    4: ($spacer * 1.5),
+    5: ($spacer * 3)
+  )
+  !default;
+// This variable affects the `.h-*` and `.w-*` classes.
+$sizes: (25: 25%, 50: 50%, 75: 75%, 100: 100%) !default;
+// Body
+//
+// Settings for the `<body>` element.
+$body-bg: $white !default;
+$body-color: $gray-900 !default;
+// Links
+//
+// Style anchor elements.
+$link-color: $primary !default;
+$link-decoration: none !default;
+$link-hover-color: $success !default;
+$link-hover-decoration: underline !default;

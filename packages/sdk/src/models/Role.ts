@@ -50,6 +50,7 @@ export class Role implements RoleInterface {
     return {
       name: 'Role',
       plural: 'Roles',
+      path: 'Roles',
       properties: {
         "id": {
           name: 'id',

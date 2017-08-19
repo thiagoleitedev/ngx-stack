@@ -1,5 +1,5 @@
 import { Component, OnInit, AfterViewInit, OnDestroy } from '@angular/core'
-import { NgxUiService } from '@ngx-plus/ngx-ui'
+import { NgxUiService } from '../../../ui'
 import { RoleApi, Role } from '@ngx-plus/ngx-sdk'
 import { Subscription } from 'rxjs/Subscription'
 

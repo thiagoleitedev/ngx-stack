@@ -1,25 +1,24 @@
-import { NgModule } from '@angular/core'
+import { NgModule, ModuleWithProviders } from '@angular/core'
 import { CommonModule } from '@angular/common'
 import { RouterModule } from '@angular/router'
-import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap'
-import { FormlyModule, FormlyBootstrapModule } from 'ng-formly'
+import { NgxFormsModule } from '@ngx-plus/ngx-forms'
 import { ToastyModule } from 'ng2-toasty'
 import { Ng2BreadcrumbModule, BreadcrumbService } from 'ng2-breadcrumb/ng2-breadcrumb'
 import { NgxDatatableModule } from '@swimlane/ngx-datatable'
 
-import { LayoutComponent, BodyComponent, FooterComponent,
+import {
+  LayoutComponent, BodyComponent, FooterComponent,
   HeaderComponent, SidebarComponent
-} from './layout'
-
-import { FormComponent, CardComponent, CardHeaderComponent,
+} from './layout/index'
+import {
+  CardComponent, CardHeaderComponent,
   CardHeaderBrandComponent, CardHeaderTabsComponent, CardHeaderTitleComponent,
   ModalComponent, DashCardComponent, ToolbarComponent, TableComponent
-} from './components'
+} from './components/index'
+import { GridComponent } from './containers/index'
 
-import { GridComponent } from './containers'
-
-import { NgxFormService, NgxUiService } from './services'
+import { NgxUiService } from './services/ngx-ui'
 
 const components = [
   LayoutComponent,
@@ -32,11 +31,10 @@ const components = [
   CardHeaderBrandComponent,
   CardHeaderTabsComponent,
   CardHeaderTitleComponent,
-  FormComponent,
   ModalComponent,
   DashCardComponent,
   TableComponent,
-  ToolbarComponent,
+  // ToolbarComponent,
   GridComponent
 ]
 
@@ -44,14 +42,11 @@ const components = [
   imports: [
     CommonModule,
     RouterModule,
-    FormsModule,
-    ReactiveFormsModule,
-    FormlyModule.forRoot(),
-    FormlyBootstrapModule,
     NgbModule.forRoot(),
-    ToastyModule,
+    NgxFormsModule.forRoot(),
+    ToastyModule.forRoot(),
     Ng2BreadcrumbModule.forRoot(),
-    NgxDatatableModule
+    NgxDatatableModule,
   ],
   declarations: [
     ...components,
@@ -59,13 +54,22 @@ const components = [
   entryComponents: [
     ModalComponent
   ],
-  providers: [
-    NgxFormService,
-    // NgxUiService,
-  ],
   exports: [
     ...components,
+    NgxFormsModule,
     NgbModule,
+    ToastyModule,
+    Ng2BreadcrumbModule,
+    NgxDatatableModule,
   ]
 })
-export class NgxUiModule { }
+export class NgxUiModule {
+  static forRoot(): ModuleWithProviders {
+    return {
+      ngModule: NgxUiModule,
+      providers: [
+        NgxUiService,
+      ]
+    }
+  }
+}

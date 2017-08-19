@@ -6,8 +6,6 @@ export { CardHeaderTitleComponent } from './card/header/card-header-title.compon
 
 export { DashCardComponent } from './dash/dash-card.component'
 
-export { FormComponent } from './form/form.component'
-
 export { ModalComponent } from './modal/modal.component'
 
 export { TableComponent } from './table/table.component'

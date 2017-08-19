@@ -1,7 +1,7 @@
-@import '../../variables';
+@import '../ui/styles/variables';
 
 .dash-card {
-  height         : 100px;
+  height: 100px;
   text-decoration: none;
 
   .card-block {
@@ -10,8 +10,8 @@
 }
 
 .card-icon-left {
-  background  : $brand-success;
-  color       : #fff;
+  background: $success;
+  color: #fff;
   margin-right: -15px;
-  padding     : 0;
+  padding: 0;
 }

@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core'
-import { DashCard } from '../../services/ngx-ui'
+import { DashCard } from '../../interfaces'
 
 @Component({
   selector: 'ngx-dash-cards',

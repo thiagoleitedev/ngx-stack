@@ -2,11 +2,12 @@
   "name": "@ngx-plus/ngx-sdk",
   "version": "0.0.0",
   "license": "MIT",
-  "dependencies": {
-    "@angular/common": "^4.3.3",
-    "@angular/core": "^4.3.3",
-    "@angular/forms": "^4.3.3",
-    "@angular/router": "^4.3.3"
+  "peerDependencies": {
+    "@angular/common": "^4.3.4",
+    "@angular/core": "^4.3.4",
+    "@angular/forms": "^4.3.4",
+    "@angular/http": "^4.3.4",
+    "@angular/router": "^4.3.4"
   },
   "publishConfig": {
     "access": "public"

@@ -1,0 +1,11 @@
+$fa-font-path: '~font-awesome/fonts';
+$web-font-path: 'https://fonts.googleapis.com/css?family=Roboto|Roboto+Condensed';
+@import 'variables';
+@import '~font-awesome/scss/font-awesome.scss';
+@import '~simple-line-icons/css/simple-line-icons.css';
+@import '~bootstrap/scss/bootstrap.scss';
+@import 'toasty';
+@import '~sweetalert2/src/sweetalert2';
+@import 'table';
+// @import 'bootswatch';
+@import 'custom';
