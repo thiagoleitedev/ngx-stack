@@ -25,9 +25,9 @@ export class AdminComponent {
     private ui: NgxUiService,
     private store: Store<any>,
   ) {
-    this.store.dispatch(new UserActions.ReadUsers({ include: 'roles' }))
-    this.store.dispatch(new RoleActions.ReadRoles({ include: 'principals' }))
-    this.store.dispatch(new ControlActions.ReadControls())
+    this.store.dispatch(new UserActions.ReadUsers({ include: 'roles', order: 'fullName ASC' }))
+    this.store.dispatch(new RoleActions.ReadRoles({ include: 'principals', order: 'name ASC' }))
+    this.store.dispatch(new ControlActions.ReadControls({ order: 'model ASC' }))
   }
 
 
