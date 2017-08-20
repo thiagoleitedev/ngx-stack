@@ -20,7 +20,7 @@
                 id="dropdownBasic2"
                 ngbDropdownToggle>
                 <div class="img-wrap">
-                  <img src="assets/img/id.jpg"
+                  <img src="assets/img/fingerprint.png"
                        height="44px"
                        width="44px"
                        class="img-avatar" />
@@ -38,7 +38,7 @@
       </div>
       <button class="btn morebar-toggle"
               (click)="ui.toggleMorebar()">
-           <i [class]="'fa fa-fw fa-ellipsis-v'"></i>
+           <i [class]="'fa fa-fw fa-ellipsis-' + (ui.morebarOpen ? 'h' : 'v')"></i>
       </button>
     </div>
   </div>

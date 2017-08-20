@@ -28,6 +28,9 @@ export class NgxUiService {
   public sidebarOpen: boolean
   public sidebarNav: NavItem[]
 
+  public morebarActive: boolean
+  public morebarOpen: boolean
+
   public footerActive: boolean
 
   constructor(
@@ -89,6 +92,19 @@ export class NgxUiService {
 
   toggleSidebar(): void {
     this.sidebarOpen = !this.sidebarOpen
+  }
+
+  activateMorebar(): void {
+    this.morebarActive = true
+  }
+
+  deactivateMorebar(): void {
+    this.morebarActive = false
+    this.morebarOpen = false
+  }
+
+  toggleMorebar(): void {
+    this.morebarOpen = !this.morebarOpen
   }
 
   getSidebarNav(): NavItem[] {
