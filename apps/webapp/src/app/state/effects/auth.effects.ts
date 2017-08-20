@@ -24,7 +24,7 @@ export class AuthEffects {
     private ui: NgxUiService,
     private auth: LoopBackAuth,
     private router: Router
-  ) {}
+  ) { }
 
   @Effect()
   public loadToken: Observable<Action> = this.actions$

@@ -24,7 +24,7 @@ export class ActionButtonComponent {
   handleAction(event) {
     switch (event.type) {
       default: {
-        return console.log('$event', event)
+        return this.action.emit(event)
       }
     }
   }

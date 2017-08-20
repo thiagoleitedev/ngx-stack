@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core'
-import { NavItem } from '../../interfaces'
+import { CardConfig } from '../../interfaces'
 
 @Component({
   selector: 'ngx-card',
@@ -27,20 +27,7 @@ import { NavItem } from '../../interfaces'
   `,
 })
 export class CardComponent {
-  @Input()
-  config: {
-    cardTitle: string
-    createButton: any
-    headerBg: string
-    headerImg: string
-    icon: string
-    nav: NavItem
-    postHeaderImg: string
-    preHeaderImg: string
-    showSearch: boolean
-    subTitle: string
-  }
-
+  @Input() config: CardConfig
   @Output() action = new EventEmitter()
 
   constructor() { }

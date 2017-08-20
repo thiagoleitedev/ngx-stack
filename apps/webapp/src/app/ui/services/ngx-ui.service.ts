@@ -87,7 +87,6 @@ export class NgxUiService {
 
   deactivateSidebar(): void {
     this.sidebarActive = false
-    this.sidebarOpen = false
   }
 
   toggleSidebar(): void {
@@ -100,7 +99,6 @@ export class NgxUiService {
 
   deactivateMorebar(): void {
     this.morebarActive = false
-    this.morebarOpen = false
   }
 
   toggleMorebar(): void {

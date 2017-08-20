@@ -1,18 +1,12 @@
-import {
-  Component,
-  Input,
-  Output,
-  EventEmitter,
-  AfterViewInit,
-  ChangeDetectorRef,
-  ChangeDetectionStrategy,
-} from '@angular/core'
+import { Component, Input, Output, EventEmitter, ViewChild, ChangeDetectionStrategy } from '@angular/core'
 import { Router } from '@angular/router'
 import { AccountApi, Account } from '@ngx-plus/ngx-sdk'
 import { Observable } from 'rxjs/Observable'
+import 'rxjs/add/operator/filter'
 
+import { TableComponent } from '../../components'
 import { NgxUiService } from '../../services'
-import { TableConfig } from '../../interfaces'
+import { CardConfig, TableConfig } from '../../interfaces'
 
 @Component({
   selector: 'ngx-grid',
@@ -30,6 +24,7 @@ import { TableConfig } from '../../interfaces'
           <ngx-table *ngIf="viewSelection === 'table'"
                      [config]="tableConfig"
                      [count$]="count$"
+                     [filteredItems$]="filteredItems$"
                      [items$]="items$"
                      (action)="handleAction($event)">
           </ngx-table>
@@ -44,12 +39,11 @@ import { TableConfig } from '../../interfaces'
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GridComponent {
+  // TODO: get filtering to work correctly
+
   @Input() count$: Observable<number>
   @Input() items$: Observable<any[]>
-  @Input() cardConfig = {
-    cardTitle: 'Roles',
-    icon: 'fa fa-fw fa-tags',
-  }
+  @Input() cardConfig: CardConfig
   @Input()
   viewOptions = [
     {
@@ -64,11 +58,33 @@ export class GridComponent {
   @Input() viewSelection = 'table'
   @Input() tableConfig: TableConfig
   @Output() action = new EventEmitter()
+  @ViewChild(TableComponent) table: TableComponent
+
+  public filteredItems$: Observable<any[]>
 
   constructor() { }
 
+  getRowString(item): string {
+    const list: string[] = []
+    this.tableConfig.columns.forEach(col => {
+      if (item[col.field]) {
+        list.push(item[col.field].toString())
+      }
+    })
+    const regex = new RegExp(',', 'g')
+    const output = list.toString().toLowerCase().replace(regex, ' ')
+    return output
+  }
+
   handleAction(event) {
     switch (event.type) {
+      case 'Filter': {
+        if (!event.payload || event.payload === '') {
+          return this.filteredItems$ = undefined
+        }
+        const search = event.payload.toString()
+        return this.filteredItems$ = this.items$.filter(item => this.getRowString(item).indexOf(search) > -1)
+      }
       case 'PageChange': {
         return (this.tableConfig.offset = event.payload - 1)
       }
@@ -77,10 +93,11 @@ export class GridComponent {
       }
       case 'ToolbarDropSelection': {
         this.tableConfig.limit = event.payload
-        return (this.tableConfig.offset = 0)
+        this.tableConfig.offset = 0
+        return this.table.recalculate()
       }
       default: {
-        return console.log('$event', event)
+        return this.action.emit(event)
       }
     }
   }
