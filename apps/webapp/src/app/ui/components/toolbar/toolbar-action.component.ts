@@ -6,7 +6,7 @@ import { NgxUiService } from '../../services'
 @Component({
   selector: 'ngx-toolbar-action',
   template: `
-    <ngx-action-button [config]="actionButton"></ngx-action-button>
+    <ngx-action-button [config]="actionButton" (action)="handleAction($event)"></ngx-action-button>
   `,
 })
 export class ToolbarActionComponent {
@@ -24,7 +24,7 @@ export class ToolbarActionComponent {
   handleAction(event) {
     switch (event.type) {
       default: {
-        return console.log('$event', event)
+        return this.action.emit(event)
       }
     }
   }

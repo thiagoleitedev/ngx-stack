@@ -1,29 +1,25 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core'
-import { NgxUiService } from '../../../services'
+import { ActionButton } from '../../../interfaces'
 
 @Component({
   selector: 'ngx-action-button',
   template: `
   <div *ngIf="config">
     <button [class]="config.class || ''"
-            (click)="action.emit($event)">
+            (click)="handleAction({ type: config.action, payload: config.item || '' })">
         <i [class]="config.icon"></i> {{ config.label }}
     </button>
   </div>
   `,
 })
 export class ActionButtonComponent {
-  @Input()
-  config = {
-    class: 'btn btn-primary',
-    label: 'Create',
-    icon: 'fa fa-fw fa',
-  }
+  @Input() config: ActionButton
+  @Input() item: any
   @Output() action = new EventEmitter()
 
   public search: string
 
-  constructor() {}
+  constructor() { }
 
   handleAction(event) {
     switch (event.type) {
