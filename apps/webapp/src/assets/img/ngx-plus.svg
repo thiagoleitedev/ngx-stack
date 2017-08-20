@@ -73,11 +73,11 @@
             <polygon
                id="Shape"
                points="313,0 0.025531915,111.552 47.761702,525.168 313,672 578.2383,525.168 625.97447,111.552 "
-               style="fill:#011f4b;fill-opacity:0.68627453" />
+               style="fill:#011f4b;fill-opacity:0.58823532" />
             <polygon
                id="polygon81722"
                points="313,74.256 313,414.624 313,672 578.2383,525.168 625.97447,111.552 313,0 313,74.592 "
-               style="fill:#011533;fill-opacity:0.78431374"
+               style="fill:#011533;fill-opacity:0.83137256"
                inkscape:label="polygon81722" />
           </g>
         </g>

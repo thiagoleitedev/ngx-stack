@@ -1,6 +1,6 @@
 <h2 align="center">
 
-<img src="https://github.com/ngx-plus/admin/blob/master/apps/webapp/src/assets/img/ngx-plus-light.png" width="150px" />
+<img src="https://github.com/ngx-plus/admin/blob/master/apps/webapp/src/assets/img/ngx-plus.png" width="150px" />
 
 ```console
 @ngx-plus/ngx-admin
