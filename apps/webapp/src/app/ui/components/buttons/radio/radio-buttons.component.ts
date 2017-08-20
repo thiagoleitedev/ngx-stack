@@ -2,7 +2,8 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core'
 import { FormBuilder, FormGroup } from '@angular/forms'
 import { Router } from '@angular/router'
 import { AccountApi, Account } from '@ngx-plus/ngx-sdk'
-import { NgxUiService } from '../../../services'
+
+import { RadioButtons } from '../../../interfaces'
 
 @Component({
   selector: 'ngx-radio-buttons',
@@ -36,17 +37,13 @@ import { NgxUiService } from '../../../services'
   ],
 })
 export class RadioButtonsComponent implements OnInit {
-  @Input()
-  options: {
-    value: string
-    icon: string
-  }[]
+  @Input() options: RadioButtons
   @Input() selected: string
   @Output() action = new EventEmitter()
 
   public radioGroup: FormGroup
 
-  constructor(private formBuilder: FormBuilder) {}
+  constructor(private formBuilder: FormBuilder) { }
 
   ngOnInit() {
     this.radioGroup = this.formBuilder.group({
