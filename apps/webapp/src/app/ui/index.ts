@@ -1,40 +1,11 @@
 import { NgxUiModule } from './ngx-ui.module'
-import { NgxUiService } from './services/ngx-ui.service'
-import {
-  LayoutComponent, BodyComponent, FooterComponent,
-  HeaderComponent, SidebarComponent
-} from './layout/index'
-
-import {
-  CardComponent, CardHeaderComponent,
-  CardHeaderBrandComponent, CardHeaderTabsComponent, CardHeaderTitleComponent,
-  ModalComponent, DashCardComponent, ToolbarComponent, TableComponent
-} from './components/index'
-
-import { GridComponent } from './containers/index'
-
-import { NavItem, DashCard, CardButton, TableConfig } from './interfaces/index'
+import { NgxUiService } from './services'
 
 export {
   NgxUiModule,
   NgxUiService,
-  LayoutComponent,
-  BodyComponent,
-  FooterComponent,
-  HeaderComponent,
-  SidebarComponent,
-  CardComponent,
-  CardHeaderComponent,
-  CardHeaderBrandComponent,
-  CardHeaderTabsComponent,
-  CardHeaderTitleComponent,
-  ModalComponent,
-  DashCardComponent,
-  TableComponent,
-  ToolbarComponent,
-  GridComponent,
-  NavItem,
-  DashCard,
-  CardButton,
-  TableConfig,
 }
+export * from './layout/'
+export * from './components/'
+export * from './containers/'
+export * from './interfaces/'

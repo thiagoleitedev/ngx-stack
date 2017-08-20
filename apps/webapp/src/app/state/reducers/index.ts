@@ -3,7 +3,8 @@ import { ActionReducerMap } from '@ngrx/store'
 import * as Users from './user.reducers'
 import * as Roles from './role.reducers'
 import * as Controls from './control.reducers'
-import * as Auth from './auth.reducers'
+import { AuthReducer } from './auth.reducers'
+import { UiReducer } from './ui.reducers'
 
 export interface AdminState {
   users: Users.State
@@ -17,4 +18,7 @@ export const AdminReducer: ActionReducerMap<AdminState> = {
   controls: Controls.ControlReducer,
 }
 
-export * from './auth.reducers'
+export {
+  AuthReducer,
+  UiReducer,
+}
