@@ -1,37 +1,34 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core'
 import { Store } from '@ngrx/store'
 import { Account } from '@ngx-plus/ngx-sdk'
 import { NgxUiService } from './ui'
 import { Observable } from 'rxjs/Observable'
 
-import { UserActions, RoleActions, ControlActions, AuthActions } from './state'
+import {
+  UserActions,
+  RoleActions,
+  ControlActions,
+  AuthActions,
+  UiActions,
+} from './state'
 
 @Component({
   selector: 'ngx-root',
   template: `
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-12">
-        <ngx-header [hidden]="!(user$ | async)"
-                    [user]="user$ | async"
-                    (action)="handleAction($event)">
-        </ngx-header>
-        <ngx-sidebar *ngIf="user$ | async"></ngx-sidebar>
-        <ngx-body>
-          <router-outlet></router-outlet>
-          <ngx-alert-templates></ngx-alert-templates>
-        </ngx-body>
-        <ngx-footer *ngIf="user$ | async"></ngx-footer>
-      </div>
-    </div>
-  </div>
+    <ngx-layout [config]="(ui$ | async)"
+                [user]="(user$ | async)"
+                (action)="handleAction($event)">
+    </ngx-layout>
   `,
+  // changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent implements OnInit {
-  user$: Observable<Account>
+  public user$: Observable<Account>
+  public ui$: Observable<any>
 
   constructor(private ui: NgxUiService, private store: Store<any>) {
     this.user$ = this.store.select('auth').map(a => a.user)
+    this.ui$ = this.store.select('ui')
   }
 
   ngOnInit() {
@@ -78,6 +75,10 @@ export class AppComponent implements OnInit {
     switch (event.type) {
       case 'LogOut':
         return this.store.dispatch(new AuthActions.LogOut({}))
+      case 'ToggleMorebar':
+        return this.store.dispatch(new UiActions.ToggleMorebar())
+      case 'ToggleSidebar':
+        return this.store.dispatch(new UiActions.ToggleSidebar())
       default:
         return console.log('$event', event)
     }

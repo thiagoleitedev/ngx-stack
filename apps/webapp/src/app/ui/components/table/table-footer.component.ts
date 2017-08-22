@@ -2,7 +2,8 @@ import { Component, Input, Output, EventEmitter } from '@angular/core'
 import { Router } from '@angular/router'
 import { AccountApi, Account } from '@ngx-plus/ngx-sdk'
 import { Observable } from 'rxjs/Observable'
-import { NgxUiService } from '../../services'
+
+import { TableConfig } from '../../interfaces'
 
 @Component({
   selector: 'ngx-table-footer',
@@ -10,9 +11,9 @@ import { NgxUiService } from '../../services'
   <div class="container">
     <div class="row align-items-center justify-content-between">
       <div class="col">
-        <ngb-pagination [collectionSize]="count$ | async"
-                        [(page)]="currentPage"
-                        [pageSize]="config.limit"
+        <ngb-pagination [collectionSize]="config.count$ | async"
+                        [(page)]="config.currentPage || default.currentPage"
+                        [pageSize]="config.limit || default.limit"
                         (pageChange)="handleAction({ type: 'PageChange', payload: $event })">
         </ngb-pagination>
       </div>
@@ -23,7 +24,7 @@ import { NgxUiService } from '../../services'
       </div>
       <div class="col">
       <h5 class="text-right m-0">
-        Total: <div class="badge badge-primary">{{ count$ | async }}</div>
+        Total: <div class="badge badge-primary">{{ config.count$ | async }}</div>
       </h5>
       </div>
     </div>
@@ -31,12 +32,15 @@ import { NgxUiService } from '../../services'
   `,
 })
 export class TableFooterComponent {
-  @Input() config
-  @Input() currentPage: number = 0
-  @Input() count$: Observable<number>
+  @Input() config: TableConfig
   @Output() action = new EventEmitter()
 
-  constructor(public ui: NgxUiService) { }
+  public default = {
+    currentPage: 0,
+    limit: 10,
+  }
+
+  constructor() { }
 
   handleAction(event) {
     switch (event.type) {

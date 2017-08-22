@@ -1,7 +1,8 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core'
 import { Router } from '@angular/router'
 import { AccountApi, Account } from '@ngx-plus/ngx-sdk'
-import { NgxUiService } from '../../services'
+
+import { ActionButton } from '../../interfaces'
 
 @Component({
   selector: 'ngx-toolbar-action',
@@ -10,13 +11,7 @@ import { NgxUiService } from '../../services'
   `,
 })
 export class ToolbarActionComponent {
-  @Input()
-  actionButton = {
-    action: 'Create',
-    class: 'btn btn-outline-primary btn-block',
-    label: 'Create',
-    icon: 'fa fa-fw fa-plus',
-  }
+  @Input() actionButton: ActionButton
   @Output() action = new EventEmitter()
 
   constructor() { }

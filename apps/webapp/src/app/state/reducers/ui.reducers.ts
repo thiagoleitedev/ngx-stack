@@ -20,19 +20,19 @@ export interface State {
 
 const initialState: State = {
   header: {
-    active: null
+    active: true,
   },
   footer: {
-    active: null
+    active: true,
   },
   sidebar: {
-    active: null,
-    open: null
+    active: true,
+    open: true,
   },
   morebar: {
-    active: null,
-    open: null
-  }
+    active: true,
+    open: false,
+  },
 }
 
 export function UiReducer(state = initialState, action: Ui.Actions): State {

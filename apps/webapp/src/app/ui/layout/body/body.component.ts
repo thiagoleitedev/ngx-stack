@@ -1,16 +1,13 @@
-import { Component } from '@angular/core'
-import { NgxUiService } from '../../services'
-import { BreadcrumbService } from 'ng2-breadcrumb/ng2-breadcrumb'
+import { Component, Input, ChangeDetectionStrategy } from '@angular/core'
 
 @Component({
   selector: 'ngx-body',
   templateUrl: './body.component.html',
-  styleUrls: ['./body.component.scss']
+  styleUrls: ['./body.component.scss'],
+  // changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BodyComponent {
+  @Input() config
 
-  constructor(
-    public ui: NgxUiService,
-    public breadcrumbService: BreadcrumbService
-  ) { }
+  constructor() {}
 }

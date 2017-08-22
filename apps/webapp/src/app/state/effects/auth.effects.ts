@@ -14,6 +14,7 @@ import 'rxjs/add/operator/mergeMap'
 import 'rxjs/add/operator/startWith'
 
 import * as Auth from '../actions/auth.actions'
+import * as Ui from '../actions/ui.actions'
 
 @Injectable()
 export class AuthEffects {
@@ -24,7 +25,7 @@ export class AuthEffects {
     private ui: NgxUiService,
     private auth: LoopBackAuth,
     private router: Router
-  ) { }
+  ) {}
 
   @Effect()
   public loadToken: Observable<Action> = this.actions$
@@ -45,6 +46,15 @@ export class AuthEffects {
   @Effect({ dispatch: false })
   protected loginSuccess = this.actions$
     .ofType(Auth.LOG_IN_SUCCESS)
+    .do((action: Auth.LogInSuccess) =>
+      this.store.dispatch(new Ui.ActivateFooter())
+    )
+    .do((action: Auth.LogInSuccess) =>
+      this.store.dispatch(new Ui.ActivateHeader())
+    )
+    .do((action: Auth.LogInSuccess) =>
+      this.store.dispatch(new Ui.ActivateSidebar())
+    )
     .do((action: Auth.LogInSuccess) => this.router.navigate(['dashboard']))
     .map((action: Auth.LogInSuccess) =>
       this.ui.alerts.toastSuccess(
@@ -104,7 +114,7 @@ export class AuthEffects {
   @Effect({ dispatch: false })
   logoutSuccess = this.actions$
     .ofType(Auth.LOG_OUT_SUCCESS)
-    .do((action: Auth.LogInSuccess) => this.router.navigate(['auth']))
+    .do((action: Auth.LogOutSuccess) => this.router.navigate(['auth']))
     .map((action: Auth.LogOutSuccess) =>
       this.ui.alerts.toastSuccess(
         'Log Out Success',
@@ -115,6 +125,7 @@ export class AuthEffects {
   @Effect({ dispatch: false })
   logoutFail = this.actions$
     .ofType(Auth.LOG_OUT_FAIL)
+    .do((action: Auth.LogOutFail) => this.router.navigate(['auth']))
     .map((action: Auth.LogOutFail) =>
       this.ui.alerts.toastError('Log Out Failure', action.payload.message)
     )

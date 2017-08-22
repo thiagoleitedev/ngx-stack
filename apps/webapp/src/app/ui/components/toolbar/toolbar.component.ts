@@ -1,20 +1,20 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core'
-import { Router } from '@angular/router'
-import { AccountApi, Account } from '@ngx-plus/ngx-sdk'
-import { NgxUiService } from '../../services'
+
+import { ToolbarConfig } from '../../interfaces'
 
 @Component({
   selector: 'ngx-toolbar',
   template: `
   <div class="row align-items-center justify-content-center toolbar-wrapper">
     <div class="col-md-4 col-lg-3">
-      <ngx-toolbar-view [options]="viewOptions"
-                        [selected]="viewSelection"
+      <ngx-toolbar-view [config]="config.radioButtons || default.radioButtons"
                         (action)="handleAction($event)">
       </ngx-toolbar-view>
     </div>
     <div class="col-md-4 col-lg-6">
-      <ngx-toolbar-action (action)="handleAction($event)"></ngx-toolbar-action>
+      <ngx-toolbar-action [actionButton]="config.actionButton || default.actionButton"
+                          (action)="handleAction($event)">
+      </ngx-toolbar-action>
     </div>
     <div class="col-md-4 col-lg-3">
       <ngx-toolbar-drop (action)="handleAction($event)"></ngx-toolbar-drop>
@@ -32,18 +32,30 @@ import { NgxUiService } from '../../services'
   ],
 })
 export class ToolbarComponent {
-  @Input() rowOptions: any[] = [10, 25, 50, 100]
-  @Input() rowSelection: any = 10
-  @Input()
-  viewOptions: {
-    value: string
-    icon: string
-  }[]
-  @Input() viewSelection: string
-
+  @Input() config: ToolbarConfig
   @Output() action = new EventEmitter()
 
-  public search: string
+  public default: ToolbarConfig = {
+    radioButtons: {
+      options: [
+        {
+          value: 'table',
+          icon: 'fa fa-fw fa-table',
+        },
+        {
+          value: 'cards',
+          icon: 'fa fa-fw fa-th-large',
+        },
+      ],
+      selected: 'table',
+    },
+    actionButton: {
+      action: 'Create',
+      class: 'btn btn-outline-primary btn-block',
+      label: 'Create',
+      icon: 'fa fa-fw fa-plus',
+    }
+  }
 
   constructor() { }
 

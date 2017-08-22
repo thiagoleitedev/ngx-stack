@@ -1,4 +1,7 @@
 export interface RadioButtons {
-  value: string
-  icon: string
-}[]
+  options: {
+    value: string
+    icon: string
+  }[]
+  selected: string
+}

@@ -1,14 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core'
 import { Router } from '@angular/router'
-import { NgxUiService, NavItem } from '../ui'
-import {
-  RealTime,
-  AccountApi,
-  FireLoopRef,
-  Account,
-  SDKToken,
-} from '@ngx-plus/ngx-sdk'
+import { AccountApi, Account, SDKToken } from '@ngx-plus/ngx-sdk'
+import { Store } from '@ngrx/store'
 import { Subscription } from 'rxjs/Subscription'
+
+import { NgxUiService, NavItem } from '../ui'
+import { UiActions } from '../state'
 
 @Component({
   selector: 'ngx-auth',
@@ -40,7 +37,7 @@ export class AuthComponent implements OnInit, OnDestroy {
     public userApi: AccountApi,
     public router: Router,
     private ui: NgxUiService,
-    private rt: RealTime
+    private store: Store<any>
   ) { }
 
   ngOnInit() {
@@ -60,9 +57,9 @@ export class AuthComponent implements OnInit, OnDestroy {
       postHeaderImg: this.ui.postHeaderImg,
       preHeaderImg: this.ui.preHeaderImg,
     }
-    this.ui.deactivateSidebar()
-    this.ui.deactivateHeader()
-    this.ui.deactivateFooter()
+    this.store.dispatch(new UiActions.DeactivateHeader())
+    this.store.dispatch(new UiActions.DeactivateSidebar())
+    this.store.dispatch(new UiActions.DeactivateFooter())
   }
 
   ngOnDestroy() {

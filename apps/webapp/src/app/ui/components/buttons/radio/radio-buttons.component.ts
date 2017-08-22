@@ -15,7 +15,7 @@ import { RadioButtons } from '../../../interfaces'
            formControlName="option">
         <label ngbButtonLabel
                class="btn-outline-success"
-               *ngFor="let option of options">
+               *ngFor="let option of config.options">
         <input ngbButton
                type="radio"
                [value]="option.value"
@@ -32,22 +32,22 @@ import { RadioButtons } from '../../../interfaces'
     }
     label {
       cursor: pointer;
+      min-width: 75px;
     }
   `,
   ],
 })
 export class RadioButtonsComponent implements OnInit {
-  @Input() options: RadioButtons
-  @Input() selected: string
+  @Input() config: RadioButtons
   @Output() action = new EventEmitter()
 
   public radioGroup: FormGroup
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder) {}
 
   ngOnInit() {
     this.radioGroup = this.formBuilder.group({
-      option: this.selected,
+      option: this.config.selected,
     })
   }
 

@@ -1,24 +1,34 @@
+import { Observable } from 'rxjs/Observable'
+
+import { ActionButton } from './action-button'
+
 export interface TableConfig {
+  actionButtons?: ActionButton[]
   columnMode?: string
   columns: {
     field: string
-    label: string
+    label?: string
+    name?: string
     action?: string
   }[]
-  cssClasses: {
+  count$: Observable<number>
+  currentPage?: number
+  cssClasses?: {
     sortAscending: string
     sortDescending: string
     pagerLeftArrow: string
     pagerRightArrow: string
   }
-  footerHeight: number
-  headerHeight: number
-  limit: number
-  loadingIndicator: boolean
-  messages: {
+  filteredItems?: any[]
+  footerHeight?: number
+  headerHeight?: number
+  items$: Observable<any[]>
+  limit?: number
+  loadingIndicator?: boolean
+  messages?: {
     emptyMessage: string
     totalMessage: string
   }
-  offset: number
-  sortType: string
+  offset?: number
+  sortType?: string
 }

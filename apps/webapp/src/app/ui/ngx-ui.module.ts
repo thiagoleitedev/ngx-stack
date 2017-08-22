@@ -17,6 +17,7 @@ import {
   CardHeaderTabsComponent,
   CardHeaderTitleComponent,
   DashCardComponent,
+  DropButtonComponent,
   ModalComponent,
   RadioButtonsComponent,
   ToolbarComponent,
@@ -36,10 +37,11 @@ import {
   SidebarComponent,
 } from './layout/index'
 
-import { NgxUiService } from './services/ngx-ui.service'
+import { NgxUiService } from './services'
 
 const components = [
   ActionButtonComponent,
+  DropButtonComponent,
   RadioButtonsComponent,
   CardComponent,
   CardHeaderComponent,

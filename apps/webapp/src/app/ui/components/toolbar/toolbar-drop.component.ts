@@ -1,60 +1,34 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core'
-import { Router } from '@angular/router'
-import { AccountApi, Account } from '@ngx-plus/ngx-sdk'
-import { NgxUiService } from '../../services'
 
 @Component({
   selector: 'ngx-toolbar-drop',
   template: `
-    <div ngbDropdown
-         class="d-inline-block float-right">
-      <button ngbDropdownToggle
-              class="btn btn-outline-success options"
-              id="tbDrop">{{ selected }}
-      </button>
-      <div ngbDropdownMenu
-           class="dropdown-menu-right"
-           aria-labelledby="tbDrop">
-        <button *ngFor="let option of options"
-                class="dropdown-item"
-                (click)="action.emit({ type: 'ToolbarDropSelection', payload: option }); selected = option"
-                [class.bg-success]="selected === option"> {{ option }}
-        </button>
-      </div>
-    </div>
+    <ngx-drop-button [config]="config || default"
+                     (action)="handleAction($event)">
+    </ngx-drop-button>
   `,
-  styles: [
-    `
-    .options {
-      width: 100px;
-    }
-
-    .dropdown-menu-right {
-      min-width: 100px;
-      top: 0;
-    }
-
-    .dropdown-item {
-      text-align: center;
-    }
-
-    .bg-success {
-      color: #fff;
-    }
-  `,
-  ],
 })
 export class ToolbarDropComponent {
-  @Input() selected: any = 10
-  @Input() options = [10, 25, 50, 100]
+  @Input() config
   @Output() action = new EventEmitter()
+
+  public default = {
+    label: null,
+    selected: 10,
+    options: [
+      { key: 10, value: 10 },
+      { key: 25, value: 25 },
+      { key: 50, value: 50 },
+      { key: 100, value: 100 },
+    ],
+  }
 
   constructor() {}
 
   handleAction(event) {
     switch (event.type) {
       default: {
-        return console.log('$event', event)
+        return this.action.emit(event)
       }
     }
   }

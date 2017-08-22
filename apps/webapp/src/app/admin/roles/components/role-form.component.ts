@@ -11,46 +11,44 @@ import { Role, RolesService } from '../roles.service'
   selector: 'ngx-role-form',
   template: `
     <ngx-form *ngIf="item"
-              [config]="formConfig"
+              [config]="service.formConfig"
               [item]="item"
               (action)="handleAction($event)">
     </ngx-form>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RoleFormComponent implements OnInit {
-
-  private subscriptions: Subscription[]
-  public formConfig: any = {}
+  public formConfig
   public item: any
+  private subscriptions: Subscription[] = []
 
   constructor(
     public service: RolesService,
     private ui: NgxUiService,
     private router: Router,
-    private store: Store<any>,
-  ) {
-    this.subscriptions = []
-  }
+    private store: Store<any>
+  ) {}
 
   ngOnInit() {
-    this.formConfig = {}
+    this.formConfig = this.service.formConfig
     this.subscriptions.push(
       this.service.selected$.subscribe(
-        (role) => this.item = role,
-        (err) => console.log(err)))
+        role => (this.item = role),
+        err => console.log(err)
+      )
+    )
   }
 
   handleAction(event) {
     switch (event.type) {
-      case 'update':
+      case 'Update':
         this.handleAction({ type: 'cancel' })
         return this.service.upsert(event.payload)
-      case 'cancel':
+      case 'Cancel':
         return this.router.navigate(['/admin/roles'])
       default:
         return console.log('Unknown Event Action:', event)
     }
   }
-
 }

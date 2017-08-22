@@ -1,4 +1,5 @@
 export { ActionButtonComponent } from './buttons/action/action-button.component'
+export { DropButtonComponent } from './buttons/drop/drop-button.component'
 export { RadioButtonsComponent } from './buttons/radio/radio-buttons.component'
 
 export { CardComponent } from './card/card.component'

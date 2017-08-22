@@ -1,5 +1,6 @@
-<div class="sidebar"
-     [class.open]="ui.sidebarOpen">
+<div *ngIf="config.sidebar.active"
+     class="sidebar"
+     [class.open]="config.sidebar.open">
   <nav class="sidebar-nav">
     <ul *ngFor="let item of ui.sidebarNav"
         class="nav">

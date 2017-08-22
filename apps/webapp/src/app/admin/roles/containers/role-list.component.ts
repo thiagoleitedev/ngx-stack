@@ -1,7 +1,13 @@
-import { Component, OnInit, OnDestroy } from '@angular/core'
+import { Component, OnInit } from '@angular/core'
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap'
 import { Router, ActivatedRoute } from '@angular/router'
-import { NgxUiService, ModalComponent } from '../../../ui'
+import {
+  NgxUiService,
+  ModalComponent,
+  CardConfig,
+  TableConfig,
+  ToolbarConfig,
+} from '../../../ui'
 import { Role, RoleApi } from '@ngx-plus/ngx-sdk'
 import { Observable } from 'rxjs/Observable'
 import { Subscription } from 'rxjs/Subscription'
@@ -14,106 +20,97 @@ import { RolesService } from '../roles.service'
   template: `
     <ngx-grid [cardConfig]="cardConfig"
               [tableConfig]="tableConfig"
-              [count$]="count$"
-              [items$]="items$"
+              [toolbarConfig]="toolbarConfig"
               (action)="handleAction($event)">
     </ngx-grid>
   `,
 })
-export class RoleListComponent implements OnInit, OnDestroy {
-  public cardConfig = {
-    cardTitle: 'Roles',
-    icon: 'fa fa-fw fa-tags',
-    showSearch: true,
-  }
-  public tableConfig = {
-    columnMode: 'force',
-    columns: [
-      { field: 'name', name: 'Name', action: 'update' },
-      { field: 'description', name: 'Description' },
-    ],
-    cssClasses: {
-      sortAscending: 'fa fa-fw fa-angle-up',
-      sortDescending: 'fa fa-fw fa-angle-down',
-      pagerLeftArrow: 'fa fa-fw fa-angle-left',
-      pagerRightArrow: 'fa fa-fw fa-angle-right',
-    },
-    footerHeight: 0,
-    headerHeight: 40,
-    limit: 10,
-    loadingIndicator: false,
-    messages: {
-      emptyMessage: 'No data to display',
-      totalMessage: 'Total',
-    },
-    offset: 0,
-    sortType: 'single',
-  }
-  public count$: Observable<number>
-  public items$: Observable<Role[]>
-  private modalRef: any
-  private subscriptions: Subscription[] = new Array<Subscription>()
+export class RoleListComponent implements OnInit {
+  public cardConfig: CardConfig
+  public tableConfig: TableConfig
+  public toolbarConfig: ToolbarConfig
+  public modalRef
 
   constructor(
     public service: RolesService,
     public ui: NgxUiService,
-    private api: RoleApi,
-    private modal: NgbModal,
     private router: Router,
     private route: ActivatedRoute
-  ) { }
+  ) {}
 
   ngOnInit() {
-    this.items$ = this.service.roles$.map(r => r.ids.map(id => r.entities[id]))
-    this.count$ = this.service.roles$.map(r => r.count)
-  }
-
-  ngOnDestroy() {
-    this.subscriptions.forEach((subscription: Subscription) =>
-      subscription.unsubscribe()
-    )
-  }
-
-  showDialog(type, item, options?): void {
-    this.modalRef = this.modal.open(ModalComponent, { size: 'sm' })
-    this.modalRef.componentInstance.item = item
-    this.modalRef.componentInstance.formConfig = {}
-    switch (type) {
-      case 'create':
-        this.modalRef.componentInstance.title = 'Create Role'
-        break
-      default:
-        return console.log('$modal', type)
+    this.cardConfig = {
+      cardTitle: 'Roles',
+      icon: 'fa fa-fw fa-tags',
+      showSearch: true,
     }
-    this.subscriptions.push(
-      this.modalRef.componentInstance.action.subscribe(event =>
-        this.handleAction(event)
-      )
-    )
+
+    this.tableConfig = {
+      actionButtons: [
+        {
+          action: 'Update',
+          class: 'btn btn-outline-info btn-sm',
+          icon: 'fa fa-fw fa-pencil',
+        },
+        {
+          action: 'Delete',
+          class: 'btn btn-outline-danger btn-sm',
+          icon: 'fa fa-fw fa-trash',
+        },
+      ],
+      columns: [
+        { field: 'name', name: 'Name', action: 'Update' },
+        { field: 'description', name: 'Description' },
+      ],
+      count$: this.service.items$.map(r => r.count),
+      items$: this.service.items$.map(r => r.ids.map(id => r.entities[id])),
+    }
+
+    this.toolbarConfig = {
+      actionButton: {
+        action: 'InitCreate',
+        class: 'btn btn-outline-primary btn-block',
+        label: 'Create New Role',
+        icon: 'fa fa-fw fa-plus',
+        item: new Role(),
+      },
+    }
   }
 
-  create() {
-    this.showDialog('create', new Role())
+  showModal(item, form, title) {
+    this.ui.modalRef = this.ui.modal.open(ModalComponent, { size: 'sm' })
+    this.ui.modalRef.componentInstance.item = item
+    this.ui.modalRef.componentInstance.formConfig = form
+    this.ui.modalRef.componentInstance.title = title
+    this.ui.modalRef.componentInstance.action.subscribe(event =>
+      this.handleAction(event)
+    )
   }
 
   handleAction(event) {
     switch (event.type) {
-      case 'close':
-      case 'cancel':
-        return this.modalRef.close()
-      case 'create':
+      case 'InitCreate':
+        return this.showModal(
+          event.payload,
+          this.service.formConfig,
+          'Create New Role'
+        )
+      case 'Close':
+      case 'Cancel':
+        return this.ui.modalRef.close()
+      case 'Save':
         event.payload.principals = []
-        this.modalRef.close()
-        return this.service.create(event.payload)
-      case 'update':
+        this.service.create(event.payload)
+        return this.ui.modalRef.close()
+      case 'Update':
         return this.router.navigate([event.payload.id], {
           relativeTo: this.route.parent,
         })
-      case 'viewUsers':
+      case 'ViewUsers':
         return this.router.navigate([event.payload.id, 'users'], {
           relativeTo: this.route.parent,
         })
-      case 'delete':
+      case 'Delete':
         const successCb = () => this.service.delete(event.payload)
         const question = {
           title: 'Are you sure?',

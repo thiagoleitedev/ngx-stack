@@ -1,5 +1,5 @@
 <div class="app-body"
-     [class.open]="ui.sidebarOpen && ui.sidebarActive"
-     [class.no-header]="!ui.headerActive">
+     [class.open]="config.sidebar.open && config.sidebar.active"
+     [class.no-header]="!config.header.active">
   <router-outlet></router-outlet>
 </div>

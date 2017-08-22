@@ -42,18 +42,16 @@ export class LoginComponent {
     private api: AccountApi,
     private router: Router,
     private store: Store<any>
-  ) { }
+  ) {}
 
   handleAction(event) {
-    this.store.dispatch(new AuthActions.LogIn(event.payload))
     switch (event.type) {
+      case 'LogIn': {
+        return this.store.dispatch(new AuthActions.LogIn(event.payload))
+      }
       default: {
         return console.log('$event', event)
       }
     }
-  }
-
-  logout() {
-    this.store.dispatch(new AuthActions.LogOut({}))
   }
 }

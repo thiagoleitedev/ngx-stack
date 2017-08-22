@@ -1,35 +1,22 @@
 import { Component, OnInit, OnDestroy } from '@angular/core'
-import { NgxUiService, NavItem } from '../ui'
-import { Subscription } from 'rxjs/Subscription'
+import { Store } from '@ngrx/store'
 
-import { AccountApi } from '@ngx-plus/ngx-sdk'
+import { NgxUiService } from '../ui'
+import { UiActions } from '../state'
 
 @Component({
   selector: 'ngx-home',
   template: `
       <router-outlet></router-outlet>
   `,
-  styleUrls: ['./home.component.scss']
-
+  styleUrls: ['./home.component.scss'],
 })
-export class HomeComponent implements OnDestroy {
-  private authIcon
-  private sidebarNav: NavItem[]
-  private subscriptions: Subscription[] = new Array<Subscription>()
-
-  constructor(
-    private ui: NgxUiService,
-    private api: AccountApi,
-  ) {
-
-  }
+export class HomeComponent implements OnInit {
+  constructor(private ui: NgxUiService, private store: Store<any>) {}
 
   ngOnInit() {
-    this.ui.activateSidebar()
+    this.store.dispatch(new UiActions.ActivateHeader())
+    this.store.dispatch(new UiActions.ActivateSidebar())
+    this.store.dispatch(new UiActions.ActivateFooter())
   }
-
-  ngOnDestroy() {
-    this.subscriptions.forEach((subscription: Subscription) => subscription.unsubscribe())
-  }
-
 }

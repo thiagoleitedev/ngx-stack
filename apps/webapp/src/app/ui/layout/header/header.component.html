@@ -1,9 +1,10 @@
-<nav class="navbar navbar-light fixed-top bg-faded">
+<nav [hidden]="!config.header.active"
+     class="navbar navbar-light fixed-top bg-faded">
   <div class="row align-items-center justify-content-between w-100">
     <div class="col">
       <button class="btn sidebar-toggle"
-              (click)="ui.toggleSidebar()">
-           <i [class]="'fa fa-fw fa-' + (ui.sidebarOpen ? 'chevron-circle-left' : 'bars')"></i>
+              (click)="handleAction({ type: 'ToggleSidebar' })">
+           <i [class]="'fa fa-fw fa-' + (config.sidebar.open ? 'chevron-circle-left' : 'bars')"></i>
       </button>
       <div class="navbar-brand">
         {{ ui.preHeaderImg }}
@@ -31,17 +32,15 @@
              class="dropdown-menu-right"
              aria-labelledby="dropdownBasic2">
           <button class="dropdown-item"
-                  (click)="logout()">
+                  (click)="handleAction({ type: 'LogOut' })">
                <i class="fa fa-fw fa-sign-out"></i> Log Out
              </button>
         </div>
       </div>
       <button class="btn morebar-toggle"
-              (click)="ui.toggleMorebar()">
-           <i [class]="'fa fa-fw fa-ellipsis-' + (ui.morebarOpen ? 'h' : 'v')"></i>
+              (click)="handleAction({ type: 'ToggleMorebar' })">
+           <i [class]="'fa fa-fw fa-ellipsis-' + (config.morebar.open ? 'h' : 'v')"></i>
       </button>
     </div>
   </div>
 </nav>
-
-<breadcrumb [class.open]="ui.sidebarOpen"></breadcrumb>

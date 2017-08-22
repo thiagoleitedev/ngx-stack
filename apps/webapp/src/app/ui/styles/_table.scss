@@ -1,20 +1,26 @@
-ngx-datatable {
+.ngx-datatable {
   display: flex;
-  width: 100%;
+  margin-bottom: 10px;
+  min-height: 425px;
+}
+
+.table {
+  // min-height: 425px;
 }
 
 .datatable-header {
-  border-bottom: 3px solid #e7e7e7 !important;
-  padding: 5px 0;
-  vertical-align: middle;
-  .datatable-header-cell {
-    font-size: 16px;
-    font-weight: 500;
-  }
+  border-bottom: 3px solid #ddd;
+  font-weight: 500;
+  margin-top: 10px;
+}
+
+.datatable-row-odd {
+  padding: 3px;
 }
 
 .datatable-row-even {
-  background-color: #f7f7f7;
+  background: #f9f9f9;
+  padding: 3px;
 }
 
 ngx-table-footer {

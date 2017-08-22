@@ -5,28 +5,9 @@
       <th [style.text-align]="'left'">Name</th>
       <th [style.text-align]="'left'">Email</th>
       <th [style.text-align]="'right'">
-        <div *ngIf="items"
-             ngbDropdown
-             class="ml-auto">
-          <button id="drop1"
-                  class="btn btn-success"
-                  ngbDropdownToggle>
-            <i class="fa fa-plus"></i>
-            &nbsp; Add User &nbsp;
-          </button>
-          <div class="dropdown-menu"
-               aria-labelledby="drop1">
-            <button *ngFor="let option of options"
-                    class="dropdown-item"
-                    (click)="handleAction({ type: 'addUser', payload: option })">
-              {{ option.fullName }}
-            </button>
-            <span *ngIf="!options || options.length === 0"
-                  class="p-1 lead">
-              All Users Assigned
-            </span>
-          </div>
-        </div>
+        <ngx-toolbar-drop [config]="dropConfig"
+                          (action)="handleAction($event)">
+        </ngx-toolbar-drop>
       </th>
     </tr>
   </thead>

@@ -17,7 +17,7 @@ import { NavItem } from '../interfaces'
 export class NgxUiService {
   public isLargeScreen: boolean
 
-  // public modalRef: NgbModalRef
+  public modalRef: NgbModalRef
   public headerActive: boolean
   public headerImg: string
   public authHeaderImg: string
@@ -35,26 +35,23 @@ export class NgxUiService {
 
   constructor(
     public alerts: NgxAlertsService,
+    public breadcrumb: BreadcrumbService,
     public forms: NgxFormsService,
-    public breadcrumb: BreadcrumbService
+    public modal: NgbModal
   ) {
-    this.checkLargeScreen()
-    this.sidebarActive = true
-    this.headerActive = true
-    this.footerActive = true
-    if (this.isLargeScreen) {
-      this.sidebarOpen = true
-    } else {
-      this.sidebarOpen = false
-    }
+    this.checkScreenSize()
   }
 
-  checkLargeScreen(): void {
+  checkScreenSize(): void {
     if (window.innerWidth > 700) {
       this.isLargeScreen = true
     } else {
       this.isLargeScreen = false
     }
+  }
+
+  setModalRef(ref: NgbModalRef) {
+    this.modalRef = ref
   }
 
   setHeaderImg(item) {
@@ -73,51 +70,11 @@ export class NgxUiService {
     this.postHeaderImg = item
   }
 
-  activateHeader(): void {
-    this.headerActive = true
-  }
-
-  deactivateHeader(): void {
-    this.headerActive = false
-  }
-
-  activateSidebar(): void {
-    this.sidebarActive = true
-  }
-
-  deactivateSidebar(): void {
-    this.sidebarActive = false
-  }
-
-  toggleSidebar(): void {
-    this.sidebarOpen = !this.sidebarOpen
-  }
-
-  activateMorebar(): void {
-    this.morebarActive = true
-  }
-
-  deactivateMorebar(): void {
-    this.morebarActive = false
-  }
-
-  toggleMorebar(): void {
-    this.morebarOpen = !this.morebarOpen
-  }
-
   getSidebarNav(): NavItem[] {
     return this.sidebarNav
   }
 
   setSidebarNav(nav: NavItem[]): void {
     this.sidebarNav = nav
-  }
-
-  activateFooter(): void {
-    this.footerActive = true
-  }
-
-  deactivateFooter(): void {
-    this.footerActive = false
   }
 }
