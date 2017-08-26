@@ -1,4 +1,10 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core'
+import {
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+  ChangeDetectionStrategy,
+} from '@angular/core'
 import { CardConfig } from '../../interfaces'
 
 @Component({
@@ -25,10 +31,11 @@ import { CardConfig } from '../../interfaces'
       </div>
     </div>
   `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CardComponent {
   @Input() config: CardConfig
   @Output() action = new EventEmitter()
 
-  constructor() { }
+  constructor() {}
 }

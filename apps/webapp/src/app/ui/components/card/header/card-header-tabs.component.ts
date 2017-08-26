@@ -1,4 +1,10 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core'
+import {
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+  ChangeDetectionStrategy,
+} from '@angular/core'
 import { NavItem } from '../../../interfaces'
 
 @Component({
@@ -16,11 +22,10 @@ import { NavItem } from '../../../interfaces'
       </li>
     </ul>
   `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CardHeaderTabsComponent {
-
   @Input() nav: NavItem
 
-  constructor() { }
-
+  constructor() {}
 }

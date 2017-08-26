@@ -1,4 +1,10 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core'
+import {
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+  ChangeDetectionStrategy,
+} from '@angular/core'
 import { NavItem } from '../../../interfaces'
 
 @Component({
@@ -12,14 +18,13 @@ import { NavItem } from '../../../interfaces'
        class="card-subtitle lead text-left">{{ subTitle }}
     </p>
   `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CardHeaderTitleComponent {
-
   @Input() cardTitle: string
   @Input() subTitle: string
 
   @Output() action = new EventEmitter()
 
-  constructor() { }
-
+  constructor() {}
 }

@@ -1,4 +1,10 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core'
+import {
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+  ChangeDetectionStrategy,
+} from '@angular/core'
 import { DashCard } from '../../interfaces'
 
 @Component({
@@ -57,6 +63,7 @@ import { DashCard } from '../../interfaces'
     }
   `,
   ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DashCardComponent {
   @Input() items: DashCard[]

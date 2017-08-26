@@ -1,4 +1,11 @@
-import { Component, Input, Output, EventEmitter, TemplateRef } from '@angular/core'
+import {
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+  TemplateRef,
+  ChangeDetectionStrategy,
+} from '@angular/core'
 import { NavItem } from '../../../interfaces'
 
 @Component({
@@ -20,7 +27,7 @@ import { NavItem } from '../../../interfaces'
       </div>
       <div *ngIf="showSearch"
            class="col-12 col-md-5">
-           <ngx-toolbar-search (action)="action.emit($event)"></ngx-toolbar-search>
+           <ngx-toolbar-filter (action)="action.emit($event)"></ngx-toolbar-filter>
       </div>
       <div *ngIf="icon"
            class="col align-self-start">
@@ -34,9 +41,9 @@ import { NavItem } from '../../../interfaces'
       </div>
     </div>
   `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CardHeaderComponent {
-
   @Input() cardTitle: string
   @Input() createButton: any
   @Input() headerBg: string
@@ -50,6 +57,5 @@ export class CardHeaderComponent {
 
   @Output() action = new EventEmitter()
 
-  constructor() { }
-
+  constructor() {}
 }
