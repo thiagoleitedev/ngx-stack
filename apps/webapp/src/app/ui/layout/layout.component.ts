@@ -24,12 +24,11 @@ import {
           <router-outlet></router-outlet>
         </ngx-body>
         <ngx-footer [config]="config"></ngx-footer>
-        <ngx-alert-templates></ngx-alert-templates>
       </div>
     </div>
   </div>
   `,
-  // changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LayoutComponent {
   @Input() config

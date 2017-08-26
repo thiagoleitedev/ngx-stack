@@ -9,7 +9,18 @@ import { NgxUiService } from '../../services'
 
 @Component({
   selector: 'ngx-footer',
-  templateUrl: './footer.component.html',
+  template: `
+    <div *ngIf="config.footer.active"
+         class="navbar fixed-bottom footer"
+         [class.open]="config.sidebar.open">
+      <div class="text-left"
+           [innerHtml]="footerLeft">
+      </div>
+      <div class="text-right"
+           [innerHtml]="footerRight">
+      </div>
+    </div>
+  `,
   styleUrls: ['./footer.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

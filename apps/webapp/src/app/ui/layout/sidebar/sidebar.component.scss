@@ -52,10 +52,10 @@
     font-size: 16px;
     padding: 8px 20px;
     width: 250px;
-    @include ripple($primary);
+    @include ripple($info);
 
     &:hover {
-      background: darken($success, 7%);
+      background: darken($success, 10%);
       box-shadow: -2px 0 2px rgba(0, 0, 0, 0.3);
 
       i {
