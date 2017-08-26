@@ -1,61 +1,43 @@
-<div class="container">
-  <div class="row">
-    <div class="col-12">
-      <table *ngIf="items"
-             class="table table-sm">
-        <thead>
-          <tr>
-            <th>Token</th>
-            <th>Created</th>
-            <th class="text-nowrap">TTL <small>(seconds)</small></th>
-            <th [style.text-align]="'right'">
-              <button (click)="handleAction({ type: 'generateToken'})"
-                      type="button"
-                      class="btn btn-success">
-                <i class="fa fa-plus"></i> &nbsp; Generate Token
-              </button>
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let item of items">
-            <td>
-              <i class="fa fa-unlock"></i> &nbsp; <small class="text-wrap">{{ item.id | slice:0:25 }}...</small>
-            </td>
-            <td>{{ item.created | date:'y-MM-dd HH:mm:ss' }}</td>
-            <td>{{ item.ttl | number }}</td>
-            <td [style.text-align]="'right'">
-              <div ngbDropdown
-                   class="btn-group">
-                <button (click)="handleAction({ type: 'deleteToken', payload: item })"
-                        type="button"
-                        class="btn btn-sm btn-outline-danger">
+<table class="table table-sm table-hover">
+  <thead>
+    <tr>
+      <th>Token</th>
+      <th>Created</th>
+      <th class="text-nowrap">TTL <small>(seconds)</small></th>
+      <th [style.text-align]="'right'">
+        <button (click)="handleAction({ type: 'GenerateToken'})"
+                type="button"
+                class="btn btn-success text-white">
+                <i class="fa fa-plus"></i> &nbsp; Generate New Token
+        </button>
+      </th>
+    </tr>
+  </thead>
+  <tbody *ngIf="items$ | async">
+    <tr *ngFor="let item of (items$ | async)">
+      <td>
+        <i class="fa fa-unlock"></i> &nbsp; <small class="text-wrap">{{ item.id | slice:0:25 }}...</small>
+      </td>
+      <td>{{ item.created | date:'y-MM-dd HH:mm:ss' }}</td>
+      <td>{{ item.ttl | number }}</td>
+      <td [style.text-align]="'right'">
+        <div class="btn-group">
+          <button (click)="handleAction({ type: 'DeleteToken', payload: item })"
+                  type="button"
+                  class="btn btn-outline-danger">
                   Delete
-                </button>
-                <button ngbDropdownToggle
-                        id="dd"
-                        type="button"
-                        class="btn btn-sm btn-danger"></button>
-                <div class="dropdown-menu dropdown-menu-right p-0"
-                     aria-labelledby="dd">
-                  <button (click)="handleAction({ type: 'removeTtl', payload: item })"
-                          class="dropdown-item m-0">Remove TTL
-                    </button>
-                </div>
-              </div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-  <div class="row justify-content-end">
-    <div class="col"
-         [style.text-align]="'right'">
-      <button (click)="handleAction({ type: 'deleteAllTokens' })"
-              class="btn btn-danger btn-sm ml-auto mr-1">
+          </button>
+          <button (click)="handleAction({ type: 'RemoveTtl', payload: item })"
+                  type="button"
+                  class="btn btn-outline-warning">
+                  Remove TTL
+          </button>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<button (click)="handleAction({ type: 'DeleteAllTokens' })"
+        class="btn btn-danger float-right">
         <i class="fa fa-trash"></i> &nbsp; Delete All Tokens
-      </button>
-    </div>
-  </div>
-</div>
+</button>

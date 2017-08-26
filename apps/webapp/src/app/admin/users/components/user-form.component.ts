@@ -1,39 +1,37 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core'
 import { Router } from '@angular/router'
 import { Store } from '@ngrx/store'
-import { NgxUiService } from '../../../ui'
 import { Subscription } from 'rxjs/Subscription'
 
 import { UserActions } from '../../../state'
+import { NgxUiService, NgxFormConfig } from '../../../ui'
 import { User, UsersService } from '../users.service'
 
 @Component({
   selector: 'ngx-user-form',
   template: `
     <ngx-form *ngIf="item"
-                [config]="formConfig"
-                [item]="item"
-                (action)="handleAction($event)">
+              [config]="service.formConfig"
+              [item]="item"
+              (action)="handleAction($event)">
     </ngx-form>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserFormComponent implements OnInit {
-  private subscriptions: Subscription[]
-  public formConfig: any = {}
+  public formConfig: NgxFormConfig
   public item: any
+  private subscriptions: Subscription[] = []
 
   constructor(
     public service: UsersService,
     private ui: NgxUiService,
     private router: Router,
     private store: Store<any>
-  ) {
-    this.subscriptions = []
-  }
+  ) {}
 
   ngOnInit() {
-    this.formConfig = {}
+    this.formConfig = this.service.formConfig
     this.subscriptions.push(
       this.service.selected$.subscribe(
         user => (this.item = user),
@@ -44,22 +42,18 @@ export class UserFormComponent implements OnInit {
 
   handleAction(event) {
     switch (event.type) {
-      case 'update':
-        const fullName =
-          event.payload.firstName +
-          ' ' +
-          (event.payload.middleName || '') +
-          ' ' +
-          event.payload.lastName +
-          ' ' +
-          (event.payload.suffix || '')
-        event.payload.fullName = fullName.replace('  ', ' ')
-        this.handleAction({ type: 'cancel' })
-        return this.service.upsert(event.payload)
-      case 'cancel':
+      case 'Save':
+        const fullName = new String(
+          `${event.payload.firstName} ${event.payload.middleName || ''} ${event
+            .payload.lastName} ${event.payload.suffix || ''}`
+        ).trim()
+        event.payload.fullName = fullName
+        this.service.update(event.payload)
+        return this.router.navigate(['/admin/users'])
+      case 'Cancel':
         return this.router.navigate(['/admin/users'])
       default:
-        return console.log('Unknown Event Action:', event)
+        return console.log('$event', event)
     }
   }
 }

@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core'
-import { NgxUiService } from '../../../ui'
+import { Observable } from 'rxjs/Observable'
 import { Subscription } from 'rxjs/Subscription'
 
+import { NgxUiService, DropButton } from '../../../ui'
 import { UsersService } from '../users.service'
 
 @Component({
@@ -9,8 +10,9 @@ import { UsersService } from '../users.service'
   templateUrl: './user-access-tokens.component.html',
 })
 export class UserAccessTokensComponent implements OnInit {
-  public item: any
-  public items: any
+  public item$: Observable<any>
+  public items$: Observable<any[]>
+  public dropConfig: DropButton
   private subscriptions: Subscription[]
 
   constructor(public service: UsersService, public ui: NgxUiService) {
@@ -18,94 +20,104 @@ export class UserAccessTokensComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.subscriptions.push(
-      this.service.selected$.subscribe(
-        user => (this.item = user),
-        err => console.log(err)
-      )
-    )
+    this.item$ = this.service.selected$
+    this.items$ = this.item$.map(item => item.accessTokens)
+    this.dropConfig = {
+      action: 'RemoveTtl',
+      class: 'btn btn-danger btn-sm',
+      label: '',
+      options: [{ key: 'Remove TTL', value: 'RemoveTtl' }],
+    }
     this.refresh()
   }
 
   refresh() {
     this.service.getUserAccessTokens(
-      this.item,
-      res => (this.items = res),
-      err => console.error(err)
+      this.service.selected,
+      res => {
+        this.service.selected.accessTokens = res
+        this.service.setSelected(this.service.selected)
+      },
+      err => this.ui.alerts.toastError('Read Tokens Failure', err.message)
     )
   }
 
   handleAction(event) {
     switch (event.type) {
-      case 'generateToken':
+      case 'GenerateToken': {
         return this.service.generateToken(
-          this.item,
-          () => {
-            this.refresh()
+          this.service.selected,
+          res => {
             this.ui.alerts.toastSuccess(
               'Generate Token Success',
-              `A new token has been generated for <u><i>${this.item[
+              `A new token has been generated for <u><i>${this.service.selected[
                 'email'
               ]}</u></i>`
             )
+            this.refresh()
           },
           err => this.ui.alerts.toastError('Generate Token Fail', err.message)
         )
-      case 'deleteToken':
+      }
+      case 'DeleteToken': {
         return this.service.deleteToken(
           {
-            user: this.item,
+            user: this.service.selected,
             token: event.payload,
           },
-          () => {
-            this.refresh()
+          res => {
             this.ui.alerts.toastSuccess(
               'Delete Token Success',
               `Token <u><i>${event.payload
                 .id}</u></i> has been deleted successfully`
             )
+            this.refresh()
           },
           err => this.ui.alerts.toastError('Delete Token Fail', err.message)
         )
-      case 'removeTtl':
+      }
+      case 'RemoveTtl': {
         return this.service.removeTtl(
           {
-            user: this.item,
+            user: this.service.selected,
             token: event.payload,
           },
-          () => {
-            this.refresh()
+          res => {
             this.ui.alerts.toastSuccess(
               'Remove TTL Success',
               `TTL for token <u><i>${event.payload
                 .id} has been removed successfully`
             )
+            this.refresh()
           },
           err => this.ui.alerts.toastError('Remove TTL Fail', err.message)
         )
-      case 'deleteAllTokens':
+      }
+      case 'DeleteAllTokens': {
         const successCb = () =>
           this.service.deleteAllTokens(
-            this.item,
-            () => {
-              this.refresh()
+            this.service.selected,
+            res => {
               this.ui.alerts.toastSuccess(
                 'Delete All Tokens Success',
-                `All tokens for <u><i>${this.item[
+                `All tokens for <u><i>${this.service.selected[
                   'email'
                 ]}</u></i> have been deleted successfully`
               )
+              this.refresh()
             },
             err =>
               this.ui.alerts.toastError('Delete All Tokens Fail', err.message)
           )
         const question = {
           title: 'Are you sure?',
-          text: 'This action cannot be undone',
+          text: 'This action cannot be reversed.',
         }
         return this.ui.alerts.alertError(question, successCb, () => ({}))
-      default:
+      }
+      default: {
         return console.log('Unknown Event Type', event)
+      }
     }
   }
 }

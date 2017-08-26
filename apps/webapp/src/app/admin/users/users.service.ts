@@ -18,17 +18,62 @@ import { UserActions } from '../../state'
 
 @Injectable()
 export class UsersService {
-  private admin$: Observable<any>
-  private subscriptions: Subscription[]
-
-  public users$: Observable<any>
+  public items$: Observable<any>
   public roles$: Observable<any>
   public selected$: Observable<any>
-  public tableColumns = [
-    { field: 'firstName', label: 'Name', action: 'edit' },
-    { field: 'email', label: 'Email' },
-    { field: 'actions', label: 'Actions' },
-  ]
+  public selected: any
+  public formConfig = {
+    fields: {
+      firstName: {
+        className: 'w-50',
+        type: 'input',
+        label: 'First Name',
+      },
+      middleName: {
+        className: 'w-50',
+        type: 'input',
+        label: 'Middle Name',
+      },
+      lastName: {
+        className: 'w-50',
+        type: 'input',
+        label: 'Last Name',
+      },
+      suffix: {
+        className: 'w-50',
+        type: 'select',
+        label: 'Suffix',
+        options: [
+          { label: 'Jr.', value: 'Jr.' },
+          { label: 'Sr.', value: 'Sr.' },
+          { label: 'II', value: 'II' },
+          { label: 'III', value: 'III' },
+          { label: 'IV', value: 'IV' },
+          { label: 'V', value: 'V' },
+        ],
+      },
+      email: {
+        className: 'w-50',
+        type: 'email',
+        label: 'Email',
+      },
+    },
+    buttons: [
+      {
+        label: 'Cancel',
+        type: 'button',
+        classNames: 'btn btn-outline-danger col-lg-6',
+        click: { type: 'Cancel' },
+      },
+      {
+        label: 'Save',
+        type: 'button',
+        classNames: 'btn btn-success text-white col-lg-6',
+        click: { type: 'Save' },
+      },
+    ],
+  }
+  private admin$: Observable<any>
 
   constructor(
     private api: AccountApi,
@@ -37,14 +82,18 @@ export class UsersService {
     private store: Store<any>
   ) {
     this.admin$ = this.store.select('admin')
-    this.users$ = this.admin$.map(a => a.users)
+    this.items$ = this.admin$.map(a => a.users)
     this.roles$ = this.admin$.map(a => a.roles)
-    this.selected$ = this.users$.map(u => u.selected)
-    this.subscriptions = []
+    this.selected$ = this.items$.map(u => u.selected)
   }
 
   setSelected(item) {
     this.store.dispatch(new UserActions.SelectUser(item))
+    this.selected = item
+  }
+
+  refresh() {
+    this.get(this.selected.id).subscribe(res => this.setSelected(res[0]))
   }
 
   get(id): Observable<any> {
@@ -79,6 +128,10 @@ export class UsersService {
 
   removeUserFromRole(item) {
     this.store.dispatch(new UserActions.DeleteUserFromRole(item))
+  }
+
+  getUserRoles(item, successCb, errorCb): Subscription {
+    return this.api.getRoles(item.id).subscribe(successCb, errorCb)
   }
 
   getUserAccessTokens(item, successCb, errorCb): Subscription {

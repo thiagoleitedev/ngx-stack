@@ -1,104 +1,123 @@
 import { Component, OnInit, OnDestroy } from '@angular/core'
-// import { NgbModal } from '@ng-bootstrap/ng-bootstrap'
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap'
 import { Router, ActivatedRoute } from '@angular/router'
+import { NgxUiService, ModalComponent, GridConfig } from '../../../ui'
+import { Observable } from 'rxjs/Observable'
 import { Subscription } from 'rxjs/Subscription'
-import { NgxUiService, ModalComponent } from '../../../ui'
-import { Account, AccountApi } from '@ngx-plus/ngx-sdk'
+import 'rxjs/operator/map'
 
-import { UsersService } from '../users.service'
+import { UsersService, User } from '../users.service'
 
 @Component({
   selector: 'ngx-user-list',
-  templateUrl: './user-list.component.html',
+  template: `
+    <ngx-grid [config]="gridConfig"
+              (action)="handleAction($event)">
+    </ngx-grid>
+  `,
 })
 export class UserListComponent implements OnInit, OnDestroy {
-  public items: Account[]
-  private modalRef: any
-  private subscriptions: Subscription[] = new Array<Subscription>()
+  public gridConfig: GridConfig
+  public modalRef
+  private subscriptions: Subscription[]
 
   constructor(
     public service: UsersService,
     public ui: NgxUiService,
-    private api: AccountApi,
-    // private modal: NgbModal,
     private router: Router,
     private route: ActivatedRoute
-  ) { }
+  ) {}
 
   ngOnInit() {
-    this.subscriptions.push(
-      this.service.users$.subscribe(
-        items => (this.items = items.ids.map(id => items.entities[id])),
-        (error: any) =>
-          this.ui.alerts.toastError('Failed to Retrieve Users', error.message)
-      )
-    )
+    this.subscriptions = []
+    this.gridConfig = {
+      card: {
+        cardTitle: 'Users',
+        icon: 'fa fa-fw fa-users',
+        showSearch: true,
+      },
+      table: {
+        actionButtons: [
+          {
+            action: 'Update',
+            class: 'btn btn-outline-info btn-sm',
+            icon: 'fa fa-fw fa-pencil',
+          },
+          {
+            action: 'Delete',
+            class: 'btn btn-outline-danger btn-sm',
+            icon: 'fa fa-fw fa-trash',
+          },
+        ],
+        columns: [
+          { field: 'fullName', label: 'Full Name', action: 'Update' },
+          { field: 'email', label: 'Email' },
+        ],
+        count$: this.service.items$.map(r => r.count),
+        items$: this.service.items$.map(r => r.ids.map(id => r.entities[id])),
+      },
+      toolbar: {
+        actionButton: {
+          action: 'InitCreate',
+          class: 'btn btn-outline-primary btn-block',
+          label: 'Create New User',
+          icon: 'fa fa-fw fa-plus',
+        },
+      },
+    }
   }
 
   ngOnDestroy() {
-    this.subscriptions.forEach((subscription: Subscription) =>
-      subscription.unsubscribe()
-    )
+    this.subscriptions.forEach(subscription => subscription.unsubscribe())
   }
 
-  showDialog(type, item, options?): void {
-    // this.modalRef = this.modal.open(ModalComponent, { size: 'lg' })
-    this.modalRef.componentInstance.item = item
-    this.modalRef.componentInstance.formConfig = {}
-    switch (type) {
-      case 'create':
-        this.modalRef.componentInstance.title = 'Create User'
-        break
-      default:
-        console.log('Unknown Type', type)
-        break
-    }
+  showModal(item, form, title) {
+    this.ui.modalRef = this.ui.modal.open(ModalComponent, { size: 'lg' })
+    this.ui.modalRef.componentInstance.item = item
+    this.ui.modalRef.componentInstance.formConfig = form
+    this.ui.modalRef.componentInstance.title = title
     this.subscriptions.push(
-      this.modalRef.componentInstance.action.subscribe(event =>
+      this.ui.modalRef.componentInstance.action.subscribe(event =>
         this.handleAction(event)
       )
     )
   }
 
-  create() {
-    this.showDialog('create', new Account())
-  }
-
   handleAction(event) {
     switch (event.type) {
-      case 'close':
-      case 'cancel':
-        return this.modalRef.close()
-      case 'create':
-        const fullName =
-          event.payload.firstName +
-          ' ' +
-          (event.payload.middleName || '') +
-          ' ' +
-          event.payload.lastName +
-          ' ' +
-          (event.payload.suffix || '')
-        event.payload.fullName = fullName.replace('  ', ' ')
+      case 'InitCreate':
+        const form = this.service.formConfig
+        form.fields['password'] = 'password'
+        return this.showModal(new User(), form, 'Create New User')
+      case 'Close':
+      case 'Cancel':
+        return this.ui.modalRef.close()
+      case 'Save':
+        const fullName = new String(
+          `${event.payload.firstName} ${event.payload.middleName || ''} ${event
+            .payload.lastName} ${event.payload.suffix || ''}`
+        ).trim()
+        event.payload.fullName = fullName
         event.payload.roles = []
-        this.modalRef.close()
-        return this.service.create(event.payload)
-      case 'update':
+        this.service.create(event.payload)
+        return this.ui.modalRef.close()
+      case 'Update':
         return this.router.navigate([event.payload.id], {
           relativeTo: this.route.parent,
         })
-      case 'viewRoles':
-        return this.router.navigate([event.payload.id, 'roles'], {
+      case 'ViewUsers':
+        return this.router.navigate([event.payload.id, 'users'], {
           relativeTo: this.route.parent,
         })
-      case 'delete':
+      case 'Delete':
         const successCb = () => this.service.delete(event.payload)
         const question = {
           title: 'Are you sure?',
-          text: 'The action cannot be undone.',
+          text: 'This action cannot be undone.',
         }
         return this.ui.alerts.alertError(question, successCb, () => ({}))
       default:
-        return console.log('Unknown Event Action', event)
+        return console.log('$event', event)
     }
   }
 }
