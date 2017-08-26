@@ -19,6 +19,7 @@ import {
                 [user]="(user$ | async)"
                 (action)="handleAction($event)">
     </ngx-layout>
+    <ngx-alert-templates></ngx-alert-templates>
   `,
   // changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -64,7 +65,7 @@ export class AppComponent implements OnInit {
           {
             name: 'Controls',
             link: '/admin/controls',
-            icon: 'fa fa-fw fa-ban',
+            icon: 'fa fa-fw fa-cogs',
           },
         ],
       },
