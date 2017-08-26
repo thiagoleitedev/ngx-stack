@@ -10,6 +10,7 @@ import {
 export { Account as Role } from '@ngx-plus/ngx-sdk'
 import { NgxUiService } from '../../ui'
 import { Observable } from 'rxjs/Observable'
+import { Subscription } from 'rxjs/Subscription'
 import 'rxjs/add/operator/distinctUntilChanged'
 import 'rxjs/add/operator/map'
 
@@ -17,10 +18,10 @@ import { RoleActions, UserActions } from '../../state'
 
 @Injectable()
 export class RolesService {
-  private admin$: Observable<any>
   public users$: Observable<any>
   public items$: Observable<any>
   public selected$: Observable<any>
+  public selected: any
   public formConfig = {
     fields: {
       name: 'input',
@@ -28,19 +29,20 @@ export class RolesService {
     },
     buttons: [
       {
-        label: 'Save',
-        type: 'button',
-        classNames: 'btn btn-success btn-block text-white',
-        click: { type: 'Save' },
-      },
-      {
         label: 'Cancel',
         type: 'button',
-        classNames: 'btn btn-danger btn-block',
+        classNames: 'btn btn-outline-danger col-lg-6',
         click: { type: 'Cancel' },
+      },
+      {
+        label: 'Save',
+        type: 'button',
+        classNames: 'btn btn-success text-white col-lg-6',
+        click: { type: 'Save' },
       },
     ],
   }
+  private admin$: Observable<any>
 
   constructor(
     private userApi: AccountApi,
@@ -56,6 +58,7 @@ export class RolesService {
 
   setSelected(item) {
     this.store.dispatch(new RoleActions.SelectRole(item))
+    this.selected = item
   }
 
   get(id): Observable<any> {
@@ -87,5 +90,9 @@ export class RolesService {
 
   removeUserFromRole(item) {
     this.store.dispatch(new UserActions.DeleteUserFromRole(item))
+  }
+
+  getRoleUsers(item, successCb, errorCb): Subscription {
+    return this.api.getPrincipals(item.id).subscribe(successCb, errorCb)
   }
 }

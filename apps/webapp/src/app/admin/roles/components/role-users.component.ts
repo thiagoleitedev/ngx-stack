@@ -1,19 +1,55 @@
-import { Component, OnInit, AfterViewInit, OnDestroy } from '@angular/core'
-import { NgxUiService } from '../../../ui'
-import { RoleApi, Role } from '@ngx-plus/ngx-sdk'
+import {
+  Component,
+  OnInit,
+  AfterViewInit,
+  OnDestroy,
+  ChangeDetectionStrategy,
+} from '@angular/core'
+import { RoleApi, Account } from '@ngx-plus/ngx-sdk'
+import { Observable } from 'rxjs/Observable'
 import { Subscription } from 'rxjs/Subscription'
+import 'rxjs/add/operator/combineLatest'
+import 'rxjs/add/operator/map'
 
+import { NgxUiService, DropButton } from '../../../ui'
 import { RolesService } from '../roles.service'
 
 @Component({
   selector: 'ngx-role-users',
-  templateUrl: './role-users.component.html',
+  template: `
+    <table class="table table-hover table-sm">
+      <thead>
+        <tr>
+          <th [style.text-align]="'left'">Name</th>
+          <th [style.text-align]="'left'">Email</th>
+          <th [style.text-align]="'right'">
+            <ngx-drop-button [config]="dropConfig"
+                             (action)="handleAction($event)">
+            </ngx-drop-button>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of (items$ | async)">
+          <td><i class="fa fa-tag"></i> &nbsp; {{ item?.fullName }}</td>
+          <td>{{ item?.email }}</td>
+          <td [style.text-align]="'right'">
+            <button class="btn btn-danger btn-sm"
+                    (click)="handleAction({ type: 'RemoveUser', payload: item })">
+              <i class="fa fa-trash-o"></i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class RoleUsersComponent implements OnInit, OnDestroy {
+export class RoleUsersComponent implements OnInit {
   public item: any
-  public items: any[]
-  public options: any[]
-  public users: any[]
+  public itemIds: string[]
+  public items$: Observable<any>
+  public users: Account[]
   public columns = [
     {
       label: 'Role',
@@ -24,47 +60,43 @@ export class RoleUsersComponent implements OnInit, OnDestroy {
       field: 'description',
     },
   ]
-  public dropConfig
+  public dropConfig: DropButton
 
-  private subscriptions: Subscription[] = []
-
-  constructor(public service: RolesService, public ui: NgxUiService) {
-    this.subscriptions = []
-  }
+  constructor(public service: RolesService, public ui: NgxUiService) {}
 
   ngOnInit() {
-    this.subscriptions.push(
-      this.service.users$.subscribe(users => {
-        this.users = users.ids.map(id => users.entities[id])
-      })
-    )
-    this.subscriptions.push(
-      this.service.selected$.subscribe(
-        role => {
-          const userIds = role.principals.map(p => p.principalId)
-          this.item = role
-          this.items = this.users.filter(u => userIds.indexOf(u.id) !== -1)
-          this.options = this.users.filter(u => userIds.indexOf(u.id) === -1)
-        },
-        err => console.log(err)
-      )
-    )
-  }
-
-  ngOnDestroy() {
-    this.subscriptions.forEach((subscription: Subscription) =>
-      subscription.unsubscribe()
+    this.dropConfig = {
+      action: 'AddUser',
+      class: 'btn btn-outline-success',
+      icon: 'fa fa-fw fa-plus',
+      label: 'Add User',
+    }
+    this.items$ = this.service.selected$.combineLatest(
+      this.service.users$,
+      (role, users) => {
+        this.item = role
+        this.itemIds = role.principals.map(principal => principal.principalId)
+        this.dropConfig.options = users.ids
+          .map(id => users.entities[id])
+          .filter(user => this.itemIds.indexOf(user.id) === -1)
+          .map(user => {
+            return { key: user.fullName, value: user }
+          })
+        return role.principals.map(
+          principal => users.entities[principal.principalId]
+        )
+      }
     )
   }
 
   handleAction(event) {
     switch (event.type) {
-      case 'addUser':
+      case 'AddUser':
         return this.service.addUserToRole({
           role: this.item,
-          user: event.payload,
+          user: event.payload.value,
         })
-      case 'removeUser':
+      case 'RemoveUser':
         return this.service.removeUserFromRole({
           role: this.item,
           user: event.payload,

@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core'
 import { ActivatedRoute } from '@angular/router'
-import { NavItem } from '../../../ui'
+import { CardConfig } from '../../../ui'
 
 import { RolesService } from '../roles.service'
 
@@ -12,9 +12,10 @@ import { RolesService } from '../roles.service'
       <router-outlet></router-outlet>
     </ngx-card>
   `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RoleDetailComponent implements OnInit {
-  public cardConfig
+  public cardConfig: CardConfig
   public item: any
 
   constructor(public service: RolesService, private route: ActivatedRoute) {}

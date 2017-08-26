@@ -1,27 +1,26 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core'
 import { Router } from '@angular/router'
 import { Store } from '@ngrx/store'
-import { NgxUiService } from '../../../ui'
-import { Subscription } from 'rxjs/Subscription'
+import { Observable } from 'rxjs/Observable'
 
 import { RoleActions } from '../../../state'
+import { NgxUiService, NgxFormConfig } from '../../../ui'
 import { Role, RolesService } from '../roles.service'
 
 @Component({
   selector: 'ngx-role-form',
   template: `
-    <ngx-form *ngIf="item"
+    <ngx-form *ngIf="service.selected$ | async"
               [config]="service.formConfig"
-              [item]="item"
+              [item]="service.selected$ | async"
               (action)="handleAction($event)">
     </ngx-form>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RoleFormComponent implements OnInit {
-  public formConfig
-  public item: any
-  private subscriptions: Subscription[] = []
+  public formConfig: NgxFormConfig
+  public item$: Observable<any>
 
   constructor(
     public service: RolesService,
@@ -32,23 +31,17 @@ export class RoleFormComponent implements OnInit {
 
   ngOnInit() {
     this.formConfig = this.service.formConfig
-    this.subscriptions.push(
-      this.service.selected$.subscribe(
-        role => (this.item = role),
-        err => console.log(err)
-      )
-    )
   }
 
   handleAction(event) {
     switch (event.type) {
-      case 'Update':
-        this.handleAction({ type: 'cancel' })
-        return this.service.upsert(event.payload)
+      case 'Save':
+        this.service.update(event.payload)
+        return this.handleAction({ type: 'Cancel' })
       case 'Cancel':
         return this.router.navigate(['/admin/roles'])
       default:
-        return console.log('Unknown Event Action:', event)
+        return console.log('$event', event)
     }
   }
 }
