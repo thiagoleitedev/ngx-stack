@@ -20,6 +20,7 @@ export interface TableConfig {
     pagerLeftArrow: string
     pagerRightArrow: string
   }
+  filteredCount?: number
   filteredItems$?: Observable<any[]>
   footerHeight?: number
   headerHeight?: number

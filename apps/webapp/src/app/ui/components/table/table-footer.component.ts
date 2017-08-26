@@ -23,10 +23,10 @@ import { TableConfig } from '../../interfaces'
                         (pageChange)="handleAction({ type: 'PageChange', payload: $event })">
         </ngb-pagination>
       </div>
-      <div *ngIf="filtered"
+      <div *ngIf="config.filteredCount"
            class="col">
         <h5 class="text-center m-0">
-          Filtered Total: <div class="badge badge-success"></div></h5>
+          Filtered Total: <div class="badge badge-success text-white">{{ config.filteredCount | number }}</div></h5>
       </div>
       <div class="col">
       <h5 class="text-right m-0">

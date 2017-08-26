@@ -72,11 +72,14 @@ export class GridComponent implements OnInit {
       this.config.searchItem$,
       (items, searchItem) => {
         if (!searchItem || searchItem === '') {
+          this.config.table.filteredCount = null
           return items
         }
-        return items.filter(
+        const filtered = items.filter(
           item => this.getRowString(item).indexOf(searchItem) > -1
         )
+        this.config.table.filteredCount = filtered.length
+        return filtered
       }
     )
   }

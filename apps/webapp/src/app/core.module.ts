@@ -1,4 +1,9 @@
-import { ModuleWithProviders, NgModule, Optional, SkipSelf } from '@angular/core'
+import {
+  ModuleWithProviders,
+  NgModule,
+  Optional,
+  SkipSelf,
+} from '@angular/core'
 import { SDKBrowserModule, LoopBackConfig } from '@ngx-plus/ngx-sdk'
 import { StoreModule } from '@ngrx/store'
 import { EffectsModule } from '@ngrx/effects'
@@ -19,8 +24,8 @@ import { NgxUiModule } from './ui'
 
 @NgModule({
   imports: [
-    SDKBrowserModule.forRoot(),
     NgxUiModule.forRoot(),
+    SDKBrowserModule.forRoot(),
     StoreModule.forRoot({
       admin: AdminReducer,
       auth: AuthReducer,
@@ -48,7 +53,6 @@ export class CoreModule {
       )
     }
     const apiConfig = Object.assign({}, window['apiConfig'])
-    // console.log(apiConfig)
     LoopBackConfig.setBaseURL(apiConfig.baseUrl)
     LoopBackConfig.setApiVersion(apiConfig.version)
   }

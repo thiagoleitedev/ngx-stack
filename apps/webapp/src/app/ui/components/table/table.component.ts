@@ -20,7 +20,6 @@ import { NgxUiService } from '../../services'
                    [columnMode]="config.columnMode || default.columnMode"
                    [columns]="config.columns"
                    [cssClasses]="config.cssClasses || default.cssClasses"
-                   [externalPaging]="config.externalPaging || default.externalPaging"
                    [footerHeight]="config.footerHeight || default.footerHeight"
                    [headerHeight]="config.headerHeight || default.headerHeight"
                    [limit]="config.limit || default.limit"
