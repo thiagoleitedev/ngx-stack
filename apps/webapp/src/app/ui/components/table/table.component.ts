@@ -4,6 +4,7 @@ import {
   Output,
   EventEmitter,
   ViewChild,
+  ChangeDetectionStrategy,
 } from '@angular/core'
 import { Router } from '@angular/router'
 import { AccountApi, Account } from '@ngx-plus/ngx-sdk'
@@ -15,8 +16,7 @@ import { NgxUiService } from '../../services'
 @Component({
   selector: 'ngx-table',
   template: `
-    <ngx-datatable [count]="config.count$ | async"
-                   [rows]="config.filteredItems"
+    <ngx-datatable [rows]="config.filteredItems$ | async"
                    [columnMode]="config.columnMode || default.columnMode"
                    [columns]="config.columns"
                    [cssClasses]="config.cssClasses || default.cssClasses"
@@ -32,7 +32,8 @@ import { NgxUiService } from '../../services'
                    [scrollbarV]="config.scrollbarV || default.scrollbarV"
                    [sortType]="config.sortType || default.sortType">
       <ngx-datatable-column *ngFor="let col of config.columns"
-                            [name]="col.name">
+                            [name]="col.label"
+                            [prop]="col.field">
         <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
           <span *ngIf="!col.action">{{ value }}</span>
           <span *ngIf="col.action">
@@ -45,8 +46,8 @@ import { NgxUiService } from '../../services'
       <ngx-datatable-column *ngIf="config.actionButtons"
                             name="Actions"
                             maxWidth="200"
-                            resizable="false"
-                            sortable="false">
+                            [resizeable]="false"
+                            [sortable]="false">
         <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
           <ngx-action-button *ngFor="let button of config.actionButtons"
                              [config]="button"
@@ -59,6 +60,7 @@ import { NgxUiService } from '../../services'
                       (action)="handleAction($event)">
     </ngx-table-footer>
   `,
+  // changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TableComponent {
   @Input() config

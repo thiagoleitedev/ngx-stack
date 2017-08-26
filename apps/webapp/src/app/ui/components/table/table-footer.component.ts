@@ -1,4 +1,10 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core'
+import {
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+  ChangeDetectionStrategy,
+} from '@angular/core'
 import { Router } from '@angular/router'
 import { AccountApi, Account } from '@ngx-plus/ngx-sdk'
 import { Observable } from 'rxjs/Observable'
@@ -13,7 +19,7 @@ import { TableConfig } from '../../interfaces'
       <div class="col">
         <ngb-pagination [collectionSize]="config.count$ | async"
                         [(page)]="config.currentPage || default.currentPage"
-                        [pageSize]="config.limit || default.limit"
+                        [pageSize]="config.limit"
                         (pageChange)="handleAction({ type: 'PageChange', payload: $event })">
         </ngb-pagination>
       </div>
@@ -30,6 +36,7 @@ import { TableConfig } from '../../interfaces'
     </div>
   <div>
   `,
+  // changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TableFooterComponent {
   @Input() config: TableConfig
@@ -40,7 +47,7 @@ export class TableFooterComponent {
     limit: 10,
   }
 
-  constructor() { }
+  constructor() {}
 
   handleAction(event) {
     switch (event.type) {
