@@ -24,7 +24,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -96,12 +96,12 @@
              id="angular">
             <polygon
                id="Shape"
-               points="578.2383,525.168 625.97447,111.552 313,0 0.025531915,111.552 47.761702,525.168 313,672 "
-               style="fill:#011f4b;fill-opacity:0.39215687" />
+               points="313,672 578.2383,525.168 625.97447,111.552 313,0 0.025531915,111.552 47.761702,525.168 "
+               style="fill:#011f4b;fill-opacity:0.52156866" />
             <polygon
                id="polygon81722"
-               points="578.2383,525.168 625.97447,111.552 313,0 313,74.592 313,74.256 313,414.624 313,672 "
-               style="fill:#011533;fill-opacity:0.92156863"
+               points="313,414.624 313,672 578.2383,525.168 625.97447,111.552 313,0 313,74.592 313,74.256 "
+               style="fill:#011533;fill-opacity:0.9137255"
                inkscape:label="polygon81722" />
           </g>
         </g>
@@ -124,7 +124,7 @@
   </g>
   <use
      id="use160534"
-     style="fill:#f2f2f2;stroke:#cccccc;fill-opacity:1;stroke-opacity:0.39215687;stroke-width:0.99779527;stroke-miterlimit:4;stroke-dasharray:none;opacity:1"
+     style="fill:#f2f2f2;stroke:#cccccc;fill-opacity:1;stroke-opacity:0.12941177;stroke-width:0.99779527;stroke-miterlimit:4;stroke-dasharray:none;opacity:1"
      xlink:href="#icon-plus"
      x="0"
      y="0"
