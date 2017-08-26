@@ -46,6 +46,7 @@ export class AuthEffects {
   @Effect({ dispatch: false })
   protected loginSuccess = this.actions$
     .ofType(Auth.LOG_IN_SUCCESS)
+    .do((action: Auth.LogInSuccess) => this.router.navigate(['dashboard']))
     .do((action: Auth.LogInSuccess) =>
       this.store.dispatch(new Ui.ActivateFooter())
     )
@@ -55,7 +56,6 @@ export class AuthEffects {
     .do((action: Auth.LogInSuccess) =>
       this.store.dispatch(new Ui.ActivateSidebar())
     )
-    .do((action: Auth.LogInSuccess) => this.router.navigate(['dashboard']))
     .map((action: Auth.LogInSuccess) =>
       this.ui.alerts.toastSuccess(
         'Log In Success',
