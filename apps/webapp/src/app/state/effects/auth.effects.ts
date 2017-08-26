@@ -127,7 +127,10 @@ export class AuthEffects {
     .ofType(Auth.LOG_OUT_FAIL)
     .do((action: Auth.LogOutFail) => this.router.navigate(['auth']))
     .map((action: Auth.LogOutFail) =>
-      this.ui.alerts.toastError('Log Out Failure', action.payload.message)
+      this.ui.alerts.toastSuccess(
+        'Log Out Success',
+        `You have logged out successfully.`
+      )
     )
 
   @Effect()

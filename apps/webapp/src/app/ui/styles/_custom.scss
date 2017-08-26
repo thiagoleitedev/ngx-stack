@@ -5,15 +5,22 @@ body {
   min-height: 100%;
 }
 
+.w-150 {
+  min-width: 150px;
+}
+
 .app-body,
 .breadcrumb,
+.card,
 .footer,
 .sidebar,
 .sidebar-toggle,
 admin-sidebar,
 body,
-breadcrumb {
-  @include transition(all 0.33s ease-in-out);
+breadcrumb,
+button,
+a {
+  @include transition(all 0.3s ease-in-out);
 }
 
 breadcrumb.open .breadcrumb {

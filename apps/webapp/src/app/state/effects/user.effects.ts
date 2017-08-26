@@ -18,7 +18,7 @@ export class UserEffects {
   constructor(
     private actions$: Actions,
     private store: Store<any>,
-    private userApi: AccountApi,
+    private api: AccountApi,
     private roleApi: RoleApi,
     private ui: NgxUiService
   ) {}
@@ -27,7 +27,7 @@ export class UserEffects {
   protected createUser: Observable<any> = this.actions$
     .ofType(UserActions.CREATE_USER)
     .mergeMap((action: UserActions.CreateUser) =>
-      this.userApi
+      this.api
         .create(action.payload)
         .map((response: Account) => new UserActions.CreateUserSuccess(response))
         .catch((error: any) => of(new UserActions.CreateUserFail(error)))
@@ -55,7 +55,7 @@ export class UserEffects {
   protected readUsers: Observable<any> = this.actions$
     .ofType(UserActions.READ_USERS)
     .mergeMap((action: UserActions.ReadUsers) =>
-      this.userApi
+      this.api
         .find(action.payload)
         .map(
           (response: Array<Account>) =>
@@ -68,7 +68,7 @@ export class UserEffects {
   protected updateUser: Observable<any> = this.actions$
     .ofType(UserActions.UPDATE_USER)
     .mergeMap((action: UserActions.UpdateUser) =>
-      this.userApi
+      this.api
         .patchAttributes(action.payload.id, action.payload)
         .map(
           (response: Account) =>
@@ -99,7 +99,7 @@ export class UserEffects {
   protected deleteUser: Observable<any> = this.actions$
     .ofType(UserActions.DELETE_USER)
     .mergeMap((action: UserActions.DeleteUser) =>
-      this.userApi
+      this.api
         .deleteById(action.payload.id)
         .map(
           (response: Account) =>
@@ -130,7 +130,7 @@ export class UserEffects {
   protected addUserToRole: Observable<any> = this.actions$
     .ofType(UserActions.ADD_USER_TO_ROLE)
     .mergeMap((action: UserActions.AddUserToRole) =>
-      this.userApi
+      this.api
         .linkRoles(action.payload.user.id, action.payload.role.id, {
           principalType: 'USER',
           principalId: action.payload.user.id,
@@ -170,7 +170,7 @@ export class UserEffects {
   protected deleteUserFromRole: Observable<any> = this.actions$
     .ofType(UserActions.DELETE_USER_FROM_ROLE)
     .mergeMap((action: UserActions.DeleteUserFromRole) =>
-      this.userApi
+      this.api
         .unlinkRoles(action.payload.user.id, action.payload.role.id)
         .map(
           (response: Account) =>

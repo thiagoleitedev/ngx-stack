@@ -1,11 +1,9 @@
 import { NgxUiModule } from './ngx-ui.module'
 import { NgxUiService } from './services'
 
-export {
-  NgxUiModule,
-  NgxUiService,
-}
+export { NgxUiModule, NgxUiService }
 export * from './layout/'
 export * from './components/'
 export * from './containers/'
 export * from './interfaces/'
+export * from './services/'
