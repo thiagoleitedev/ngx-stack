@@ -23,7 +23,7 @@ import { UiActions } from '../state'
   styles: [
     `
     .row {
-      height: 75vh;
+      height: calc(100vh - 30px);
     }
     `,
   ],
@@ -38,7 +38,7 @@ export class AuthComponent implements OnInit, OnDestroy {
     public router: Router,
     private ui: NgxUiService,
     private store: Store<any>
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.cardConfig = {
