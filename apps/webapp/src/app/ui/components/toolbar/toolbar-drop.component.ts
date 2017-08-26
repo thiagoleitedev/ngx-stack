@@ -1,18 +1,27 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core'
+import {
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+  ChangeDetectionStrategy,
+} from '@angular/core'
 
 @Component({
   selector: 'ngx-toolbar-drop',
   template: `
-    <ngx-drop-button [config]="config || default"
+    <ngx-drop-button class="float-right"
+                     [config]="config || default"
                      (action)="handleAction($event)">
     </ngx-drop-button>
   `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ToolbarDropComponent {
   @Input() config
   @Output() action = new EventEmitter()
 
   public default = {
+    class: 'btn btn-outline-success w-150',
     label: null,
     selected: 10,
     options: [
@@ -22,8 +31,6 @@ export class ToolbarDropComponent {
       { key: 100, value: 100 },
     ],
   }
-
-  constructor() {}
 
   handleAction(event) {
     switch (event.type) {

@@ -1,4 +1,10 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core'
+import {
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+  ChangeDetectionStrategy,
+} from '@angular/core'
 
 import { ToolbarConfig } from '../../interfaces'
 
@@ -24,12 +30,13 @@ import { ToolbarConfig } from '../../interfaces'
   styles: [
     `
     .toolbar-wrapper {
-      background: #f7f7f7;
+      background: #f9f9f9;
       margin-top: -20px;
       padding   : 20px 0;
     }
   `,
   ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ToolbarComponent {
   @Input() config: ToolbarConfig
@@ -54,10 +61,10 @@ export class ToolbarComponent {
       class: 'btn btn-outline-primary btn-block',
       label: 'Create',
       icon: 'fa fa-fw fa-plus',
-    }
+    },
   }
 
-  constructor() { }
+  constructor() {}
 
   handleAction(event) {
     switch (event.type) {

@@ -1,4 +1,10 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core'
+import {
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+  ChangeDetectionStrategy,
+} from '@angular/core'
 import { RadioButtons } from '../../interfaces'
 
 @Component({
@@ -8,12 +14,13 @@ import { RadioButtons } from '../../interfaces'
                        (action)="handleAction($event)">
     </ngx-radio-buttons>
   `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ToolbarViewComponent {
   @Input() config: RadioButtons
   @Output() action = new EventEmitter()
 
-  constructor() { }
+  constructor() {}
 
   handleAction(event) {
     switch (event.type) {

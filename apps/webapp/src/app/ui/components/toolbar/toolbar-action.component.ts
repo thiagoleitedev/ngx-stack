@@ -1,4 +1,10 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core'
+import {
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+  ChangeDetectionStrategy,
+} from '@angular/core'
 import { Router } from '@angular/router'
 import { AccountApi, Account } from '@ngx-plus/ngx-sdk'
 
@@ -9,12 +15,13 @@ import { ActionButton } from '../../interfaces'
   template: `
     <ngx-action-button [config]="actionButton" (action)="handleAction($event)"></ngx-action-button>
   `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ToolbarActionComponent {
   @Input() actionButton: ActionButton
   @Output() action = new EventEmitter()
 
-  constructor() { }
+  constructor() {}
 
   handleAction(event) {
     switch (event.type) {
