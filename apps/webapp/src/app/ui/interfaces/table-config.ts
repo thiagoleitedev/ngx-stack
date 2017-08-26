@@ -1,6 +1,7 @@
+import { BehaviorSubject } from 'rxjs/BehaviorSubject'
 import { Observable } from 'rxjs/Observable'
 
-import { ActionButton } from './action-button'
+import { ActionButton } from './buttons'
 
 export interface TableConfig {
   actionButtons?: ActionButton[]
@@ -19,7 +20,7 @@ export interface TableConfig {
     pagerLeftArrow: string
     pagerRightArrow: string
   }
-  filteredItems?: any[]
+  filteredItems$?: Observable<any[]>
   footerHeight?: number
   headerHeight?: number
   items$: Observable<any[]>

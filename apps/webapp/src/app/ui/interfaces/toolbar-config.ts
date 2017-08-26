@@ -1,5 +1,4 @@
-import { ActionButton } from './action-button'
-import { RadioButtons } from './radio-buttons'
+import { ActionButton, RadioButtons } from './buttons'
 
 export interface ToolbarConfig {
   radioButtons?: RadioButtons
