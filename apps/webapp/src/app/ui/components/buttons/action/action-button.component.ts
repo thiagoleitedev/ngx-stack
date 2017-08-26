@@ -1,4 +1,10 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core'
+import {
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+  ChangeDetectionStrategy,
+} from '@angular/core'
 import { ActionButton } from '../../../interfaces'
 
 @Component({
@@ -10,6 +16,7 @@ import { ActionButton } from '../../../interfaces'
         <i [class]="config.icon"></i> {{ config.label }}
     </button>
   `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ActionButtonComponent {
   @Input() config: ActionButton
