@@ -57,11 +57,15 @@
       "FireLoop": true
     }
   },
-  "Todo": {
+  "Account": {
     "dataSource": "db",
     "public": true
   },
-  "Account": {
+  "Project": {
+    "dataSource": "db",
+    "public": true
+  },
+  "Product": {
     "dataSource": "db",
     "public": true
   }

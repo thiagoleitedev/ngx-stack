@@ -2,25 +2,27 @@
   "name": "Account",
   "base": "User",
   "idInjection": true,
-  "forceId": false,
   "options": {
     "validateUpsert": true
   },
+  "forceId": false,
   "mixins": {
     "FireLoop": true,
     "TimeStamp": {
       "required": false
     },
-    "Stats": [ {
-      "method": "stats",
-      "endpoint": "/stats",
-      "description": "Statistical information for Account registers.",
-      "type": "model",
-      "count": {
-        "on": "createdAt",
-        "by": "index"
+    "Stats": [
+      {
+        "method": "stats",
+        "endpoint": "/stats",
+        "description": "Statistical information for Account registers.",
+        "type": "model",
+        "count": {
+          "on": "createdAt",
+          "by": "index"
+        }
       }
-    } ]
+    ]
   },
   "properties": {
     "firstName": {

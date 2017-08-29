@@ -1,22 +1,13 @@
 {
-  "compileOnSave": false,
   "compilerOptions": {
-    "baseUrl": ".",
-    "noEmit": true,
-    "moduleResolution": "node",
-    "emitDecoratorMetadata": true,
+    "module": "commonjs",
+    "noImplicitAny": true,
+    "removeComments": true,
+    "preserveConstEnums": true,
+    "sourceMap": true,
     "experimentalDecorators": true,
-    "skipLibCheck": true,
-    "target": "es5",
-    "lib": [
-      "es2016",
-      "dom"
-    ],
-    "paths": {
-
-    },
-    "typeRoots": [
-      "node_modules/@types"
-    ]
+    "moduleResolution": "node",
+    "typeRoots": ["./node_modules/@types"],
+    "types": ["node", "mocha"]
   }
 }
