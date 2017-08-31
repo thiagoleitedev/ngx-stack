@@ -4,8 +4,8 @@ import { AccessToken } from '../../models/AccessToken';
 import { ACL } from '../../models/ACL';
 import { RoleMapping } from '../../models/RoleMapping';
 import { Role } from '../../models/Role';
-import { Todo } from '../../models/Todo';
 import { Account } from '../../models/Account';
+import { Project } from '../../models/Project';
 
 export interface Models { [name: string]: any }
 
@@ -17,8 +17,8 @@ export class SDKModels {
     ACL: ACL,
     RoleMapping: RoleMapping,
     Role: Role,
-    Todo: Todo,
     Account: Account,
+    Project: Project,
     
   };
 

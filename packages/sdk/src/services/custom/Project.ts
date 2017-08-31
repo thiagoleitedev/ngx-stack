@@ -10,15 +10,15 @@ import { JSONSearchParams } from '../core/search.params';
 import { ErrorHandler } from '../core/error.service';
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Rx';
-import { Todo } from '../../models/Todo';
+import { Project } from '../../models/Project';
 import { SocketConnection } from '../../sockets/socket.connections';
 
 
 /**
- * Api services for the `Todo` model.
+ * Api services for the `Project` model.
  */
 @Injectable()
-export class TodoApi extends BaseLoopBackApi {
+export class ProjectApi extends BaseLoopBackApi {
 
   constructor(
     @Inject(Http) protected http: Http,
@@ -44,13 +44,13 @@ export class TodoApi extends BaseLoopBackApi {
    *
    * <em>
    * (The remote method definition does not provide any description.
-   * This usually means the response is a `Todo` object.)
+   * This usually means the response is a `Project` object.)
    * </em>
    */
   public patchOrCreate(data: any = {}, customHeaders?: Function): Observable<any> {
     let _method: string = "PATCH";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Todos";
+    "/Projects";
     let _routeParams: any = {};
     let _postBody: any = {
       data: data
@@ -63,7 +63,7 @@ export class TodoApi extends BaseLoopBackApi {
   /**
    * Patch attributes for a model instance and persist it into the data source.
    *
-   * @param {any} id Todo id
+   * @param {any} id Project id
    *
    * @param {object} data Request data.
    *
@@ -75,13 +75,13 @@ export class TodoApi extends BaseLoopBackApi {
    *
    * <em>
    * (The remote method definition does not provide any description.
-   * This usually means the response is a `Todo` object.)
+   * This usually means the response is a `Project` object.)
    * </em>
    */
   public patchAttributes(id: any, data: any = {}, customHeaders?: Function): Observable<any> {
     let _method: string = "PATCH";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Todos/:id";
+    "/Projects/:id";
     let _routeParams: any = {
       id: id
     };
@@ -109,7 +109,7 @@ export class TodoApi extends BaseLoopBackApi {
   public myRemote(customHeaders?: Function): Observable<any> {
     let _method: string = "GET";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Todos/my-remote";
+    "/Projects/my-remote";
     let _routeParams: any = {};
     let _postBody: any = {};
     let _urlParams: any = {};
@@ -118,7 +118,7 @@ export class TodoApi extends BaseLoopBackApi {
   }
 
   /**
-   * Statistical information for Todo registers.
+   * Statistical information for Project registers.
    *
    * @param {string} range hourly, daily, weekly, monthly, yearly, custom
    *
@@ -134,13 +134,13 @@ export class TodoApi extends BaseLoopBackApi {
    *
    * <em>
    * (The remote method definition does not provide any description.
-   * This usually means the response is a `Todo` object.)
+   * This usually means the response is a `Project` object.)
    * </em>
    */
   public stats(range: any, custom: any = {}, where: any = {}, groupBy: any = {}, customHeaders?: Function): Observable<any> {
     let _method: string = "GET";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Todos/stats";
+    "/Projects/stats";
     let _routeParams: any = {};
     let _postBody: any = {};
     let _urlParams: any = {};
@@ -154,9 +154,9 @@ export class TodoApi extends BaseLoopBackApi {
 
   /**
    * The name of the model represented by this $resource,
-   * i.e. `Todo`.
+   * i.e. `Project`.
    */
   public getModelName() {
-    return "Todo";
+    return "Project";
   }
 }

@@ -52,8 +52,8 @@ import { AccessTokenApi } from './services/custom/AccessToken';
 import { ACLApi } from './services/custom/ACL';
 import { RoleMappingApi } from './services/custom/RoleMapping';
 import { RoleApi } from './services/custom/Role';
-import { TodoApi } from './services/custom/Todo';
 import { AccountApi } from './services/custom/Account';
+import { ProjectApi } from './services/custom/Project';
 /**
 * @module SDKBrowserModule
 * @description
@@ -89,8 +89,8 @@ export class SDKBrowserModule {
         ACLApi,
         RoleMappingApi,
         RoleApi,
-        TodoApi,
         AccountApi,
+        ProjectApi,
         internalStorageProvider,
         { provide: SDKStorage, useClass: StorageBrowser },
         { provide: SocketDriver, useClass: SocketBrowser }
