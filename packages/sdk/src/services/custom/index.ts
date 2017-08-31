@@ -5,5 +5,6 @@ export * from './RoleMapping';
 export * from './Role';
 export * from './Account';
 export * from './Project';
+export * from './Container';
 export * from './SDKModels';
 export * from './logger.service';
