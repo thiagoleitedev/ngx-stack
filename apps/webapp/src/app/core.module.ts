@@ -14,6 +14,8 @@ import {
   AuthEffects,
   AuthReducer,
   AdminReducer,
+  ProjectEffects,
+  ProjectReducer,
   UiReducer,
   UserEffects,
   RoleEffects,
@@ -29,6 +31,7 @@ import { NgxUiModule } from './ui'
     StoreModule.forRoot({
       admin: AdminReducer,
       auth: AuthReducer,
+      projects: ProjectReducer,
       ui: UiReducer,
     }),
     EffectsModule.forRoot([
@@ -36,6 +39,7 @@ import { NgxUiModule } from './ui'
       RoleEffects,
       ControlEffects,
       AuthEffects,
+      ProjectEffects,
     ]),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
   ],

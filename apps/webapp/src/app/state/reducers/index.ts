@@ -4,6 +4,7 @@ import * as Users from './user.reducers'
 import * as Roles from './role.reducers'
 import * as Controls from './control.reducers'
 import { AuthReducer } from './auth.reducers'
+import { ProjectReducer } from './project.reducers'
 import { UiReducer } from './ui.reducers'
 
 export interface AdminState {
@@ -18,7 +19,4 @@ export const AdminReducer: ActionReducerMap<AdminState> = {
   controls: Controls.ControlReducer,
 }
 
-export {
-  AuthReducer,
-  UiReducer,
-}
+export { AuthReducer, ProjectReducer, UiReducer }

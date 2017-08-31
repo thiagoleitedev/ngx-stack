@@ -25,13 +25,21 @@ export class AuthEffects {
     private ui: NgxUiService,
     private auth: LoopBackAuth,
     private router: Router
-  ) {}
+  ) { }
 
   @Effect()
   public loadToken: Observable<Action> = this.actions$
     .ofType(Auth.LOAD_TOKEN)
     .startWith(new Auth.LoadToken())
     .map(() => new Auth.LoadTokenSuccess(this.auth.getToken()))
+
+  @Effect({ dispatch: false })
+  public loadTokenSuccess: Observable<Action> = this.actions$
+    .ofType(Auth.LOAD_TOKEN_SUCCESS)
+    .map(
+    (action: Auth.LoadTokenSuccess) =>
+      new Auth.UpdateUser(action.payload.user.id)
+    )
 
   @Effect()
   protected login: Observable<Action> = this.actions$
@@ -46,16 +54,13 @@ export class AuthEffects {
   @Effect({ dispatch: false })
   protected loginSuccess = this.actions$
     .ofType(Auth.LOG_IN_SUCCESS)
-    .do((action: Auth.LogInSuccess) => this.router.navigate(['dashboard']))
-    .do((action: Auth.LogInSuccess) =>
+    .do((action: Auth.LogInSuccess) => this.router.navigate(['home']))
+    .do((action: Auth.LogInSuccess) => {
+      this.store.dispatch(new Auth.UpdateUser(action.payload.user.id))
       this.store.dispatch(new Ui.ActivateFooter())
-    )
-    .do((action: Auth.LogInSuccess) =>
       this.store.dispatch(new Ui.ActivateHeader())
-    )
-    .do((action: Auth.LogInSuccess) =>
       this.store.dispatch(new Ui.ActivateSidebar())
-    )
+    })
     .map((action: Auth.LogInSuccess) =>
       this.ui.alerts.toastSuccess(
         'Log In Success',
@@ -136,7 +141,7 @@ export class AuthEffects {
   @Effect()
   checkToken: Observable<Action> = this.actions$
     .ofType(Auth.CHECK_TOKEN)
-    .mergeMap((action: Auth.LogOut) =>
+    .mergeMap((action: Auth.CheckToken) =>
       this.userApi
         .getCurrent()
         .map((response: any) => new Auth.CheckTokenSuccess(response))
@@ -158,5 +163,15 @@ export class AuthEffects {
         'Valid Token',
         `Your access token has been validated.`
       )
+    )
+
+  @Effect()
+  updateUser: Observable<Action> = this.actions$
+    .ofType(Auth.UPDATE_USER)
+    .mergeMap((action: Auth.UpdateUser) =>
+      this.userApi
+        .findById(action.payload, { include: 'roles' })
+        .map((response: any) => new Auth.UpdateUserSuccess(response))
+        .catch((error: any) => of(new Auth.UpdateUserFail(error)))
     )
 }

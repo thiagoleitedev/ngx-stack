@@ -21,7 +21,7 @@ import { DashCard } from '../../interfaces'
             <div class="row align-items-center justify-content-center">
               <div [class]="'col-4 dash-card-left p-0 bg-' + item.class">
                   <div [class]="'card-body p-0 text-center text-' + item.class">
-                    <i [class]="'text-white fa fa-fw fa-' + item.icon"></i>
+                    <i [class]="'text-white ' + item.icon"></i>
                   </div>
               </div>
               <div class="col-8">

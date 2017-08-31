@@ -144,12 +144,6 @@ th {
 .nav-tabs {
   box-shadow: none;
 
-  .nav-link {
-    border: 1px solid transparent;
-    color: #ddd;
-    margin-left: 3px;
-  }
-
   .nav-item.show .nav-link,
   .nav-link.active,
   .nav-link.active:focus,
@@ -160,6 +154,13 @@ th {
     color: $primary;
     background-color: #fff;
     border-color: #ddd #ddd #fff #ddd;
+  }
+
+  .nav-link {
+    border: 1px solid transparent;
+    color: #ddd;
+    margin-left: 3px;
+    min-width: 100px;
   }
 
   .nav-link,

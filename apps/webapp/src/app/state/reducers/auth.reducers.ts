@@ -17,7 +17,7 @@ const initialState: State = {
   userId: null,
   created: null,
   ttl: null,
-  rememberMe: null
+  rememberMe: null,
 }
 
 export function AuthReducer(state = initialState, action: Auth.Actions): State {
@@ -30,6 +30,11 @@ export function AuthReducer(state = initialState, action: Auth.Actions): State {
     case Auth.LOAD_TOKEN_SUCCESS: {
       const token = action.payload
       return Object.assign({}, token)
+    }
+    case Auth.UPDATE_USER_SUCCESS: {
+      const updateState = Object.assign({}, state)
+      updateState.user = action.payload
+      return updateState
     }
     default:
       return state
