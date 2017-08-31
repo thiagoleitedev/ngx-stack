@@ -10,9 +10,9 @@ import { User, UsersService } from '../users.service'
 @Component({
   selector: 'ngx-user-form',
   template: `
-    <ngx-form *ngIf="item"
+    <ngx-form *ngIf="service.selected$ | async"
               [config]="service.formConfig"
-              [item]="item"
+              [item]="service.selected$ | async"
               (action)="handleAction($event)">
     </ngx-form>
   `,
@@ -32,12 +32,6 @@ export class UserFormComponent implements OnInit {
 
   ngOnInit() {
     this.formConfig = this.service.formConfig
-    this.subscriptions.push(
-      this.service.selected$.subscribe(
-        user => (this.item = user),
-        err => console.log(err)
-      )
-    )
   }
 
   handleAction(event) {

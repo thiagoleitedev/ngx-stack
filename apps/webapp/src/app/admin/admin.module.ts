@@ -4,8 +4,8 @@ import { EffectsModule } from '@ngrx/effects'
 import { SharedModule } from '../shared.module'
 
 import { AdminComponent } from './admin.component'
+import { AdminDashboardComponent } from './admin-dashboard.component'
 import { AdminRoutingModule } from './admin.routing'
-// import { ControlModule } from './controls/control.module'
 
 import {
   AdminReducer,
@@ -17,10 +17,9 @@ import {
 @NgModule({
   imports: [
     SharedModule,
-    // ControlModule,
     StoreModule.forFeature('admin', AdminReducer),
     AdminRoutingModule,
   ],
-  declarations: [AdminComponent],
+  declarations: [AdminComponent, AdminDashboardComponent],
 })
-export class AdminModule {}
+export class AdminModule { }

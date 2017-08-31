@@ -39,7 +39,7 @@ export class ControlListComponent implements OnInit {
     this.gridConfig = {
       card: {
         cardTitle: 'Controls',
-        icon: 'fa fa-fw fa-tags',
+        icon: 'fa fa-fw fa-sliders',
         showSearch: true,
       },
       table: {

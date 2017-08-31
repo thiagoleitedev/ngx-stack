@@ -25,22 +25,22 @@ export class UsersService {
   public formConfig = {
     fields: {
       firstName: {
-        className: 'w-50',
+        className: 'col-lg-6',
         type: 'input',
         label: 'First Name',
       },
       middleName: {
-        className: 'w-50',
+        className: 'col-lg-6',
         type: 'input',
         label: 'Middle Name',
       },
       lastName: {
-        className: 'w-50',
+        className: 'col-lg-6',
         type: 'input',
         label: 'Last Name',
       },
       suffix: {
-        className: 'w-50',
+        className: 'col-lg-6',
         type: 'select',
         label: 'Suffix',
         options: [
@@ -53,7 +53,7 @@ export class UsersService {
         ],
       },
       email: {
-        className: 'w-50',
+        className: 'col-lg-6',
         type: 'email',
         label: 'Email',
       },
@@ -62,7 +62,7 @@ export class UsersService {
       {
         label: 'Cancel',
         type: 'button',
-        classNames: 'btn btn-outline-danger col-lg-6',
+        classNames: 'btn btn-danger col-lg-6',
         click: { type: 'Cancel' },
       },
       {

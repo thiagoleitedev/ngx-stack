@@ -28,7 +28,7 @@ export class AppComponent implements OnInit {
   public ui$: Observable<any>
 
   constructor(private ui: NgxUiService, private store: Store<any>) {
-    this.user$ = this.store.select('auth').map(a => a.user)
+    this.user$ = this.store.select('auth').map(auth => auth.user)
     this.ui$ = this.store.select('ui')
   }
 
@@ -39,33 +39,34 @@ export class AppComponent implements OnInit {
     this.ui.setPostHeaderImg('plus')
     this.ui.setSidebarNav([
       {
-        items: [
-          {
-            name: 'Dashboard',
-            link: '/dashboard',
-            icon: 'fa fa-fw fa-tachometer',
-          },
-        ],
-      },
-      {
         title: 'Home',
         items: [
           {
-            name: 'Todos',
-            link: '/home/todos',
-            icon: 'fa fa-fw fa-check-square-o',
+            name: 'Dashboard',
+            link: '/home/dashboard',
+            icon: 'fa fa-fw fa-tachometer',
+          },
+          {
+            name: 'Projects',
+            link: '/home/projects',
+            icon: 'fa fa-fw fa-calendar-check-o',
           },
         ],
       },
       {
         title: 'Admin',
         items: [
+          {
+            name: 'Dashboard',
+            link: '/admin/dashboard',
+            icon: 'fa fa-fw fa-tachometer',
+          },
           { name: 'Users', link: '/admin/users', icon: 'fa fa-fw fa-users' },
           { name: 'Roles', link: '/admin/roles', icon: 'fa fa-fw fa-tags' },
           {
             name: 'Controls',
             link: '/admin/controls',
-            icon: 'fa fa-fw fa-cogs',
+            icon: 'fa fa-fw fa-sliders',
           },
         ],
       },

@@ -25,7 +25,7 @@ export class ControlDetailComponent implements OnInit {
     this.service.setSelected(this.item)
     this.cardConfig = {
       cardTitle: this.item.model,
-      icon: 'fa fa-fw fa-cog',
+      icon: 'fa fa-fw fa-toggle-on',
       nav: {
         title: 'Control Detail',
         items: [

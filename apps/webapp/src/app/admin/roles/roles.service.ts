@@ -31,7 +31,7 @@ export class RolesService {
       {
         label: 'Cancel',
         type: 'button',
-        classNames: 'btn btn-outline-danger col-lg-6',
+        classNames: 'btn btn-danger col-lg-6',
         click: { type: 'Cancel' },
       },
       {
