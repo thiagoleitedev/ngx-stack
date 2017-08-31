@@ -4,12 +4,12 @@
   "description": "Advanced Angular Admin",
   "scripts": {
     "build": "cd apps/webapp/ && npm run build",
-    "clean": "npx lerna clean --yes",
-    "dev": "npx lerna run dev --stream",
-    "postinstall": "npx lerna bootstrap",
+    "clean": "lerna clean --yes",
+    "dev": "lerna run dev --stream",
+    "postinstall": "lerna bootstrap",
     "sdk": "fireloop sdk",
     "test": "npm run build",
-    "update": "ncu -a && lerna exec \"ncu -a\""
+    "update": "ncu -a && lerna exec 'ncu -a'"
   },
   "keywords": [
     "angular",
