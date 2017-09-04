@@ -1,11 +1,14 @@
 import { Observable } from 'rxjs/Observable'
 import { ActionReducerMap } from '@ngrx/store'
-import * as Users from './user.reducers'
-import * as Roles from './role.reducers'
-import * as Controls from './control.reducers'
+
 import { AuthReducer } from './auth.reducers'
-import { ProjectReducer } from './project.reducers'
 import { UiReducer } from './ui.reducers'
+
+import * as Controls from './control.reducers'
+import * as Files from './file.reducers'
+import * as Projects from './project.reducers'
+import * as Roles from './role.reducers'
+import * as Users from './user.reducers'
 
 export interface AdminState {
   users: Users.State
@@ -19,4 +22,14 @@ export const AdminReducer: ActionReducerMap<AdminState> = {
   controls: Controls.ControlReducer,
 }
 
-export { AuthReducer, ProjectReducer, UiReducer }
+export interface HomeState {
+  files: Files.State
+  projects: Projects.State
+}
+
+export const HomeReducer: ActionReducerMap<HomeState> = {
+  files: Files.FileReducer,
+  projects: Projects.ProjectReducer,
+}
+
+export { AuthReducer, UiReducer }
