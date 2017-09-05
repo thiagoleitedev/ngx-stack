@@ -16,9 +16,10 @@ export class ModalComponent implements OnInit {
   @Input() title
   @Input() formConfig
   @Input() item
+  @Input() uploader = false
   @Output() action = new EventEmitter()
 
-  constructor() {}
+  constructor() { }
 
   handleAction($event) {
     switch ($event.type) {
@@ -27,5 +28,5 @@ export class ModalComponent implements OnInit {
     }
   }
 
-  ngOnInit() {}
+  ngOnInit() { }
 }

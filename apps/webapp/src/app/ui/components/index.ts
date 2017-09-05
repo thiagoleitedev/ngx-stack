@@ -16,6 +16,8 @@ export {
 
 export { DashCardComponent } from './dash/dash-card.component'
 
+export { FileUploaderComponent } from './file-uploader/file-uploader.component'
+export { FileUploaderListComponent } from './file-uploader/file-uploader-list.component'
 export { ModalComponent } from './modal/modal.component'
 
 export { TableComponent } from './table/table.component'

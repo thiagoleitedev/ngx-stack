@@ -1,3 +1,4 @@
+import { TemplateRef } from '@angular/core'
 import { BehaviorSubject } from 'rxjs/BehaviorSubject'
 import { Observable } from 'rxjs/Observable'
 
@@ -11,6 +12,8 @@ export interface TableConfig {
     label?: string
     name?: string
     action?: string
+    cellTemplate?: any
+    headerTemplate?: any
   }[]
   count$: Observable<number>
   currentPage?: number

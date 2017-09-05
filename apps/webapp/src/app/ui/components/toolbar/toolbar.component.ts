@@ -18,9 +18,11 @@ import { ToolbarConfig } from '../../interfaces'
       </ngx-toolbar-view>
     </div>
     <div class="col-md-4 col-lg-6">
-      <ngx-toolbar-action [actionButton]="config.actionButton || default.actionButton"
+      <ngx-toolbar-action *ngIf="config.actionButton"
+                          [actionButton]="config.actionButton"
                           (action)="handleAction($event)">
       </ngx-toolbar-action>
+      <ngx-toolbar-filter *ngIf="config.filter" (action)="action.emit($event)"></ngx-toolbar-filter>
     </div>
     <div class="col-md-4 col-lg-3">
       <ngx-toolbar-drop (action)="handleAction($event)"></ngx-toolbar-drop>
@@ -56,15 +58,9 @@ export class ToolbarComponent {
       ],
       selected: 'table',
     },
-    actionButton: {
-      action: 'Create',
-      class: 'btn btn-outline-primary btn-block',
-      label: 'Create',
-      icon: 'fa fa-fw fa-plus',
-    },
   }
 
-  constructor() {}
+  constructor() { }
 
   handleAction(event) {
     switch (event.type) {

@@ -8,6 +8,7 @@ import { NgxFormsModule } from '@ngx-plus/ngx-forms'
 import { ToastyModule } from 'ng2-toasty'
 import { Ng2BreadcrumbModule } from 'ng2-breadcrumb/ng2-breadcrumb'
 import { NgxDatatableModule } from '@swimlane/ngx-datatable'
+import { NgUploaderModule } from 'ngx-uploader'
 
 import {
   ActionButtonComponent,
@@ -18,6 +19,8 @@ import {
   CardHeaderTitleComponent,
   DashCardComponent,
   DropButtonComponent,
+  FileUploaderComponent,
+  FileUploaderListComponent,
   ModalComponent,
   RadioButtonsComponent,
   ToolbarComponent,
@@ -48,8 +51,10 @@ const components = [
   CardHeaderBrandComponent,
   CardHeaderTabsComponent,
   CardHeaderTitleComponent,
-  ModalComponent,
   DashCardComponent,
+  FileUploaderComponent,
+  FileUploaderListComponent,
+  ModalComponent,
   TableComponent,
   TableFooterComponent,
   ToolbarComponent,
@@ -68,6 +73,7 @@ const components = [
 const modules = [
   Ng2BreadcrumbModule,
   NgbModule,
+  NgUploaderModule,
   NgxAlertsModule,
   NgxDatatableModule,
   NgxFormsModule,
@@ -82,6 +88,7 @@ const modules = [
     ReactiveFormsModule,
     Ng2BreadcrumbModule.forRoot(),
     NgbModule.forRoot(),
+    NgUploaderModule,
     NgxAlertsModule.forRoot(),
     NgxDatatableModule,
     NgxFormsModule.forRoot(),

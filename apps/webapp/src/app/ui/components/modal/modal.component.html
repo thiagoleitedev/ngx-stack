@@ -8,8 +8,12 @@
   </button>
 </div>
 <div class="modal-body">
-  <ngx-form [config]="formConfig"
+  <ngx-form *ngIf="formConfig"
+            [config]="formConfig"
             [item]="item"
             (action)="handleAction($event)">
   </ngx-form>
+  <ngx-file-uploader *ngIf="uploader"
+                     (uploadInput)="handleAction($event)">
+  </ngx-file-uploader>
 </div>

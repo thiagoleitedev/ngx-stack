@@ -18,7 +18,8 @@ import { GridConfig } from '../../interfaces'
 @Component({
   selector: 'ngx-grid',
   template: `
-    <ngx-card [config]="config.card"
+    <ngx-card *ngIf="config.card"
+              [config]="config.card"
               (action)="handleAction($event)">
       <div class="row align-items-center justify-content-center page-wrapper">
         <div class="col-12">
@@ -34,6 +35,20 @@ import { GridConfig } from '../../interfaces'
         </div>
       </div>
     </ngx-card>
+    <div *ngIf="!config.card"
+         class="row align-items-center justify-content-center page-wrapper">
+      <div class="col-12">
+        <ngx-toolbar [config]="config.toolbar"
+                     (action)="handleAction($event)">
+        </ngx-toolbar>
+      </div>
+      <div class="col-12">
+        <ngx-table *ngIf="config.toolbar.radioButtons.selected === 'table'"
+                   [config]="config.table"
+                   (action)="handleAction($event)">
+        </ngx-table>
+      </div>
+    </div>
   `,
   // changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -46,7 +61,7 @@ export class GridComponent implements OnInit {
 
   public items: any[]
 
-  constructor() {}
+  constructor() { }
 
   ngOnInit() {
     this.config.searchItem$ = new BehaviorSubject('')
@@ -64,9 +79,6 @@ export class GridComponent implements OnInit {
         ],
         selected: 'table',
       }
-    }
-    if (!this.config.table.limit) {
-      this.config.table.limit = 10
     }
     this.config.table.filteredItems$ = this.config.table.items$.combineLatest(
       this.config.searchItem$,

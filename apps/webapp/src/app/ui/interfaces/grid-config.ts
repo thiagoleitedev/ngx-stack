@@ -4,7 +4,7 @@ import { ToolbarConfig } from './toolbar-config'
 import { BehaviorSubject } from 'rxjs/BehaviorSubject'
 
 export interface GridConfig {
-  card: CardConfig
+  card?: CardConfig
   table: TableConfig
   toolbar: ToolbarConfig
   searchItem$?: BehaviorSubject<string>
