@@ -1,0 +1,58 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12">
+      <div ngFileDrop
+           class="drop-container"
+           (uploadOutput)="onUploadOutput($event)"
+           [uploadInput]="uploadInput"
+           [ngClass]="{ 'is-drop-over': dragOver }">
+        <h3>Drop Files Here</h3>
+        <h3><i class="fa fa-fw fa-2x fa-cloud-upload"></i></h3>
+        <p class="lead">or... </p>
+        <label class="upload-button">
+          <input ngFileSelect
+                 type="file"
+                 class="btn btn-info"
+                 (uploadOutput)="onUploadOutput($event)"
+                 [uploadInput]="uploadInput"
+                 multiple>
+        </label>
+      </div>
+    </div>
+    <div class="col-12">
+      <div class="row">
+        <div class="col-md-4">
+          <button type="button"
+                  class="btn btn-outline-danger btn-block"
+                  (click)="handleAction({ type: 'Cancel' })">
+            Cancel
+          </button>
+        </div>
+        <div class="col-md-4">
+          <button *ngIf="files?.length"
+                  type="button"
+                  class="btn btn-danger btn-block"
+                  (click)="handleAction({ type: 'RemoveAllFiles' })">
+          <i class="fa fa-fw fa-trash"></i>
+            Remove All
+          </button>
+        </div>
+        <div class="col-md-4">
+          <button type="button"
+                  class="btn btn-success btn-block start-upload-btn"
+                  [disabled]="!files?.length"
+                  (click)="handleAction({ type: 'StartUpload' })">
+          <i class="fa fa-fw fa-play-circle"></i>
+            Start Upload
+          </button>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="config.showList"
+         class="col-12">
+      <ngx-file-uploader-list [files]="files"
+                              (action)="handleAction($event)">
+      </ngx-file-uploader-list>
+    </div>
+  </div>
+</div>

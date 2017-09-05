@@ -1,0 +1,39 @@
+<div class="uploads"
+     *ngIf="files?.length">
+  <table class="table table-responsive table-hover table-sm">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Size (kb)</th>
+        <th>Type</th>
+        <th class="w-25">Status</th>
+        <th class="text-right">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of files">
+        <td>{{ item?.name }}</td>
+        <td>{{ (item?.size / 1000) | number }}</td>
+        <td>{{ item?.type }}</td>
+        <td class="align-middle">
+          <ngb-progressbar [type]="item?.responseStatus === 200 ? 'success' : 'danger'"
+                           [value]="item?.progress.data.percentage"
+                           [striped]="true">
+            <span *ngIf="item?.responseStatus !== 200">
+              <i class="fa fa-fw fa-exclamation-triangle text-white"></i> Error
+            </span>
+            <span *ngIf="item?.responseStatus === 200">
+              <i class="fa fa-fw fa-check text-white"></i> Uploaded
+            </span>
+          </ngb-progressbar>
+        </td>
+        <td class="text-right">
+          <button class="btn btn-danger btn-sm"
+                  (click)="handleAction({ type: 'RemoveFile', payload: item.id })">
+            <i class="fa fa-trash-o"></i>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
