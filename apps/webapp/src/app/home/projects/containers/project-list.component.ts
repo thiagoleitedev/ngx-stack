@@ -23,7 +23,7 @@ import { ProjectsService } from '../projects.service'
               (action)="handleAction($event)">
     </ngx-grid>
   `,
-  // changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProjectListComponent implements OnInit {
   public gridConfig: GridConfig

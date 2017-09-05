@@ -27,7 +27,7 @@ export class HomeDashboardComponent implements OnInit {
 
   ngOnInit() {
     this.store.dispatch(new ProjectActions.ReadProjects())
-    this.items$ = this.store.select('projects')
+    this.items$ = this.store.select('home')
     this.setDashCards()
   }
 
@@ -36,9 +36,16 @@ export class HomeDashboardComponent implements OnInit {
       {
         name: 'Projects',
         icon: 'fa fa-fw fa-calendar-check-o',
-        data: this.items$.map(projects => projects.count),
-        link: '/home/projects/list',
+        data: this.items$.map(home => home.projects.count),
+        link: '/home/projects',
         class: 'success',
+      },
+      {
+        name: 'Files',
+        icon: 'fa fa-fw fa-files-o',
+        data: this.items$.map(home => home.files.count),
+        link: '/home/files',
+        class: 'info',
       },
     ]
   }

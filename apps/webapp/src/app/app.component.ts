@@ -51,6 +51,11 @@ export class AppComponent implements OnInit {
             link: '/home/projects',
             icon: 'fa fa-fw fa-calendar-check-o',
           },
+          {
+            name: 'Files',
+            link: '/home/files',
+            icon: 'fa fa-fw fa-files-o',
+          },
         ],
       },
       {

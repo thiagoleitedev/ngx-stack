@@ -1,8 +1,6 @@
 import { NgModule } from '@angular/core'
 import { StoreModule } from '@ngrx/store'
 import { SharedModule } from '../../shared.module'
-import { ProjectReducer } from '../../state'
-
 import { ProjectsService } from './projects.service'
 import { ProjectsRoutingModule } from './projects.routing'
 
@@ -14,8 +12,6 @@ import { ProjectFormComponent } from './components/project-form.component'
   imports: [
     SharedModule,
     ProjectsRoutingModule,
-    StoreModule.forFeature('projects', ProjectReducer),
-
   ],
   declarations: [
     ProjectDetailComponent,

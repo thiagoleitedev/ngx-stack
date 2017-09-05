@@ -55,13 +55,13 @@ export class ProjectsService {
   }
 
   constructor(
-    private userApi: AccountApi,
     private api: ProjectApi,
+    private userApi: AccountApi,
     private ui: NgxUiService,
     private store: Store<any>
   ) {
-    this.items$ = this.store.select('projects')
-    this.selected$ = this.items$.map(item => item.selected)
+    this.items$ = this.store.select('home').map(home => home.projects)
+    this.selected$ = this.items$.map(items => items.selected)
   }
 
   setSelected(item) {
