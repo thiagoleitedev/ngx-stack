@@ -15,7 +15,7 @@
    version="1.1"
    id="svg81732"
    sodipodi:docname="ngx-plus.svg"
-   inkscape:version="0.92.1 r15371">
+   inkscape:version="0.92.2 (5c3e80d, 2017-08-06)">
   <metadata
      id="metadata81736">
     <rdf:RDF>
@@ -124,7 +124,7 @@
   </g>
   <use
      id="use160534"
-     style="fill:#f2f2f2;stroke:#cccccc;fill-opacity:1;stroke-opacity:0.12941177;stroke-width:0.99779527;stroke-miterlimit:4;stroke-dasharray:none;opacity:1"
+     style="fill:#f2f2f2;stroke:#cccccc;fill-opacity:1;stroke-opacity:0.12941177;stroke-width:0;stroke-miterlimit:4;stroke-dasharray:none;opacity:1"
      xlink:href="#icon-plus"
      x="0"
      y="0"
