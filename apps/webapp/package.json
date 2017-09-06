@@ -3,12 +3,12 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "ng": "npx ng",
-    "dev": "npx ng serve --proxy-config proxy.conf.json",
-    "build": "npx ng build --prod --output-path ../api/dist",
-    "test": "npx ng test",
-    "lint": "npx ng lint",
-    "e2e": "npx ng e2e"
+    "ng": "ng",
+    "dev": "ng serve --proxy-config proxy.conf.json",
+    "build": "ng build --prod --output-path ../api/dist",
+    "test": "ng test",
+    "lint": "ng lint",
+    "e2e": "ng e2e"
   },
   "dependencies": {
     "@angular/common": "^4.3.6",
