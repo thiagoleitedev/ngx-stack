@@ -1,0 +1,26 @@
+[
+  {
+    "accessType": "*",
+    "principalType": "ROLE",
+    "principalId": "Admin",
+    "permission": "ALLOW",
+    "property": "*",
+    "model": "*"
+  },
+  {
+    "accessType": "*",
+    "principalType": "ROLE",
+    "principalId": "Admin",
+    "permission": "ALLOW",
+    "property": "find",
+    "model": "Account"
+  },
+  {
+    "accessType": "*",
+    "principalType": "ROLE",
+    "principalId": "Admin",
+    "permission": "ALLOW",
+    "property": "*",
+    "model": "Account"
+  }
+]
