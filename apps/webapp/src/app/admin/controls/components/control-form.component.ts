@@ -1,11 +1,8 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core'
 import { Router } from '@angular/router'
-import { Store } from '@ngrx/store'
-import { Observable } from 'rxjs/Observable'
 
-import { ControlActions } from '../../../state'
-import { NgxUiService, NgxFormConfig } from '../../../ui'
-import { Control, ControlsService } from '../controls.service'
+import { NgxFormConfig } from '../../../ui'
+import { ControlsService } from '../controls.service'
 
 @Component({
   selector: 'ngx-control-form',
@@ -20,13 +17,10 @@ import { Control, ControlsService } from '../controls.service'
 })
 export class ControlFormComponent implements OnInit {
   public formConfig: NgxFormConfig
-  public item$: Observable<any>
 
   constructor(
     public service: ControlsService,
-    private ui: NgxUiService,
     private router: Router,
-    private store: Store<any>
   ) {}
 
   ngOnInit() {

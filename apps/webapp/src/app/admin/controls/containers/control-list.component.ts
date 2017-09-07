@@ -1,12 +1,5 @@
-import {
-  Component,
-  OnInit,
-  OnDestroy,
-  ChangeDetectionStrategy,
-} from '@angular/core'
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap'
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core'
 import { Router, ActivatedRoute } from '@angular/router'
-import { Observable } from 'rxjs/Observable'
 import { Subscription } from 'rxjs/Subscription'
 import 'rxjs/add/operator/map'
 
@@ -36,6 +29,7 @@ export class ControlListComponent implements OnInit {
 
   ngOnInit() {
     this.subscriptions = []
+    // TODO: Consider moving gridConfig to the service
     this.gridConfig = {
       card: {
         cardTitle: 'Controls',
