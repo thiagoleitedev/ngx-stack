@@ -1,10 +1,8 @@
 import { Component, OnInit, ChangeDetectionStrategy, ViewChild, TemplateRef } from '@angular/core'
 import { Router } from '@angular/router'
-import { Store } from '@ngrx/store'
-import { Observable } from 'rxjs/Observable'
 
-import { NgxUiService, NgxFormConfig, GridConfig } from '../../../ui'
-import { Container, FilesService } from '../files.service'
+import { GridConfig } from '../../../ui'
+import { FilesService } from '../files.service'
 
 @Component({
   selector: 'ngx-file-view',
@@ -23,9 +21,7 @@ export class FileViewComponent implements OnInit {
 
   constructor(
     public service: FilesService,
-    private ui: NgxUiService,
     private router: Router,
-    private store: Store<any>
   ) { }
 
   ngOnInit() {

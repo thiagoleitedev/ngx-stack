@@ -1,7 +1,6 @@
-import { Component, OnInit, OnDestroy } from '@angular/core'
+import { Component, OnInit } from '@angular/core'
 import { Store } from '@ngrx/store'
 
-import { NgxUiService } from '../ui'
 import { UiActions, ProjectActions } from '../state'
 
 @Component({
@@ -11,7 +10,7 @@ import { UiActions, ProjectActions } from '../state'
   `,
 })
 export class HomeComponent implements OnInit {
-  constructor(private ui: NgxUiService, private store: Store<any>) { }
+  constructor(private store: Store<any>) { }
 
   ngOnInit() {
     this.store.dispatch(new UiActions.ActivateHeader())

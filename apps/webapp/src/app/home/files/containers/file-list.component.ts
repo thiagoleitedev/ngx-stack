@@ -1,20 +1,10 @@
-import {
-  Component,
-  OnInit,
-  OnDestroy,
-  ChangeDetectionStrategy,
-  ViewChild,
-  TemplateRef
-} from '@angular/core'
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap'
+import { Component, OnInit, ChangeDetectionStrategy, ViewChild, TemplateRef } from '@angular/core'
 import { Router, ActivatedRoute } from '@angular/router'
-import { Container, ContainerApi } from '@ngx-plus/ngx-sdk'
-import { Observable } from 'rxjs/Observable'
+import { Container } from '@ngx-plus/ngx-sdk'
 import { Subscription } from 'rxjs/Subscription'
 import 'rxjs/add/operator/map'
 
 import { NgxUiService, ModalComponent, GridConfig } from '../../../ui'
-import { FileActions } from '../../../state'
 import { FilesService } from '../files.service'
 
 @Component({

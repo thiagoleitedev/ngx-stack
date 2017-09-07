@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core'
-import { StoreModule } from '@ngrx/store'
+
 import { SharedModule } from '../../shared.module'
 import { ProjectsService } from './projects.service'
 import { ProjectsRoutingModule } from './projects.routing'

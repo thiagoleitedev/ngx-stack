@@ -1,7 +1,5 @@
 import { NgModule } from '@angular/core'
-import { StoreModule } from '@ngrx/store'
 import { SharedModule } from '../../shared.module'
-// import { FileReducer } from '../../state'
 
 import { FilesService } from './files.service'
 import { FilesRoutingModule } from './files.routing'
@@ -15,7 +13,6 @@ import { FileViewComponent } from './components/file-view.component'
   imports: [
     SharedModule,
     FilesRoutingModule,
-    // StoreModule.forFeature('files', FileReducer),
   ],
   declarations: [
     FileDetailComponent,

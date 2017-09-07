@@ -1,11 +1,8 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core'
 import { Router } from '@angular/router'
-import { Store } from '@ngrx/store'
-import { Observable } from 'rxjs/Observable'
 
-import { ProjectActions } from '../../../state'
-import { NgxUiService, NgxFormConfig } from '../../../ui'
-import { Project, ProjectsService } from '../projects.service'
+import { NgxFormConfig } from '../../../ui'
+import { ProjectsService } from '../projects.service'
 
 @Component({
   selector: 'ngx-project-form',
@@ -20,13 +17,10 @@ import { Project, ProjectsService } from '../projects.service'
 })
 export class ProjectFormComponent implements OnInit {
   public formConfig: NgxFormConfig
-  public item$: Observable<any>
 
   constructor(
     public service: ProjectsService,
-    private ui: NgxUiService,
     private router: Router,
-    private store: Store<any>
   ) {}
 
   ngOnInit() {

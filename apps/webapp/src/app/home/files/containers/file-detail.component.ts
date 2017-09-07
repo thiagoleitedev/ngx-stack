@@ -2,7 +2,7 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core'
 import { ActivatedRoute } from '@angular/router'
 import { CardConfig } from '../../../ui'
 
-import { FilesService, Container } from '../files.service'
+import { FilesService } from '../files.service'
 
 @Component({
   selector: 'ngx-file-detail',

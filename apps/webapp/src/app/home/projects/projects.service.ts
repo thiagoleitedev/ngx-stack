@@ -1,20 +1,12 @@
 import { Injectable } from '@angular/core'
 import { Store } from '@ngrx/store'
-import {
-  AccountApi,
-  Account,
-  ProjectApi,
-  Project,
-  AccessToken,
-} from '@ngx-plus/ngx-sdk'
+import { ProjectApi, Project } from '@ngx-plus/ngx-sdk'
 export { Project } from '@ngx-plus/ngx-sdk'
-import { NgxUiService } from '../../ui'
 import { Observable } from 'rxjs/Observable'
-import { Subscription } from 'rxjs/Subscription'
 import 'rxjs/add/operator/distinctUntilChanged'
 import 'rxjs/add/operator/map'
 
-import { ProjectActions, UserActions } from '../../state'
+import { ProjectActions } from '../../state'
 
 @Injectable()
 export class ProjectsService {
@@ -56,8 +48,6 @@ export class ProjectsService {
 
   constructor(
     private api: ProjectApi,
-    private userApi: AccountApi,
-    private ui: NgxUiService,
     private store: Store<any>
   ) {
     this.items$ = this.store.select('home').map(home => home.projects)
@@ -73,19 +63,8 @@ export class ProjectsService {
     return this.api.find({ where: { id: id } })
   }
 
-  upsert(item) {
-    if (item.id) {
-      return this.update(item)
-    }
-    return this.create(item)
-  }
-
   create(item) {
     this.store.dispatch(new ProjectActions.CreateProject(item))
-  }
-
-  read(item = {}) {
-    this.store.dispatch(new ProjectActions.ReadProjects(item))
   }
 
   update(item) {

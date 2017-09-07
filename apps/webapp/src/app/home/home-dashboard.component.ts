@@ -1,8 +1,7 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core'
-import { DashCard, NgxUiService, NavItem } from '../ui'
+import { Component, OnInit } from '@angular/core'
+import { DashCard } from '../ui'
 import { Store } from '@ngrx/store'
 import { Observable } from 'rxjs/Observable'
-import { Subscription } from 'rxjs/Subscription'
 import 'rxjs/add/operator/map'
 
 import { ProjectActions } from '../state'
@@ -23,7 +22,7 @@ export class HomeDashboardComponent implements OnInit {
     cardTitle: 'Dashboard',
   }
 
-  constructor(private ui: NgxUiService, private store: Store<any>) { }
+  constructor(private store: Store<any>) { }
 
   ngOnInit() {
     this.store.dispatch(new ProjectActions.ReadProjects())
