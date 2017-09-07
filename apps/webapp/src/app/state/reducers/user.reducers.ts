@@ -1,5 +1,4 @@
-import { Observable } from 'rxjs/Observable'
-import { Account, Role, RoleMapping, ACL } from '@ngx-plus/ngx-sdk'
+import { Account, Role } from '@ngx-plus/ngx-sdk'
 import * as Users from '../actions/user.actions'
 
 export interface State {

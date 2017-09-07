@@ -1,5 +1,4 @@
-import { Observable } from 'rxjs/Observable'
-import { Account, Role, RoleMapping, ACL } from '@ngx-plus/ngx-sdk'
+import { Account, Role, RoleMapping } from '@ngx-plus/ngx-sdk'
 import * as Roles from '../actions/role.actions'
 import * as Users from '../actions/user.actions'
 
@@ -74,7 +73,6 @@ export function RoleReducer(state: State = initialState, action: any): State {
       return updateState
     }
     case Users.ADD_USER_TO_ROLE_SUCCESS: {
-      const user: Account = action.payload.user
       const role: Role = action.payload.role
       const updateState = Object.assign({}, state)
       const roleUsers: RoleMapping[] = role.principals || []

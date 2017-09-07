@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core'
 import { Observable } from 'rxjs/Observable'
 import { of } from 'rxjs/observable/of'
-import { concat } from 'rxjs/observable/concat'
 import { Effect, Actions } from '@ngrx/effects'
-import { Store, Action } from '@ngrx/store'
+import { Action } from '@ngrx/store'
 import { Project, ProjectApi } from '@ngx-plus/ngx-sdk'
 import { NgxUiService } from '../../ui'
 import 'rxjs/add/operator/let'
@@ -16,7 +15,6 @@ import * as Projects from '../actions/project.actions'
 export class ProjectEffects {
   constructor(
     private actions$: Actions,
-    private store: Store<any>,
     private api: ProjectApi,
     private ui: NgxUiService
   ) { }

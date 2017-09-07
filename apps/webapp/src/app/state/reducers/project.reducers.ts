@@ -1,5 +1,4 @@
-import { Observable } from 'rxjs/Observable'
-import { Account, Role, RoleMapping, Project } from '@ngx-plus/ngx-sdk'
+import { Project } from '@ngx-plus/ngx-sdk'
 import * as Projects from '../actions/project.actions'
 
 export interface State {
@@ -16,10 +15,7 @@ export const initialState: State = {
   count: 0,
 }
 
-export function ProjectReducer(
-  state: State = initialState,
-  action: Projects.Actions
-): State {
+export function ProjectReducer(state: State = initialState, action: Projects.Actions): State {
   switch (action.type) {
     case Projects.CREATE_PROJECT_SUCCESS: {
       const project: Project = action.payload

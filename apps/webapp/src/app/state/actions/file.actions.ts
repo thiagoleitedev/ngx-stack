@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store'
-import { Container, LoopBackFilter } from '@ngx-plus/ngx-sdk'
+import { LoopBackFilter } from '@ngx-plus/ngx-sdk'
 
 export const CREATE_CONTAINER = '[Files] CreateContainer'
 export const CREATE_CONTAINER_SUCCESS = '[Files] CreateContainer Success'

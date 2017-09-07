@@ -1,4 +1,3 @@
-import { Observable } from 'rxjs/Observable'
 import * as Files from '../actions/file.actions'
 
 export interface State {

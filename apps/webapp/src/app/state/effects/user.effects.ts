@@ -1,10 +1,8 @@
 import { Injectable } from '@angular/core'
 import { Observable } from 'rxjs/Observable'
 import { of } from 'rxjs/observable/of'
-import { concat } from 'rxjs/observable/concat'
 import { Effect, Actions } from '@ngrx/effects'
-import { Store, Action } from '@ngrx/store'
-import { Account, Role, AccountApi, RoleApi } from '@ngx-plus/ngx-sdk'
+import { Account, AccountApi } from '@ngx-plus/ngx-sdk'
 import { NgxUiService } from '../../ui'
 import 'rxjs/add/operator/let'
 import 'rxjs/add/operator/map'
@@ -17,9 +15,7 @@ import * as UserActions from '../actions/user.actions'
 export class UserEffects {
   constructor(
     private actions$: Actions,
-    private store: Store<any>,
     private api: AccountApi,
-    private roleApi: RoleApi,
     private ui: NgxUiService
   ) {}
 
