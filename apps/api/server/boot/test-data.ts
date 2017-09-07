@@ -11,26 +11,29 @@ class TestData {
     const Role = app.models.Role
     const Control = app.models.ACL
 
-    User.exists('admin-user')
+    const adminId = 'admin-user'
+    const adminRole = 'Admin'
+
+    User.exists(adminId)
       .then((res: any) => {
         if (res) {
           return console.log('[test-data]', 'admin-user already exists')
         }
-        this.createData(User, [TestUsers])
-        this.createData(Role, [TestRoles])
-        this.createData(Control, [TestControls])
       })
-
-    Role.find({ where: { name: 'Admin' } })
-      .then((role: any) => role[0].principals.create({ principalType: 'USER', principalId: 'admin-user' }))
+      .then(() => Promise.all([
+        this.createData(User, [TestUsers]),
+        this.createData(Role, [TestRoles]),
+        this.createData(Control, [TestControls]),
+      ]))
+      .then(() => Role.find({ where: { name: adminRole } }))
+      .then((role: any) => role[0].principals.create({ principalType: 'USER', principalId: adminId }))
+      .tap((res: any) => console.log('[test-data]', `Roles ${adminRole} assigned to`))
   }
 
   createData(Model: any, data: any[]) {
-    data.forEach(item => {
-      Model.create(data)
-        .then((res: any) => console.log('[test-data]', `${res.length} items created for model`, Model.modelName))
-        .catch((err: any) => console.log('[test-data]', `Data could not be created for model`, Model.modelName))
-    })
+    return Model.create(data)
+      .tap((res: any) => console.log('[test-data]', `${res.length} items created for model`, Model.modelName))
+      .catch((err: any) => console.log('[test-data]', `Data could not be created for model`, Model.modelName, 'err:', err))
   }
 }
 
