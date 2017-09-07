@@ -12,7 +12,7 @@
   "dependencies": {
     "@mean-expert/boot-script": "^1.0.0",
     "@mean-expert/loopback-component-realtime": "^1.0.0-rc.9.5",
-    "@mean-expert/loopback-sdk-builder": "^2.1.0-rc.13.5",
+    "@mean-expert/loopback-sdk-builder": "git+https://github.com/JonnyBGod/loopback-sdk-builder.git#new-ngrx",
     "@mean-expert/loopback-stats-mixin": "^1.2.2",
     "@mean-expert/model": "^1.0.9",
     "async": "^2.5.0",
