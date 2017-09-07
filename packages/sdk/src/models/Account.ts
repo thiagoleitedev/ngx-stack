@@ -70,6 +70,7 @@ export class Account implements AccountInterface {
       name: 'Account',
       plural: 'Accounts',
       path: 'Accounts',
+      idName: 'id',
       properties: {
         "firstName": {
           name: 'firstName',
@@ -128,12 +129,20 @@ export class Account implements AccountInterface {
         accessTokens: {
           name: 'accessTokens',
           type: 'AccessToken[]',
-          model: 'AccessToken'
+          model: 'AccessToken',
+          relationType: 'hasMany',
+                  keyFrom: 'id',
+          keyTo: 'userId'
         },
         roles: {
           name: 'roles',
           type: 'Role[]',
-          model: 'Role'
+          model: 'Role',
+          relationType: 'hasMany',
+          modelThrough: 'RoleMapping',
+          keyThrough: 'roleId',
+          keyFrom: 'id',
+          keyTo: 'principalId'
         },
       }
     }

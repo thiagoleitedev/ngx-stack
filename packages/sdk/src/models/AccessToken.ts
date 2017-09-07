@@ -51,6 +51,7 @@ export class AccessToken implements AccessTokenInterface {
       name: 'AccessToken',
       plural: 'AccessTokens',
       path: 'AccessTokens',
+      idName: 'id',
       properties: {
         "id": {
           name: 'id',
@@ -78,7 +79,10 @@ export class AccessToken implements AccessTokenInterface {
         user: {
           name: 'user',
           type: 'Account',
-          model: 'Account'
+          model: 'Account',
+          relationType: 'belongsTo',
+                  keyFrom: 'userId',
+          keyTo: 'id'
         },
       }
     }

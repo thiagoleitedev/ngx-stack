@@ -50,6 +50,7 @@ export class ACL implements ACLInterface {
       name: 'ACL',
       plural: 'ACLs',
       path: 'ACLs',
+      idName: 'id',
       properties: {
         "model": {
           name: 'model',

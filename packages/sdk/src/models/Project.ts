@@ -52,6 +52,7 @@ export class Project implements ProjectInterface {
       name: 'Project',
       plural: 'Projects',
       path: 'Projects',
+      idName: 'id',
       properties: {
         "name": {
           name: 'name',
