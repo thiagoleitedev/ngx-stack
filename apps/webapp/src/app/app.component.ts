@@ -1,16 +1,10 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core'
+import { Component, OnInit } from '@angular/core'
 import { Store } from '@ngrx/store'
 import { Account } from '@ngx-plus/ngx-sdk'
 import { NgxUiService } from './ui'
 import { Observable } from 'rxjs/Observable'
 
-import {
-  UserActions,
-  RoleActions,
-  ControlActions,
-  AuthActions,
-  UiActions,
-} from './state'
+import { AuthActions, UiActions } from './state'
 
 @Component({
   selector: 'ngx-root',
@@ -21,7 +15,6 @@ import {
     </ngx-layout>
     <ngx-alert-templates></ngx-alert-templates>
   `,
-  // changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent implements OnInit {
   public user$: Observable<Account>
