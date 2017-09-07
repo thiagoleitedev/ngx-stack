@@ -1,13 +1,6 @@
-import {
-  Component,
-  OnInit,
-  OnDestroy,
-  ChangeDetectionStrategy,
-} from '@angular/core'
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap'
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core'
 import { Router, ActivatedRoute } from '@angular/router'
-import { Role, RoleApi } from '@ngx-plus/ngx-sdk'
-import { Observable } from 'rxjs/Observable'
+import { Role } from '@ngx-plus/ngx-sdk'
 import { Subscription } from 'rxjs/Subscription'
 import 'rxjs/add/operator/map'
 

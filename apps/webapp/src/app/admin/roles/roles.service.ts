@@ -1,16 +1,8 @@
 import { Injectable } from '@angular/core'
 import { Store } from '@ngrx/store'
-import {
-  AccountApi,
-  Account,
-  RoleApi,
-  Role,
-  AccessToken,
-} from '@ngx-plus/ngx-sdk'
+import { Account, RoleApi } from '@ngx-plus/ngx-sdk'
 export { Account as Role } from '@ngx-plus/ngx-sdk'
-import { NgxUiService } from '../../ui'
 import { Observable } from 'rxjs/Observable'
-import { Subscription } from 'rxjs/Subscription'
 import 'rxjs/add/operator/distinctUntilChanged'
 import 'rxjs/add/operator/map'
 
@@ -45,9 +37,7 @@ export class RolesService {
   private admin$: Observable<any>
 
   constructor(
-    private userApi: AccountApi,
     private api: RoleApi,
-    private ui: NgxUiService,
     private store: Store<any>
   ) {
     this.admin$ = this.store.select('admin')
@@ -63,13 +53,6 @@ export class RolesService {
 
   get(id): Observable<any> {
     return this.api.find({ where: { id: id }, include: 'principals' })
-  }
-
-  upsert(item) {
-    if (item.id) {
-      return this.update(item)
-    }
-    return this.create(item)
   }
 
   create(item) {
@@ -92,7 +75,4 @@ export class RolesService {
     this.store.dispatch(new UserActions.DeleteUserFromRole(item))
   }
 
-  getRoleUsers(item, successCb, errorCb): Subscription {
-    return this.api.getPrincipals(item.id).subscribe(successCb, errorCb)
-  }
 }

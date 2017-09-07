@@ -1,11 +1,8 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core'
 import { Router } from '@angular/router'
-import { Store } from '@ngrx/store'
-import { Observable } from 'rxjs/Observable'
 
-import { RoleActions } from '../../../state'
-import { NgxUiService, NgxFormConfig } from '../../../ui'
-import { Role, RolesService } from '../roles.service'
+import { NgxFormConfig } from '../../../ui'
+import { RolesService } from '../roles.service'
 
 @Component({
   selector: 'ngx-role-form',
@@ -20,13 +17,10 @@ import { Role, RolesService } from '../roles.service'
 })
 export class RoleFormComponent implements OnInit {
   public formConfig: NgxFormConfig
-  public item$: Observable<any>
 
   constructor(
     public service: RolesService,
-    private ui: NgxUiService,
     private router: Router,
-    private store: Store<any>
   ) {}
 
   ngOnInit() {

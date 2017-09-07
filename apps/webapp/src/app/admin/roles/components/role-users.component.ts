@@ -1,13 +1,6 @@
-import {
-  Component,
-  OnInit,
-  AfterViewInit,
-  OnDestroy,
-  ChangeDetectionStrategy,
-} from '@angular/core'
-import { RoleApi, Account } from '@ngx-plus/ngx-sdk'
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core'
+import { Account } from '@ngx-plus/ngx-sdk'
 import { Observable } from 'rxjs/Observable'
-import { Subscription } from 'rxjs/Subscription'
 import 'rxjs/add/operator/combineLatest'
 import 'rxjs/add/operator/map'
 

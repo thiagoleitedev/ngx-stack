@@ -1,9 +1,5 @@
 import { Injectable } from '@angular/core'
-import {
-  Resolve,
-  RouterStateSnapshot,
-  ActivatedRouteSnapshot,
-} from '@angular/router'
+import { Resolve, ActivatedRouteSnapshot } from '@angular/router'
 import { Observable } from 'rxjs/Observable'
 
 import { Role, RolesService } from './roles.service'
@@ -12,10 +8,7 @@ import { Role, RolesService } from './roles.service'
 export class RoleResolver implements Resolve<Role> {
   constructor(private service: RolesService) { }
 
-  resolve(
-    route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot
-  ): Observable<Role> {
+  resolve(route: ActivatedRouteSnapshot): Observable<Role> {
     return this.service.get(route.params['id'])
   }
 }
