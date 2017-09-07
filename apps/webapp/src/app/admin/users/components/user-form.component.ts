@@ -1,11 +1,8 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core'
 import { Router } from '@angular/router'
-import { Store } from '@ngrx/store'
-import { Subscription } from 'rxjs/Subscription'
 
-import { UserActions } from '../../../state'
-import { NgxUiService, NgxFormConfig } from '../../../ui'
-import { User, UsersService } from '../users.service'
+import { NgxFormConfig } from '../../../ui'
+import { UsersService } from '../users.service'
 
 @Component({
   selector: 'ngx-user-form',
@@ -20,14 +17,10 @@ import { User, UsersService } from '../users.service'
 })
 export class UserFormComponent implements OnInit {
   public formConfig: NgxFormConfig
-  public item: any
-  private subscriptions: Subscription[] = []
 
   constructor(
     public service: UsersService,
-    private ui: NgxUiService,
     private router: Router,
-    private store: Store<any>
   ) {}
 
   ngOnInit() {

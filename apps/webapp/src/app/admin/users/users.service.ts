@@ -1,14 +1,7 @@
 import { Injectable } from '@angular/core'
 import { Store } from '@ngrx/store'
-import {
-  AccountApi,
-  Account,
-  RoleApi,
-  Role,
-  AccessToken,
-} from '@ngx-plus/ngx-sdk'
+import { AccountApi, Account } from '@ngx-plus/ngx-sdk'
 export { Account as User } from '@ngx-plus/ngx-sdk'
-import { NgxUiService } from '../../ui'
 import { Observable } from 'rxjs/Observable'
 import { Subscription } from 'rxjs/Subscription'
 import 'rxjs/add/operator/distinctUntilChanged'
@@ -77,8 +70,6 @@ export class UsersService {
 
   constructor(
     private api: AccountApi,
-    private roleApi: RoleApi,
-    private ui: NgxUiService,
     private store: Store<any>
   ) {
     this.admin$ = this.store.select('admin')
@@ -92,22 +83,11 @@ export class UsersService {
     this.selected = item
   }
 
-  refresh() {
-    this.get(this.selected.id).subscribe(res => this.setSelected(res[0]))
-  }
-
   get(id): Observable<any> {
     return this.api.find({
       where: { id: id },
       include: ['roles', 'accessTokens'],
     })
-  }
-
-  upsert(item) {
-    if (item.id) {
-      return this.update(item)
-    }
-    return this.create(item)
   }
 
   create(item) {
@@ -128,10 +108,6 @@ export class UsersService {
 
   removeUserFromRole(item) {
     this.store.dispatch(new UserActions.DeleteUserFromRole(item))
-  }
-
-  getUserRoles(item, successCb, errorCb): Subscription {
-    return this.api.getRoles(item.id).subscribe(successCb, errorCb)
   }
 
   getUserAccessTokens(item, successCb, errorCb): Subscription {

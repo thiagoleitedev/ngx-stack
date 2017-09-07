@@ -1,8 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core'
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap'
 import { Router, ActivatedRoute } from '@angular/router'
 import { NgxUiService, ModalComponent, GridConfig } from '../../../ui'
-import { Observable } from 'rxjs/Observable'
 import { Subscription } from 'rxjs/Subscription'
 import 'rxjs/operator/map'
 

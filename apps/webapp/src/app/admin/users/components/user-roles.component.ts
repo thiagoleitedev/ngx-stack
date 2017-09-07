@@ -1,9 +1,7 @@
-import { Component, OnInit, AfterViewInit, OnDestroy } from '@angular/core'
-import { RoleApi, Role } from '@ngx-plus/ngx-sdk'
+import { Component, OnInit } from '@angular/core'
 import { Observable } from 'rxjs/Observable'
-import { Subscription } from 'rxjs/Subscription'
 
-import { NgxUiService, DropButton } from '../../../ui'
+import { DropButton } from '../../../ui'
 import { UsersService } from '../users.service'
 
 @Component({
@@ -52,7 +50,7 @@ export class UserRolesComponent implements OnInit {
   ]
   public dropConfig: DropButton
 
-  constructor(public service: UsersService, public ui: NgxUiService) {}
+  constructor(public service: UsersService) {}
 
   ngOnInit() {
     this.dropConfig = {
