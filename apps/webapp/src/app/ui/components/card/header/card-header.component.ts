@@ -1,11 +1,4 @@
-import {
-  Component,
-  Input,
-  Output,
-  EventEmitter,
-  TemplateRef,
-  ChangeDetectionStrategy,
-} from '@angular/core'
+import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core'
 import { NavItem } from '../../../interfaces'
 
 @Component({
@@ -56,6 +49,4 @@ export class CardHeaderComponent {
   @Input() subTitle: string
 
   @Output() action = new EventEmitter()
-
-  constructor() {}
 }

@@ -1,10 +1,4 @@
-import {
-  Component,
-  Input,
-  Output,
-  EventEmitter,
-  ChangeDetectionStrategy,
-} from '@angular/core'
+import { Component, Input, ChangeDetectionStrategy } from '@angular/core'
 
 @Component({
   selector: 'ngx-card-header-brand',
@@ -23,6 +17,4 @@ export class CardHeaderBrandComponent {
   @Input() headerImg: string
   @Input() postHeaderImg: string
   @Input() preHeaderImg: string
-
-  constructor() {}
 }

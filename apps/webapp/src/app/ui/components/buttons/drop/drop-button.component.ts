@@ -1,10 +1,4 @@
-import {
-  Component,
-  Input,
-  Output,
-  EventEmitter,
-  ChangeDetectionStrategy,
-} from '@angular/core'
+import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core'
 import { DropButton } from '../../../interfaces'
 
 @Component({
@@ -64,8 +58,6 @@ export class DropButtonComponent {
     ],
     selected: 10,
   }
-
-  constructor() {}
 
   handleAction(event) {
     switch (event.type) {

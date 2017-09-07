@@ -1,12 +1,5 @@
-import {
-  Component,
-  Input,
-  Output,
-  EventEmitter,
-  ChangeDetectionStrategy,
-} from '@angular/core'
-import { UploadOutput, UploadInput, UploadFile, humanizeBytes, NgUploaderService } from 'ngx-uploader'
-// import { FileUploader } from '../../../interfaces'
+import { Component, Input, Output, EventEmitter } from '@angular/core'
+import { UploadOutput, UploadInput, UploadFile, humanizeBytes } from 'ngx-uploader'
 
 @Component({
   selector: 'ngx-file-uploader',
@@ -43,7 +36,6 @@ export class FileUploaderComponent {
   @Output() action
   @Output() uploadInput
 
-  formData: FormData
   files: UploadFile[]
   humanizeBytes: Function
   dragOver: boolean

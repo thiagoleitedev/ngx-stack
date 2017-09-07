@@ -1,10 +1,4 @@
-import {
-  Component,
-  Input,
-  Output,
-  EventEmitter,
-  ChangeDetectionStrategy,
-} from '@angular/core'
+import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core'
 import { ActionButton } from '../../../interfaces'
 
 @Component({
@@ -23,8 +17,6 @@ export class ActionButtonComponent {
   @Output() action = new EventEmitter()
 
   public search: string
-
-  constructor() {}
 
   handleAction(event) {
     switch (event.type) {

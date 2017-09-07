@@ -1,14 +1,5 @@
-import {
-  Component,
-  OnInit,
-  Input,
-  Output,
-  EventEmitter,
-  ChangeDetectionStrategy,
-} from '@angular/core'
+import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core'
 import { FormBuilder, FormGroup } from '@angular/forms'
-import { Router } from '@angular/router'
-import { AccountApi, Account } from '@ngx-plus/ngx-sdk'
 
 import { RadioButtons } from '../../../interfaces'
 
@@ -32,8 +23,7 @@ import { RadioButtons } from '../../../interfaces'
       </div>
     </form>
   `,
-  styles: [
-    `
+  styles: [`
     .bg-success {
       color: #fff;
     }

@@ -1,13 +1,4 @@
-import {
-  Component,
-  Input,
-  Output,
-  EventEmitter,
-  ChangeDetectionStrategy,
-} from '@angular/core'
-import { Router } from '@angular/router'
-import { AccountApi, Account } from '@ngx-plus/ngx-sdk'
-import { Observable } from 'rxjs/Observable'
+import { Component, Input, Output, EventEmitter } from '@angular/core'
 
 import { TableConfig } from '../../interfaces'
 
@@ -34,9 +25,8 @@ import { TableConfig } from '../../interfaces'
       </h5>
       </div>
     </div>
-  <div>
+  </div>
   `,
-  // changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TableFooterComponent {
   @Input() config: TableConfig
@@ -46,8 +36,6 @@ export class TableFooterComponent {
     currentPage: 0,
     limit: 10,
   }
-
-  constructor() {}
 
   handleAction(event) {
     switch (event.type) {

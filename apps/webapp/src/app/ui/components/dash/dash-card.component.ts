@@ -1,10 +1,4 @@
-import {
-  Component,
-  Input,
-  Output,
-  EventEmitter,
-  ChangeDetectionStrategy,
-} from '@angular/core'
+import { Component, Input, ChangeDetectionStrategy } from '@angular/core'
 import { DashCard } from '../../interfaces'
 
 @Component({
@@ -67,6 +61,4 @@ import { DashCard } from '../../interfaces'
 })
 export class DashCardComponent {
   @Input() items: DashCard[]
-
-  constructor() {}
 }

@@ -1,18 +1,6 @@
-import {
-  Component,
-  Input,
-  Output,
-  EventEmitter,
-  ViewChild,
-  TemplateRef,
-  ChangeDetectionStrategy,
-  OnInit
-} from '@angular/core'
-import { Router } from '@angular/router'
-import { AccountApi, Account } from '@ngx-plus/ngx-sdk'
+import { Component, Input, Output, EventEmitter, ViewChild, TemplateRef, OnInit } from '@angular/core'
 import { DatatableComponent } from '@swimlane/ngx-datatable'
 
-import { Observable } from 'rxjs/Observable'
 import { NgxUiService } from '../../services'
 
 @Component({
@@ -52,7 +40,6 @@ import { NgxUiService } from '../../services'
       </ngx-action-button>
     </ng-template>
   `,
-  // changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TableComponent implements OnInit {
   @Input() config

@@ -1,10 +1,4 @@
-import {
-  Component,
-  Input,
-  Output,
-  EventEmitter,
-  ChangeDetectionStrategy,
-} from '@angular/core'
+import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core'
 import { RadioButtons } from '../../interfaces'
 
 @Component({
@@ -19,8 +13,6 @@ import { RadioButtons } from '../../interfaces'
 export class ToolbarViewComponent {
   @Input() config: RadioButtons
   @Output() action = new EventEmitter()
-
-  constructor() {}
 
   handleAction(event) {
     switch (event.type) {

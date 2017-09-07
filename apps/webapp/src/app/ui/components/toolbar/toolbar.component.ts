@@ -1,10 +1,4 @@
-import {
-  Component,
-  Input,
-  Output,
-  EventEmitter,
-  ChangeDetectionStrategy,
-} from '@angular/core'
+import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core'
 
 import { ToolbarConfig } from '../../interfaces'
 
@@ -59,8 +53,6 @@ export class ToolbarComponent {
       selected: 'table',
     },
   }
-
-  constructor() { }
 
   handleAction(event) {
     switch (event.type) {

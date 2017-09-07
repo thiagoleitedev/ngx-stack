@@ -1,13 +1,4 @@
-import {
-  Component,
-  Input,
-  Output,
-  EventEmitter,
-  ChangeDetectionStrategy,
-} from '@angular/core'
-import { Router } from '@angular/router'
-import { AccountApi, Account } from '@ngx-plus/ngx-sdk'
-import { NgxUiService } from '../../services'
+import { Component, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core'
 
 @Component({
   selector: 'ngx-toolbar-filter',
@@ -33,8 +24,6 @@ export class ToolbarFilterComponent {
   @Output() action = new EventEmitter()
 
   public filter: string
-
-  constructor() {}
 
   handleAction(event) {
     switch (event.type) {
