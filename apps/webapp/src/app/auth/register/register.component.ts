@@ -1,10 +1,7 @@
 import { Component, OnInit } from '@angular/core'
-import { Router } from '@angular/router'
-import { Subscription } from 'rxjs/Subscription'
 import { Store } from '@ngrx/store'
 import { AuthActions } from '../../state'
-import { NgxUiService } from '../../ui'
-import { Account, AccountApi } from '@ngx-plus/ngx-sdk'
+import { Account } from '@ngx-plus/ngx-sdk'
 
 @Component({
   selector: 'ngx-auth-register',
@@ -16,15 +13,10 @@ import { Account, AccountApi } from '@ngx-plus/ngx-sdk'
   `,
 })
 export class RegisterComponent implements OnInit {
-  private subscriptions: Subscription[] = new Array<Subscription>()
   public registration: Account
   public formConfig: {}
 
-  constructor(
-    private ui: NgxUiService,
-    private store: Store<any>,
-    private router: Router
-  ) {}
+  constructor(private store: Store<any>) {}
 
   ngOnInit() {
     this.formConfig = {

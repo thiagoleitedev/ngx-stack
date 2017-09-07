@@ -1,10 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core'
 import { Router } from '@angular/router'
-import { AccountApi, Account, SDKToken } from '@ngx-plus/ngx-sdk'
+import { AccountApi } from '@ngx-plus/ngx-sdk'
 import { Store } from '@ngrx/store'
 import { Subscription } from 'rxjs/Subscription'
 
-import { NgxUiService, NavItem } from '../ui'
+import { NgxUiService } from '../ui'
 import { UiActions } from '../state'
 
 @Component({
@@ -30,11 +30,9 @@ import { UiActions } from '../state'
 })
 export class AuthComponent implements OnInit, OnDestroy {
   public cardConfig
-  public data: any
   private subscriptions: Subscription[] = new Array<Subscription>()
 
   constructor(
-    public userApi: AccountApi,
     public router: Router,
     private ui: NgxUiService,
     private store: Store<any>
@@ -57,6 +55,7 @@ export class AuthComponent implements OnInit, OnDestroy {
       postHeaderImg: this.ui.postHeaderImg,
       preHeaderImg: this.ui.preHeaderImg,
     }
+    // TODO: Consider moving Auth routes through a component without these components
     this.store.dispatch(new UiActions.DeactivateHeader())
     this.store.dispatch(new UiActions.DeactivateSidebar())
     this.store.dispatch(new UiActions.DeactivateFooter())

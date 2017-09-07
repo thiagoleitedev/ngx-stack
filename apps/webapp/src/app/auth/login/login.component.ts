@@ -1,10 +1,6 @@
-import { Component, OnInit } from '@angular/core'
-import { Router } from '@angular/router'
-import { NgxFormConfig } from '@ngx-plus/ngx-forms'
-import { AccountApi } from '@ngx-plus/ngx-sdk'
+import { Component } from '@angular/core'
 import { Store } from '@ngrx/store'
 
-import { NgxUiService } from '../../ui'
 import { AuthActions } from '../../state'
 
 @Component({
@@ -37,12 +33,7 @@ export class LoginComponent {
     ],
   }
 
-  constructor(
-    private ui: NgxUiService,
-    private api: AccountApi,
-    private router: Router,
-    private store: Store<any>
-  ) {}
+  constructor(private store: Store<any>) {}
 
   handleAction(event) {
     switch (event.type) {
