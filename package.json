@@ -9,7 +9,7 @@
     "postinstall": "lerna bootstrap",
     "sdk": "fireloop sdk",
     "test": "npm run build",
-    "update": "ncu -a && lerna exec 'ncu -a'"
+    "update": "ncu -a && lerna exec \"ncu -a\""
   },
   "keywords": [
     "angular",
@@ -36,6 +36,6 @@
   "author": "Brannon N. Darby II (logic) <bdarby86@gmail.com>",
   "license": "MIT",
   "devDependencies": {
-    "lerna": "^2.1.1"
+    "lerna": "^2.1.2"
   }
 }
