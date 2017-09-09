@@ -1,10 +1,8 @@
 [{
   "id": "admin-user",
   "email": "admin@example.com",
-  "firstName": "Brannon",
-  "middleName": "N.",
-  "lastName": "Darby",
-  "suffix": "II",
-  "fullName": "Brannon N. Darby II",
+  "firstName": "Admin",
+  "lastName": "User",
+  "fullName": "Admin User",
   "password": "s3cr3t"
 }]
