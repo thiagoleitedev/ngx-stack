@@ -10,32 +10,18 @@ import {
   Route,
 } from '@angular/router'
 import { Store } from '@ngrx/store'
-import { LoopBackAuth, AccountApi, Role } from '@ngx-plus/ngx-sdk'
+import { LoopBackAuth } from '@ngx-plus/ngx-sdk'
 import { Observable } from 'rxjs/Observable'
-import 'rxjs/add/operator/combineLatest'
 import 'rxjs/add/operator/map'
+import 'rxjs/add/operator/take'
 
 @Injectable()
 export class AdminGuard implements CanActivate, CanActivateChild, CanLoad {
-  private auth$: Observable<any>
-  private userRoles$: Observable<any>
-  private isAdmin$: Observable<boolean>
-  private roles
-
   constructor(
     private auth: LoopBackAuth,
     private router: Router,
     private store: Store<any>,
-    private api: AccountApi,
-  ) {
-    this.auth$ = this.store.select('auth')
-    this.userRoles$ = this.auth$.map(auth => auth.user.roles)
-    this.isAdmin$ = this.userRoles$
-      .map(roles => roles.map(role => role.name))
-      .do(roles => console.log(roles))
-      .map(roles => roles.indexOf('Admin') > -1)
-      .do(roles => console.log(roles))
-  }
+  ) {}
 
   canActivate(
     route: ActivatedRouteSnapshot,
@@ -51,11 +37,11 @@ export class AdminGuard implements CanActivate, CanActivateChild, CanLoad {
     return this.canActivate(route, state)
   }
 
-  canLoad(): Observable<boolean> {
+  canLoad(route: Route): Observable<boolean> {
     return this.isAdmin()
   }
 
   isAdmin(): Observable<boolean> {
-    return this.isAdmin$
+    return this.store.select('auth').map(auth => auth.isAdmin).take(1)
   }
 }

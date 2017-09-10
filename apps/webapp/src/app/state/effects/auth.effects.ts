@@ -5,6 +5,7 @@ import { Effect, Actions } from '@ngrx/effects'
 import { Action, Store } from '@ngrx/store'
 import { Observable } from 'rxjs/Observable'
 import { of } from 'rxjs/observable/of'
+import { defer } from 'rxjs/observable/defer'
 import { NgxUiService } from '../../ui'
 import { AccountApi, LoopBackAuth } from '@ngx-plus/ngx-sdk'
 import 'rxjs/add/operator/do'
@@ -28,23 +29,20 @@ export class AuthEffects {
   ) {}
 
   @Effect()
-  public loadToken: Observable<Action> = this.actions$
-    .ofType(Auth.LOAD_TOKEN)
-    .startWith(new Auth.LoadToken())
-    .map(
-      (action: Auth.LoadToken) =>
-        new Auth.LoadTokenSuccess(this.auth.getToken()),
-    )
+  public init$: Observable<Action> = defer(() => {
+    return of(new Auth.LoadTokenSuccess(this.auth.getToken()))
+  })
 
   @Effect({ dispatch: false })
-  public loadTokenSuccess: Observable<Action> = this.actions$
+  public loadTokenSuccess = this.actions$
     .ofType(Auth.LOAD_TOKEN_SUCCESS)
-    .do((action: Auth.LoadTokenSuccess) =>
-      this.store.dispatch(new Auth.UpdateUser(action.payload.userId)),
+    .do(
+      (action: Auth.LoadTokenSuccess) =>
+        new Auth.LogInSuccess({ user: { id: action.payload.userId } }),
     )
 
   @Effect()
-  protected login: Observable<Action> = this.actions$
+  protected logIn$: Observable<Action> = this.actions$
     .ofType(Auth.LOG_IN)
     .mergeMap((action: Auth.LogIn) =>
       this.userApi
@@ -54,7 +52,7 @@ export class AuthEffects {
     )
 
   @Effect({ dispatch: false })
-  protected loginSuccess = this.actions$
+  protected logInSuccess = this.actions$
     .ofType(Auth.LOG_IN_SUCCESS)
     .do((action: Auth.LogInSuccess) => this.router.navigate(['home']))
     .do((action: Auth.LogInSuccess) => {
@@ -63,7 +61,7 @@ export class AuthEffects {
       this.store.dispatch(new Ui.ActivateHeader())
       this.store.dispatch(new Ui.ActivateSidebar())
     })
-    .map((action: Auth.LogInSuccess) =>
+    .do((action: Auth.LogInSuccess) =>
       this.ui.alerts.toastSuccess(
         'Log In Success',
         `You are logged in as <u><i>${action.payload.user.email}</u></i>.`,
@@ -71,14 +69,14 @@ export class AuthEffects {
     )
 
   @Effect({ dispatch: false })
-  protected loginFail = this.actions$
+  protected logInFail = this.actions$
     .ofType(Auth.LOG_IN_FAIL)
-    .map((action: Auth.LogInFail) =>
+    .do((action: Auth.LogInFail) =>
       this.ui.alerts.toastError('Log In Failure', `${action.payload.message}`),
     )
 
   @Effect()
-  register: Observable<Action> = this.actions$
+  protected register$: Observable<Action> = this.actions$
     .ofType(Auth.REGISTER)
     .mergeMap((action: Auth.Register) =>
       this.userApi
@@ -88,7 +86,7 @@ export class AuthEffects {
     )
 
   @Effect({ dispatch: false })
-  registerSuccess = this.actions$
+  protected registerSuccess = this.actions$
     .ofType(Auth.REGISTER_SUCCESS)
     .map((action: Auth.RegisterSuccess) => {
       this.router.navigate(['auth'])
@@ -100,7 +98,7 @@ export class AuthEffects {
     })
 
   @Effect({ dispatch: false })
-  registerFail = this.actions$
+  protected registerFail = this.actions$
     .ofType(Auth.REGISTER_FAIL)
     .map((action: Auth.RegisterFail) =>
       this.ui.alerts.toastError(
@@ -110,7 +108,7 @@ export class AuthEffects {
     )
 
   @Effect()
-  logout: Observable<Action> = this.actions$
+  protected logOut$: Observable<Action> = this.actions$
     .ofType(Auth.LOG_OUT)
     .mergeMap((action: Auth.LogOut) =>
       this.userApi
@@ -120,7 +118,7 @@ export class AuthEffects {
     )
 
   @Effect({ dispatch: false })
-  logoutSuccess = this.actions$
+  protected logOutSuccess = this.actions$
     .ofType(Auth.LOG_OUT_SUCCESS)
     .do((action: Auth.LogOutSuccess) => this.router.navigate(['auth']))
     .map((action: Auth.LogOutSuccess) =>
@@ -131,7 +129,7 @@ export class AuthEffects {
     )
 
   @Effect({ dispatch: false })
-  logoutFail = this.actions$
+  protected logOutFail = this.actions$
     .ofType(Auth.LOG_OUT_FAIL)
     .do((action: Auth.LogOutFail) => this.router.navigate(['auth']))
     .map((action: Auth.LogOutFail) =>
@@ -142,7 +140,7 @@ export class AuthEffects {
     )
 
   @Effect()
-  checkToken: Observable<Action> = this.actions$
+  protected checkToken$: Observable<Action> = this.actions$
     .ofType(Auth.CHECK_TOKEN)
     .mergeMap((action: Auth.CheckToken) =>
       this.userApi
@@ -152,7 +150,7 @@ export class AuthEffects {
     )
 
   @Effect({ dispatch: false })
-  checkTokenFail = this.actions$
+  protected checkTokenFail = this.actions$
     .ofType(Auth.CHECK_TOKEN_FAIL)
     .map((action: Auth.CheckTokenFail) => {
       this.router.navigate(['auth'])
@@ -160,7 +158,7 @@ export class AuthEffects {
     })
 
   @Effect({ dispatch: false })
-  checkTokenSuccess = this.actions$
+  protected checkTokenSuccess = this.actions$
     .ofType(Auth.CHECK_TOKEN_SUCCESS)
     .map((action: Auth.CheckTokenSuccess) =>
       this.ui.alerts.toastSuccess(
@@ -170,12 +168,15 @@ export class AuthEffects {
     )
 
   @Effect()
-  updateUser: Observable<Action> = this.actions$
+  protected updateUser$: Observable<Action> = this.actions$
     .ofType(Auth.UPDATE_USER)
     .mergeMap((action: Auth.UpdateUser) =>
       this.userApi
         .findById(action.payload, { include: 'roles' })
-        .map((response: any) => new Auth.UpdateUserSuccess(response))
+        .map((response: any) => {
+          this.auth.setUser(response)
+          return new Auth.UpdateUserSuccess(response)
+        })
         .catch((error: any) => of(new Auth.UpdateUserFail(error))),
     )
 }
