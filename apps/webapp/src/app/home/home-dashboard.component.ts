@@ -22,10 +22,9 @@ export class HomeDashboardComponent implements OnInit {
     cardTitle: 'Dashboard',
   }
 
-  constructor(private store: Store<any>) { }
+  constructor(private store: Store<any>) {}
 
   ngOnInit() {
-    this.store.dispatch(new ProjectActions.ReadProjects())
     this.items$ = this.store.select('home')
     this.setDashCards()
   }
