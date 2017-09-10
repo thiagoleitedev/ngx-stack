@@ -121,7 +121,7 @@ export class RegisterFail implements Action {
 /** CHECK_TOKEN **/
 export class CheckToken implements Action {
   public readonly type = CHECK_TOKEN
-  constructor(public payload: any) {}
+  constructor() {}
 }
 
 export class CheckTokenSuccess implements Action {

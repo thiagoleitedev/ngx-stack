@@ -11,7 +11,9 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools'
 
 import { environment } from '../environments/environment'
 import {
+  AdminGuard,
   AuthEffects,
+  AuthGuard,
   AuthReducer,
   AdminReducer,
   ControlEffects,
@@ -52,11 +54,11 @@ export class CoreModule {
   constructor(
     @Optional()
     @SkipSelf()
-    parentModule: CoreModule
+    parentModule: CoreModule,
   ) {
     if (parentModule) {
       throw new Error(
-        'CoreModule is already loaded. It can ONLY be imported in the AppModule!'
+        'CoreModule is already loaded. It can ONLY be imported in the AppModule!',
       )
     }
     const apiConfig = Object.assign({}, window['apiConfig'])
@@ -66,7 +68,7 @@ export class CoreModule {
   static forRoot(): ModuleWithProviders {
     return {
       ngModule: CoreModule,
-      providers: [],
+      providers: [AdminGuard, AuthGuard],
     }
   }
 }

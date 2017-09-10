@@ -24,21 +24,23 @@ export class AuthEffects {
     private userApi: AccountApi,
     private ui: NgxUiService,
     private auth: LoopBackAuth,
-    private router: Router
-  ) { }
+    private router: Router,
+  ) {}
 
   @Effect()
   public loadToken: Observable<Action> = this.actions$
     .ofType(Auth.LOAD_TOKEN)
     .startWith(new Auth.LoadToken())
-    .map(() => new Auth.LoadTokenSuccess(this.auth.getToken()))
+    .map(
+      (action: Auth.LoadToken) =>
+        new Auth.LoadTokenSuccess(this.auth.getToken()),
+    )
 
   @Effect({ dispatch: false })
   public loadTokenSuccess: Observable<Action> = this.actions$
     .ofType(Auth.LOAD_TOKEN_SUCCESS)
-    .map(
-    (action: Auth.LoadTokenSuccess) =>
-      new Auth.UpdateUser(action.payload.user.id)
+    .do((action: Auth.LoadTokenSuccess) =>
+      this.store.dispatch(new Auth.UpdateUser(action.payload.userId)),
     )
 
   @Effect()
@@ -48,7 +50,7 @@ export class AuthEffects {
       this.userApi
         .login(action.payload, 'user', true)
         .map((response: any) => new Auth.LogInSuccess(response))
-        .catch((error: any) => of(new Auth.LogInFail(error)))
+        .catch((error: any) => of(new Auth.LogInFail(error))),
     )
 
   @Effect({ dispatch: false })
@@ -64,15 +66,15 @@ export class AuthEffects {
     .map((action: Auth.LogInSuccess) =>
       this.ui.alerts.toastSuccess(
         'Log In Success',
-        `You are logged in as <u><i>${action.payload.user.email}</u></i>.`
-      )
+        `You are logged in as <u><i>${action.payload.user.email}</u></i>.`,
+      ),
     )
 
   @Effect({ dispatch: false })
   protected loginFail = this.actions$
     .ofType(Auth.LOG_IN_FAIL)
     .map((action: Auth.LogInFail) =>
-      this.ui.alerts.toastError('Log In Failure', `${action.payload.message}`)
+      this.ui.alerts.toastError('Log In Failure', `${action.payload.message}`),
     )
 
   @Effect()
@@ -82,19 +84,20 @@ export class AuthEffects {
       this.userApi
         .create(action.payload)
         .map((response: any) => new Auth.RegisterSuccess(response))
-        .catch((error: any) => of(new Auth.RegisterFail(error)))
+        .catch((error: any) => of(new Auth.RegisterFail(error))),
     )
 
   @Effect({ dispatch: false })
   registerSuccess = this.actions$
     .ofType(Auth.REGISTER_SUCCESS)
-    .map((action: Auth.RegisterSuccess) =>
+    .map((action: Auth.RegisterSuccess) => {
+      this.router.navigate(['auth'])
       this.ui.alerts.toastSuccess(
-        'Register Success',
-        `<u><i>${action.payload
-          .email}</i></u> has been registered successfully.`
+        'Registration Success',
+        `You have registered successfully as <u><i>${action.payload
+          .email}</i></u>.`,
       )
-    )
+    })
 
   @Effect({ dispatch: false })
   registerFail = this.actions$
@@ -102,8 +105,8 @@ export class AuthEffects {
     .map((action: Auth.RegisterFail) =>
       this.ui.alerts.toastError(
         get(action, 'payload.name'),
-        get(action, 'payload.message')
-      )
+        get(action, 'payload.message'),
+      ),
     )
 
   @Effect()
@@ -113,7 +116,7 @@ export class AuthEffects {
       this.userApi
         .logout()
         .map((response: any) => new Auth.LogOutSuccess(response))
-        .catch((error: any) => of(new Auth.LogOutFail(error)))
+        .catch((error: any) => of(new Auth.LogOutFail(error))),
     )
 
   @Effect({ dispatch: false })
@@ -123,8 +126,8 @@ export class AuthEffects {
     .map((action: Auth.LogOutSuccess) =>
       this.ui.alerts.toastSuccess(
         'Log Out Success',
-        `You have logged out successfully.`
-      )
+        `You have logged out successfully.`,
+      ),
     )
 
   @Effect({ dispatch: false })
@@ -134,8 +137,8 @@ export class AuthEffects {
     .map((action: Auth.LogOutFail) =>
       this.ui.alerts.toastSuccess(
         'Log Out Success',
-        `You have logged out successfully.`
-      )
+        `You have logged out successfully.`,
+      ),
     )
 
   @Effect()
@@ -145,15 +148,16 @@ export class AuthEffects {
       this.userApi
         .getCurrent()
         .map((response: any) => new Auth.CheckTokenSuccess(response))
-        .catch((error: any) => of(new Auth.CheckTokenFail(error)))
+        .catch((error: any) => of(new Auth.CheckTokenFail(error))),
     )
 
   @Effect({ dispatch: false })
   checkTokenFail = this.actions$
     .ofType(Auth.CHECK_TOKEN_FAIL)
-    .map((action: Auth.CheckTokenFail) =>
+    .map((action: Auth.CheckTokenFail) => {
+      this.router.navigate(['auth'])
       this.ui.alerts.toastError('Invalid Token', 'Redirecting to Log In screen')
-    )
+    })
 
   @Effect({ dispatch: false })
   checkTokenSuccess = this.actions$
@@ -161,8 +165,8 @@ export class AuthEffects {
     .map((action: Auth.CheckTokenSuccess) =>
       this.ui.alerts.toastSuccess(
         'Valid Token',
-        `Your access token has been validated.`
-      )
+        `Your access token has been validated.`,
+      ),
     )
 
   @Effect()
@@ -172,6 +176,6 @@ export class AuthEffects {
       this.userApi
         .findById(action.payload, { include: 'roles' })
         .map((response: any) => new Auth.UpdateUserSuccess(response))
-        .catch((error: any) => of(new Auth.UpdateUserFail(error)))
+        .catch((error: any) => of(new Auth.UpdateUserFail(error))),
     )
 }
