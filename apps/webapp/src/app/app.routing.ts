@@ -1,5 +1,6 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { NgModule } from '@angular/core'
+import { Routes, RouterModule } from '@angular/router'
+import { AdminGuard, AuthGuard } from './state'
 
 const routes: Routes = [
   {
@@ -7,11 +8,19 @@ const routes: Routes = [
     children: [
       { path: '', redirectTo: 'auth', pathMatch: 'full' },
       { path: 'auth', loadChildren: './auth/auth.module#AuthModule' },
-      { path: 'home', loadChildren: './home/home.module#HomeModule' },
-      { path: 'admin', loadChildren: './admin/admin.module#AdminModule' },
-    ]
-  }
-];
+      {
+        path: 'home',
+        loadChildren: './home/home.module#HomeModule',
+        canLoad: [AuthGuard],
+      },
+      {
+        path: 'admin',
+        loadChildren: './admin/admin.module#AdminModule',
+        canLoad: [AdminGuard],
+      },
+    ],
+  },
+]
 
 @NgModule({
   imports: [
@@ -20,8 +29,6 @@ const routes: Routes = [
       useHash: true,
     }),
   ],
-  exports: [
-    RouterModule,
-  ],
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
