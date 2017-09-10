@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core'
 import { Store } from '@ngrx/store'
 
-import { UiActions, ProjectActions } from '../state'
+import { UiActions, ProjectActions, FileActions } from '../state'
 
 @Component({
   selector: 'ngx-home',
@@ -10,12 +10,13 @@ import { UiActions, ProjectActions } from '../state'
   `,
 })
 export class HomeComponent implements OnInit {
-  constructor(private store: Store<any>) { }
+  constructor(private store: Store<any>) {}
 
   ngOnInit() {
     this.store.dispatch(new UiActions.ActivateHeader())
     this.store.dispatch(new UiActions.ActivateSidebar())
     this.store.dispatch(new UiActions.ActivateFooter())
     this.store.dispatch(new ProjectActions.ReadProjects())
+    this.store.dispatch(new FileActions.ReadContainers())
   }
 }

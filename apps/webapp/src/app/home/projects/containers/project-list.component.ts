@@ -29,10 +29,9 @@ export class ProjectListComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private store: Store<any>,
-  ) { }
+  ) {}
 
   ngOnInit() {
-    this.store.dispatch(new ProjectActions.ReadProjects())
     this.subscriptions = []
     this.gridConfig = {
       card: {
@@ -59,7 +58,7 @@ export class ProjectListComponent implements OnInit {
         ],
         count$: this.service.items$.map(item => item.count),
         items$: this.service.items$.map(item =>
-          item.ids.map(id => item.entities[id])
+          item.ids.map(id => item.entities[id]),
         ),
       },
       toolbar: {
@@ -84,8 +83,8 @@ export class ProjectListComponent implements OnInit {
     this.ui.modalRef.componentInstance.title = title
     this.subscriptions.push(
       this.ui.modalRef.componentInstance.action.subscribe(event =>
-        this.handleAction(event)
-      )
+        this.handleAction(event),
+      ),
     )
   }
 
