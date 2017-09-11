@@ -6,6 +6,9 @@ export const DEACTIVATE_FOOTER = '[Ui] DeactivateFooter'
 export const ACTIVATE_HEADER = '[Ui] ActivateHeader'
 export const DEACTIVATE_HEADER = '[Ui] DeactivateHeader'
 
+export const ACTIVATE_LOADER = '[Ui] ActivateLoader'
+export const DEACTIVATE_LOADER = '[Ui] DeactivateLoader'
+
 export const ACTIVATE_SIDEBAR = '[Ui] ActivateSidebar'
 export const DEACTIVATE_SIDEBAR = '[Ui] DeactivateSidebar'
 export const TOGGLE_SIDEBAR = '[Ui] ToggleSidebar'
@@ -16,52 +19,62 @@ export const TOGGLE_MOREBAR = '[Ui] ToggleMorebar'
 
 export class ActivateFooter implements Action {
   public readonly type = ACTIVATE_FOOTER
-  constructor() { }
+  constructor() {}
 }
 
 export class DeactivateFooter implements Action {
   public readonly type = DEACTIVATE_FOOTER
-  constructor() { }
+  constructor() {}
 }
 
 export class ActivateHeader implements Action {
   public readonly type = ACTIVATE_HEADER
-  constructor() { }
+  constructor() {}
 }
 
 export class DeactivateHeader implements Action {
   public readonly type = DEACTIVATE_HEADER
-  constructor() { }
+  constructor() {}
+}
+
+export class ActivateLoader implements Action {
+  public readonly type = ACTIVATE_LOADER
+  constructor() {}
+}
+
+export class DeactivateLoader implements Action {
+  public readonly type = DEACTIVATE_LOADER
+  constructor() {}
 }
 
 export class ActivateSidebar implements Action {
   public readonly type = ACTIVATE_SIDEBAR
-  constructor() { }
+  constructor() {}
 }
 
 export class DeactivateSidebar implements Action {
   public readonly type = DEACTIVATE_SIDEBAR
-  constructor() { }
+  constructor() {}
 }
 
 export class ToggleSidebar implements Action {
   public readonly type = TOGGLE_SIDEBAR
-  constructor() { }
+  constructor() {}
 }
 
 export class ActivateMorebar implements Action {
   public readonly type = ACTIVATE_MOREBAR
-  constructor() { }
+  constructor() {}
 }
 
 export class DeactivateMorebar implements Action {
   public readonly type = DEACTIVATE_MOREBAR
-  constructor() { }
+  constructor() {}
 }
 
 export class ToggleMorebar implements Action {
   public readonly type = TOGGLE_MOREBAR
-  constructor() { }
+  constructor() {}
 }
 
 export type Actions =
@@ -69,6 +82,8 @@ export type Actions =
   | DeactivateFooter
   | ActivateHeader
   | DeactivateHeader
+  | ActivateLoader
+  | DeactivateLoader
   | ActivateSidebar
   | DeactivateSidebar
   | ToggleSidebar

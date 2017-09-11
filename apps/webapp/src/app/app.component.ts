@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, OnInit, AfterViewInit } from '@angular/core'
 import { Store } from '@ngrx/store'
 import { Account } from '@ngx-plus/ngx-sdk'
 import { NgxUiService } from './ui'
@@ -9,20 +9,29 @@ import { AuthActions, UiActions } from './state'
 @Component({
   selector: 'ngx-root',
   template: `
-    <ngx-layout [config]="(ui$ | async)"
-                [user]="(user$ | async)"
+    <ngx-layout [config]="ui$ | async"
+                [user]="user$ | async"
                 (action)="handleAction($event)">
     </ngx-layout>
     <ngx-alert-templates></ngx-alert-templates>
+    <ngx-loading [show]="loader$ | async"
+                 [config]="loaderConfig">
+    </ngx-loading>
   `,
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, AfterViewInit {
+  public loader$: Observable<boolean>
   public user$: Observable<Account>
   public ui$: Observable<any>
+
+  public loaderConfig = {
+    fullScreenBackdrop: true,
+  }
 
   constructor(private ui: NgxUiService, private store: Store<any>) {
     this.user$ = this.store.select('auth').map(auth => auth.user)
     this.ui$ = this.store.select('ui')
+    this.loader$ = this.ui$.map(ui => ui.loader.active)
   }
 
   ngOnInit() {
@@ -69,6 +78,12 @@ export class AppComponent implements OnInit {
         ],
       },
     ])
+  }
+
+  ngAfterViewInit() {
+    setTimeout(() => {
+      this.store.dispatch(new UiActions.DeactivateLoader())
+    }, 2000)
   }
 
   handleAction(event) {

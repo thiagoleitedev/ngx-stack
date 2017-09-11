@@ -8,6 +8,7 @@ import { NgxFormsModule } from '@ngx-plus/ngx-forms'
 import { ToastyModule } from 'ng2-toasty'
 import { Ng2BreadcrumbModule } from 'ng2-breadcrumb/ng2-breadcrumb'
 import { NgxDatatableModule } from '@swimlane/ngx-datatable'
+import { LoadingModule, ANIMATION_TYPES } from 'ngx-loading'
 import { NgUploaderModule } from 'ngx-uploader'
 
 import {
@@ -71,6 +72,7 @@ const components = [
 ]
 
 const modules = [
+  LoadingModule,
   Ng2BreadcrumbModule,
   NgbModule,
   NgUploaderModule,
@@ -86,6 +88,7 @@ const modules = [
     RouterModule,
     FormsModule,
     ReactiveFormsModule,
+    LoadingModule,
     Ng2BreadcrumbModule.forRoot(),
     NgbModule.forRoot(),
     NgUploaderModule,
