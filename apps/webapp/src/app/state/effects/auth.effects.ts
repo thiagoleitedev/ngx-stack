@@ -30,7 +30,11 @@ export class AuthEffects {
 
   @Effect()
   public init$: Observable<Action> = defer(() => {
-    return of(new Auth.LoadTokenSuccess(this.auth.getToken()))
+    const token = this.auth.getToken()
+    if (!token.user) {
+      return of(new Auth.LoadTokenFail(token))
+    }
+    return of(new Auth.LoadTokenSuccess(token))
   })
 
   @Effect({ dispatch: false })
@@ -44,6 +48,7 @@ export class AuthEffects {
   @Effect()
   protected logIn$: Observable<Action> = this.actions$
     .ofType(Auth.LOG_IN)
+    .do(() => this.store.dispatch(new Ui.ActivateLoader()))
     .mergeMap((action: Auth.LogIn) =>
       this.userApi
         .login(action.payload, 'user', true)
@@ -62,6 +67,9 @@ export class AuthEffects {
       this.store.dispatch(new Ui.ActivateSidebar())
     })
     .do((action: Auth.LogInSuccess) =>
+      setTimeout(() => this.store.dispatch(new Ui.DeactivateLoader()), 1000),
+    )
+    .do((action: Auth.LogInSuccess) =>
       this.ui.alerts.toastSuccess(
         'Log In Success',
         `You are logged in as <u><i>${action.payload.user.email}</u></i>.`,
@@ -71,6 +79,9 @@ export class AuthEffects {
   @Effect({ dispatch: false })
   protected logInFail = this.actions$
     .ofType(Auth.LOG_IN_FAIL)
+    .do((action: Auth.LogInSuccess) =>
+      setTimeout(() => this.store.dispatch(new Ui.DeactivateLoader()), 1000),
+    )
     .do((action: Auth.LogInFail) =>
       this.ui.alerts.toastError('Log In Failure', `${action.payload.message}`),
     )
@@ -110,6 +121,7 @@ export class AuthEffects {
   @Effect()
   protected logOut$: Observable<Action> = this.actions$
     .ofType(Auth.LOG_OUT)
+    .do(() => this.store.dispatch(new Ui.ActivateLoader()))
     .mergeMap((action: Auth.LogOut) =>
       this.userApi
         .logout()
@@ -121,6 +133,9 @@ export class AuthEffects {
   protected logOutSuccess = this.actions$
     .ofType(Auth.LOG_OUT_SUCCESS)
     .do((action: Auth.LogOutSuccess) => this.router.navigate(['auth']))
+    .do((action: Auth.LogInSuccess) =>
+      setTimeout(() => this.store.dispatch(new Ui.DeactivateLoader()), 1000),
+    )
     .map((action: Auth.LogOutSuccess) =>
       this.ui.alerts.toastSuccess(
         'Log Out Success',
@@ -132,6 +147,9 @@ export class AuthEffects {
   protected logOutFail = this.actions$
     .ofType(Auth.LOG_OUT_FAIL)
     .do((action: Auth.LogOutFail) => this.router.navigate(['auth']))
+    .do((action: Auth.LogInSuccess) =>
+      setTimeout(() => this.store.dispatch(new Ui.DeactivateLoader()), 1000),
+    )
     .map((action: Auth.LogOutFail) =>
       this.ui.alerts.toastSuccess(
         'Log Out Success',

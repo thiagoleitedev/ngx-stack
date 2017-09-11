@@ -5,11 +5,20 @@ body {
   min-height: 100%;
 }
 
+.backdrop {
+  background-color: $primary !important;
+}
+
+.full-screen {
+  z-index: 9999 !important;
+}
+
 .w-150 {
   min-width: 150px;
 }
 
 .app-body,
+.backdrop,
 .breadcrumb,
 .card,
 .footer,

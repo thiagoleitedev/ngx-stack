@@ -1,6 +1,9 @@
 import * as Ui from '../actions/ui.actions'
 
 export interface State {
+  loader: {
+    active: boolean
+  }
   header: {
     active: boolean
   }
@@ -18,6 +21,9 @@ export interface State {
 }
 
 const initialState: State = {
+  loader: {
+    active: true,
+  },
   header: {
     active: true,
   },
@@ -36,6 +42,16 @@ const initialState: State = {
 
 export function UiReducer(state = initialState, action: Ui.Actions): State {
   switch (action.type) {
+    case Ui.ACTIVATE_LOADER: {
+      const updateState = Object.assign({}, state)
+      updateState.loader.active = true
+      return updateState
+    }
+    case Ui.DEACTIVATE_LOADER: {
+      const updateState = Object.assign({}, state)
+      updateState.loader.active = false
+      return updateState
+    }
     case Ui.ACTIVATE_FOOTER: {
       const updateState = Object.assign({}, state)
       updateState.footer.active = true
