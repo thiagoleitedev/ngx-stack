@@ -2,6 +2,7 @@ import { Component, OnInit, AfterViewInit } from '@angular/core'
 import { Store } from '@ngrx/store'
 import { Account } from '@ngx-plus/ngx-sdk'
 import { NgxUiService } from './ui'
+import { ANIMATION_TYPES } from 'ngx-loading'
 import { Observable } from 'rxjs/Observable'
 
 import { AuthActions, UiActions } from './state'
@@ -25,6 +26,7 @@ export class AppComponent implements OnInit, AfterViewInit {
   public ui$: Observable<any>
 
   public loaderConfig = {
+    animationType: ANIMATION_TYPES.rectangleBounce,
     fullScreenBackdrop: true,
   }
 
@@ -83,7 +85,7 @@ export class AppComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
     setTimeout(() => {
       this.store.dispatch(new UiActions.DeactivateLoader())
-    }, 2000)
+    }, 1000)
   }
 
   handleAction(event) {
