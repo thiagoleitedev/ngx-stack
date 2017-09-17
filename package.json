@@ -36,6 +36,6 @@
   "author": "Brannon N. Darby II (logic) <bdarby86@gmail.com>",
   "license": "MIT",
   "devDependencies": {
-    "lerna": "^2.1.2"
+    "lerna": "^2.2.0"
   }
 }
