@@ -3,10 +3,13 @@ import { Routes, RouterModule } from '@angular/router'
 import { AdminComponent } from './admin.component'
 import { AdminDashboardComponent } from './admin-dashboard.component'
 
+import { AdminGuard } from '../state'
+
 const routes: Routes = [
   {
     path: '',
     component: AdminComponent,
+    canActivate: [AdminGuard],
     children: [
       { path: 'dashboard', component: AdminDashboardComponent },
       { path: 'users', loadChildren: './users/users.module#UsersModule' },
@@ -24,4 +27,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class AdminRoutingModule { }
+export class AdminRoutingModule {}
