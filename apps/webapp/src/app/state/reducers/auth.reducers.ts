@@ -21,6 +21,8 @@ const initialState: State = {
   rememberMe: null,
 }
 
+const checkAdmin = (roles = []) => roles.includes('Admin')
+
 export function AuthReducer(state = initialState, action: Auth.Actions): State {
   switch (action.type) {
     case Auth.LOG_OUT_SUCCESS:
@@ -31,26 +33,16 @@ export function AuthReducer(state = initialState, action: Auth.Actions): State {
       const updateState = Object.assign({}, action.payload)
       return updateState
     }
-    case Auth.LOAD_TOKEN_SUCCESS: {
-      const updateState = Object.assign({}, state)
-      const token = action.payload
-      Object.keys(token).forEach(key => (updateState[key] = token[key]))
-      const roles = token.user.roles.map(role => role.name)
-      if (roles.indexOf('Admin') > -1) {
-        updateState.isAdmin = true
-      } else {
-        updateState.isAdmin = false
-      }
+    case Auth.CHECK_TOKEN_SUCCESS: {
+      const updateState = Object.assign({}, state, action.payload)
+      const roles = updateState.user.roles.map(role => role.name)
+      updateState.isAdmin = checkAdmin(roles)
       return updateState
     }
     case Auth.UPDATE_USER_SUCCESS: {
       const updateState = Object.assign({}, state)
       const roles = action.payload.roles.map(role => role.name)
-      if (roles.indexOf('Admin') > -1) {
-        updateState.isAdmin = true
-      } else {
-        updateState.isAdmin = false
-      }
+      updateState.isAdmin = checkAdmin(roles)
       updateState.user = action.payload
       return updateState
     }

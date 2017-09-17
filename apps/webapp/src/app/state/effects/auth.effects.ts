@@ -32,18 +32,38 @@ export class AuthEffects {
   public init$: Observable<Action> = defer(() => {
     const token = this.auth.getToken()
     if (!token.user) {
-      return of(new Auth.LoadTokenFail(token))
+      return of(new Auth.CheckTokenFail(token))
     }
-    return of(new Auth.LoadTokenSuccess(token))
+    return of(new Auth.CheckTokenSuccess(token))
   })
 
-  @Effect({ dispatch: false })
-  public loadTokenSuccess = this.actions$
-    .ofType(Auth.LOAD_TOKEN_SUCCESS)
-    .do(
-      (action: Auth.LoadTokenSuccess) =>
-        new Auth.LogInSuccess({ user: { id: action.payload.userId } }),
+  @Effect()
+  protected checkToken$: Observable<Action> = this.actions$
+    .ofType(Auth.CHECK_TOKEN)
+    .mergeMap((action: Auth.CheckToken) =>
+      this.userApi
+        .getCurrent()
+        .map((response: any) => new Auth.CheckTokenSuccess(response))
+        .catch((error: any) => of(new Auth.CheckTokenFail(error))),
     )
+
+  @Effect({ dispatch: false })
+  protected checkTokenSuccess = this.actions$
+    .ofType(Auth.CHECK_TOKEN_SUCCESS)
+    .do((action: Auth.CheckTokenSuccess) =>
+      this.ui.alerts.toastSuccess(
+        'Valid Token',
+        `Your access token has been validated.`,
+      ),
+    )
+
+  @Effect({ dispatch: false })
+  protected checkTokenFail = this.actions$
+    .ofType(Auth.CHECK_TOKEN_FAIL)
+    .do((action: Auth.CheckTokenFail) => {
+      this.router.navigate(['auth'])
+      this.ui.alerts.toastError('Invalid Token', 'Redirecting to Log In screen')
+    })
 
   @Effect()
   protected logIn$: Observable<Action> = this.actions$
@@ -136,7 +156,7 @@ export class AuthEffects {
     .do((action: Auth.LogInSuccess) =>
       setTimeout(() => this.store.dispatch(new Ui.DeactivateLoader()), 1000),
     )
-    .map((action: Auth.LogOutSuccess) =>
+    .do((action: Auth.LogOutSuccess) =>
       this.ui.alerts.toastSuccess(
         'Log Out Success',
         `You have logged out successfully.`,
@@ -150,38 +170,10 @@ export class AuthEffects {
     .do((action: Auth.LogInSuccess) =>
       setTimeout(() => this.store.dispatch(new Ui.DeactivateLoader()), 1000),
     )
-    .map((action: Auth.LogOutFail) =>
+    .do((action: Auth.LogOutFail) =>
       this.ui.alerts.toastSuccess(
         'Log Out Success',
         `You have logged out successfully.`,
-      ),
-    )
-
-  @Effect()
-  protected checkToken$: Observable<Action> = this.actions$
-    .ofType(Auth.CHECK_TOKEN)
-    .mergeMap((action: Auth.CheckToken) =>
-      this.userApi
-        .getCurrent()
-        .map((response: any) => new Auth.CheckTokenSuccess(response))
-        .catch((error: any) => of(new Auth.CheckTokenFail(error))),
-    )
-
-  @Effect({ dispatch: false })
-  protected checkTokenFail = this.actions$
-    .ofType(Auth.CHECK_TOKEN_FAIL)
-    .map((action: Auth.CheckTokenFail) => {
-      this.router.navigate(['auth'])
-      this.ui.alerts.toastError('Invalid Token', 'Redirecting to Log In screen')
-    })
-
-  @Effect({ dispatch: false })
-  protected checkTokenSuccess = this.actions$
-    .ofType(Auth.CHECK_TOKEN_SUCCESS)
-    .map((action: Auth.CheckTokenSuccess) =>
-      this.ui.alerts.toastSuccess(
-        'Valid Token',
-        `Your access token has been validated.`,
       ),
     )
 
