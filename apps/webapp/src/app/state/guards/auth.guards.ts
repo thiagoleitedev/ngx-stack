@@ -16,18 +16,12 @@ import { Observable } from 'rxjs/Observable'
 export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
   constructor(private router: Router, private auth: LoopBackAuth) {}
 
-  canActivate(
-    route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot,
-  ): boolean {
+  canActivate(route: ActivatedRouteSnapshot): boolean {
     return this.isAuthenticated()
   }
 
-  canActivateChild(
-    route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot,
-  ): boolean {
-    return this.canActivate(route, state)
+  canActivateChild(route: ActivatedRouteSnapshot): boolean {
+    return this.canActivate(route)
   }
 
   canLoad(): boolean {
@@ -36,6 +30,7 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
 
   isAuthenticated(): boolean {
     if (this.auth.getAccessTokenId() !== null) {
+      console.log('token: ', this.auth.getAccessTokenId())
       return true
     }
 

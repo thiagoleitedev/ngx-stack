@@ -15,26 +15,23 @@ import { Observable } from 'rxjs/Observable'
 import 'rxjs/add/operator/map'
 import 'rxjs/add/operator/take'
 
+import { NgxUiService } from '../../ui'
+
 @Injectable()
 export class AdminGuard implements CanActivate, CanActivateChild, CanLoad {
   constructor(
     private auth: LoopBackAuth,
     private router: Router,
     private store: Store<any>,
+    private ui: NgxUiService,
   ) {}
 
-  canActivate(
-    route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot,
-  ): Observable<boolean> {
+  canActivate(route: ActivatedRouteSnapshot): Observable<boolean> {
     return this.isAdmin()
   }
 
-  canActivateChild(
-    route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot,
-  ): Observable<boolean> {
-    return this.canActivate(route, state)
+  canActivateChild(route: ActivatedRouteSnapshot): Observable<boolean> {
+    return this.canActivate(route)
   }
 
   canLoad(route: Route): Observable<boolean> {
@@ -42,6 +39,17 @@ export class AdminGuard implements CanActivate, CanActivateChild, CanLoad {
   }
 
   isAdmin(): Observable<boolean> {
-    return this.store.select('auth').map(auth => auth.isAdmin).take(1)
+    return this.store
+      .select('auth')
+      .map(auth => auth.isAdmin)
+      .take(1)
+      .do(admin => {
+        if (!admin) {
+          this.ui.alerts.toastError(
+            'Not Authorized',
+            'Only Admin users can view the Admin section!',
+          )
+        }
+      })
   }
 }
