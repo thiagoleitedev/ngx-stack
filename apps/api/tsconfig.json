@@ -1,13 +1,14 @@
 {
+  "compileOnSave": false,
   "compilerOptions": {
-    "module": "commonjs",
-    "noImplicitAny": true,
-    "removeComments": true,
-    "preserveConstEnums": true,
+    "outDir": "./dist/out-tsc",
     "sourceMap": true,
-    "experimentalDecorators": true,
+    "declaration": false,
     "moduleResolution": "node",
-    "typeRoots": ["./node_modules/@types"],
-    "types": ["node", "mocha"]
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "target": "es5",
+    "typeRoots": ["node_modules/@types"],
+    "lib": ["es2017", "dom"]
   }
 }

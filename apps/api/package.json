@@ -23,7 +23,7 @@
     "config": "^1.26.2",
     "cookie-parser": "^1.4.3",
     "cors": "^2.8.4",
-    "eslint": "^4.7.0",
+    "eslint": "^4.7.2",
     "eslint-config-loopback": "^8.0.0",
     "helmet": "^3.8.1",
     "loopback": "^3.11.1",
@@ -48,6 +48,6 @@
     "@types/bluebird": "^3.5.11",
     "@types/chalk": "^0.4.31",
     "@types/mocha": "^2.2.43",
-    "@types/node": "^8.0.28"
+    "@types/node": "^8.0.29"
   }
 }

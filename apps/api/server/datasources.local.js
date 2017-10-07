@@ -29,12 +29,7 @@ if (config.has('smtp') && config.get('smtp.host') && config.get('smtp.port')) {
 
 if (config.has('storage') && config.get('storage.path')) {
   console.log(chalk.magenta('[data-sources] Configure Storage'))
-  datasources['storage'] = {
-    name: 'storage',
-    connector: 'loopback-component-storage',
-    provider: 'filesystem',
-    root: config.get('storage.path'),
-  }
+  datasources['storage'] = config.storage
 }
 
 module.exports = datasources
