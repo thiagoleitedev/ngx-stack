@@ -1,49 +1,52 @@
-import { Component, OnInit, ChangeDetectionStrategy, ViewChild, TemplateRef } from '@angular/core'
+import {
+  Component,
+  OnInit,
+  ChangeDetectionStrategy,
+  ViewChild,
+  TemplateRef,
+} from '@angular/core'
 import { Router, ActivatedRoute } from '@angular/router'
-import { Container } from '@ngx-plus/ngx-sdk'
 import { Subscription } from 'rxjs/Subscription'
 import 'rxjs/add/operator/map'
 
 import { NgxUiService, ModalComponent, GridConfig } from '../../../ui'
-import { FilesService } from '../files.service'
+import { StorageService, Container } from '../storage.service'
 
 @Component({
-  selector: 'ngx-file-list',
+  selector: 'ngx-container-list',
   template: `
     <ngx-grid [config]="gridConfig"
               (action)="handleAction($event)">
     </ngx-grid>
-    <ng-template #filesTmpl let-row="row" let-value="value">
+    <ng-template #filesTRef let-row="row" let-value="value">
       <button class="btn btn-outline-info p-1"
               (click)="handleAction({ type: 'ViewFiles', payload: row })">
         <i class="fa fa-fw fa-search"></i>
-        <span class="badge badge-info text-white m-0">{{ value | number }}</span>
+        <span class="badge badge-info text-white m-0">{{ value.length | number }}</span>
       </button>
     </ng-template>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FileListComponent implements OnInit {
-
-  @ViewChild('filesTmpl') filesTmpl: TemplateRef<any>
+export class ContainerListComponent implements OnInit {
+  @ViewChild('filesTRef') filesTRef: TemplateRef<any>
   public gridConfig: GridConfig
   public modalRef
   private subscriptions: Subscription[]
 
   constructor(
-    public service: FilesService,
+    public service: StorageService,
     public ui: NgxUiService,
     private router: Router,
     private route: ActivatedRoute,
-  ) { }
+  ) {}
 
   ngOnInit() {
-    this.service.read()
     this.subscriptions = []
     this.gridConfig = {
       card: {
-        cardTitle: 'Files',
-        icon: 'fa fa-fw fa-files-o',
+        cardTitle: 'Storage',
+        icon: 'fa fa-fw fa-server',
         showSearch: true,
       },
       table: {
@@ -61,11 +64,11 @@ export class FileListComponent implements OnInit {
         ],
         columns: [
           { field: 'name', label: 'Container', action: 'ViewFiles' },
-          { field: 'size', label: 'Files', cellTemplate: this.filesTmpl },
+          { field: 'files', label: 'Files', cellTemplate: this.filesTRef },
         ],
         count$: this.service.items$.map(items => items.count),
         items$: this.service.items$.map(items =>
-          items.ids.map(id => items.entities[id])
+          items.ids.map(id => items.entities[id]),
         ),
       },
       toolbar: {
@@ -84,14 +87,14 @@ export class FileListComponent implements OnInit {
   }
 
   showModal(item, form, title) {
-    this.ui.modalRef = this.ui.modal.open(ModalComponent, { size: 'lg' })
+    this.ui.modalRef = this.ui.modal.open(ModalComponent, { size: 'sm' })
     this.ui.modalRef.componentInstance.item = item
     this.ui.modalRef.componentInstance.formConfig = form
     this.ui.modalRef.componentInstance.title = title
     this.subscriptions.push(
       this.ui.modalRef.componentInstance.action.subscribe(event =>
-        this.handleAction(event)
-      )
+        this.handleAction(event),
+      ),
     )
   }
 
@@ -111,7 +114,7 @@ export class FileListComponent implements OnInit {
           relativeTo: this.route.parent,
         })
       case 'ViewFiles':
-        return this.router.navigate([event.payload.name, 'list'], {
+        return this.router.navigate([event.payload.name, 'files'], {
           relativeTo: this.route.parent,
         })
       case 'Delete':

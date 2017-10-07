@@ -2,10 +2,10 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core'
 import { ActivatedRoute } from '@angular/router'
 import { CardConfig } from '../../../ui'
 
-import { FilesService } from '../files.service'
+import { StorageService } from '../storage.service'
 
 @Component({
-  selector: 'ngx-file-detail',
+  selector: 'ngx-container-detail',
   template: `
     <ngx-card *ngIf="item"
               [config]="cardConfig">
@@ -14,17 +14,14 @@ import { FilesService } from '../files.service'
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FileDetailComponent implements OnInit {
+export class ContainerDetailComponent implements OnInit {
   public cardConfig: CardConfig
   public item
 
-  constructor(public service: FilesService, private route: ActivatedRoute) { }
+  constructor(public service: StorageService, private route: ActivatedRoute) {}
 
   ngOnInit() {
-    this.item = {
-      name: this.route.snapshot.params.id,
-      files: this.route.snapshot.data.files
-    }
+    this.item = this.route.snapshot.data.container[0]
     this.service.setSelected(this.item)
     this.cardConfig = {
       cardTitle: this.item.name,
@@ -32,7 +29,7 @@ export class FileDetailComponent implements OnInit {
       nav: {
         title: 'File Detail',
         items: [
-          { icon: 'fa fa-fw fa-table', name: 'List', link: 'list' },
+          { icon: 'fa fa-fw fa-files-o', name: 'Files', link: 'files' },
           { icon: 'fa fa-fw fa-cloud-upload', name: 'Upload', link: 'upload' },
         ],
       },

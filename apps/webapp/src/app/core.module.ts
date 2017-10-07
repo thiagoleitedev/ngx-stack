@@ -9,6 +9,7 @@ import { StoreModule } from '@ngrx/store'
 import { EffectsModule } from '@ngrx/effects'
 import { StoreDevtoolsModule } from '@ngrx/store-devtools'
 
+import { AppConfig } from './app.config'
 import { environment } from '../environments/environment'
 import {
   AdminGuard,
@@ -17,12 +18,12 @@ import {
   AuthReducer,
   AdminReducer,
   ControlEffects,
-  FileEffects,
   HomeReducer,
   ProjectEffects,
+  RoleEffects,
+  StorageEffects,
   UiReducer,
   UserEffects,
-  RoleEffects,
 } from './state'
 
 import { NgxUiModule } from './ui'
@@ -40,11 +41,10 @@ import { NgxUiModule } from './ui'
     EffectsModule.forRoot([
       AuthEffects,
       ControlEffects,
-      FileEffects,
       ProjectEffects,
-      UserEffects,
       RoleEffects,
-      ProjectEffects,
+      StorageEffects,
+      UserEffects,
     ]),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
   ],
@@ -68,7 +68,7 @@ export class CoreModule {
   static forRoot(): ModuleWithProviders {
     return {
       ngModule: CoreModule,
-      providers: [AdminGuard, AuthGuard],
+      providers: [AppConfig, AdminGuard, AuthGuard, LoopBackConfig],
     }
   }
 }

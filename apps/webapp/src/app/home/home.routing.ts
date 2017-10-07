@@ -20,8 +20,8 @@ const routes: Routes = [
         loadChildren: './projects/projects.module#ProjectsModule',
       },
       {
-        path: 'files',
-        loadChildren: './files/files.module#FilesModule',
+        path: 'storage',
+        loadChildren: './storage/storage.module#StorageModule',
       },
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
     ],

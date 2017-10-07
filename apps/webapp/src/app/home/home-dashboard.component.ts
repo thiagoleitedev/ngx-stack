@@ -39,10 +39,10 @@ export class HomeDashboardComponent implements OnInit {
         class: 'success',
       },
       {
-        name: 'Files',
-        icon: 'fa fa-fw fa-files-o',
-        data: this.items$.map(home => home.files.count),
-        link: '/home/files',
+        name: 'Storage',
+        icon: 'fa fa-fw fa-server',
+        data: this.items$.map(home => home.storage.count),
+        link: '/home/storage',
         class: 'info',
       },
     ]

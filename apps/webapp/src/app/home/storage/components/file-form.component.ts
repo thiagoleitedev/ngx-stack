@@ -1,7 +1,7 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core'
 import { Router } from '@angular/router'
 
-import { FilesService } from '../files.service'
+import { StorageService } from '../storage.service'
 
 @Component({
   selector: 'ngx-file-form',
@@ -16,10 +16,7 @@ export class FileFormComponent implements OnInit {
   public uploadConfig
   public item
 
-  constructor(
-    public service: FilesService,
-    private router: Router,
-  ) { }
+  constructor(public service: StorageService, private router: Router) {}
 
   ngOnInit() {
     this.item = this.service.selected
@@ -27,10 +24,15 @@ export class FileFormComponent implements OnInit {
 
   handleAction(event) {
     switch (event.type) {
-      case 'Cancel':
-        return this.router.navigate(['/home/files'])
-      default:
+      case 'Done': {
+        return this.service.updateSelected()
+      }
+      case 'Exit': {
+        return this.router.navigate(['/home/storage'])
+      }
+      default: {
         return console.log('$event', event)
+      }
     }
   }
 }
