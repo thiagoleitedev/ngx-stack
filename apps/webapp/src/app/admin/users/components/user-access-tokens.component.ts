@@ -38,7 +38,11 @@ export class UserAccessTokensComponent implements OnInit {
         this.service.selected.accessTokens = res
         this.service.setSelected(this.service.selected)
       },
-      err => this.ui.alerts.toastError('Read Tokens Failure', err.message)
+      err =>
+        this.ui.alerts.notifyError({
+          title: 'Read Tokens Failure',
+          body: err.message,
+        }),
     )
   }
 
@@ -48,15 +52,18 @@ export class UserAccessTokensComponent implements OnInit {
         return this.service.generateToken(
           this.service.selected,
           res => {
-            this.ui.alerts.toastSuccess(
-              'Generate Token Success',
-              `A new token has been generated for <u><i>${this.service.selected[
-                'email'
-              ]}</u></i>`
-            )
+            this.ui.alerts.notifySuccess({
+              title: 'Generate Token Success',
+              body: `A new token has been generated for <u><i>${this.service
+                .selected['email']}</u></i>`,
+            })
             this.refresh()
           },
-          err => this.ui.alerts.toastError('Generate Token Fail', err.message)
+          err =>
+            this.ui.alerts.notifyError({
+              title: 'Generate Token Fail',
+              body: err.message,
+            }),
         )
       }
       case 'DeleteToken': {
@@ -66,14 +73,18 @@ export class UserAccessTokensComponent implements OnInit {
             token: event.payload,
           },
           res => {
-            this.ui.alerts.toastSuccess(
-              'Delete Token Success',
-              `Token <u><i>${event.payload
-                .id}</u></i> has been deleted successfully`
-            )
+            this.ui.alerts.notifySuccess({
+              title: 'Delete Token Success',
+              body: `Token <u><i>${event.payload
+                .id}</u></i> has been deleted successfully`,
+            })
             this.refresh()
           },
-          err => this.ui.alerts.toastError('Delete Token Fail', err.message)
+          err =>
+            this.ui.alerts.notifyError({
+              title: 'Delete Token Fail',
+              body: err.message,
+            }),
         )
       }
       case 'RemoveTtl': {
@@ -83,14 +94,18 @@ export class UserAccessTokensComponent implements OnInit {
             token: event.payload,
           },
           res => {
-            this.ui.alerts.toastSuccess(
-              'Remove TTL Success',
-              `TTL for token <u><i>${event.payload
-                .id} has been removed successfully`
-            )
+            this.ui.alerts.notifySuccess({
+              title: 'Remove TTL Success',
+              body: `TTL for token <u><i>${event.payload
+                .id} has been removed successfully`,
+            })
             this.refresh()
           },
-          err => this.ui.alerts.toastError('Remove TTL Fail', err.message)
+          err =>
+            this.ui.alerts.notifyError({
+              title: 'Remove TTL Fail',
+              body: err.message,
+            }),
         )
       }
       case 'DeleteAllTokens': {
@@ -98,16 +113,19 @@ export class UserAccessTokensComponent implements OnInit {
           this.service.deleteAllTokens(
             this.service.selected,
             res => {
-              this.ui.alerts.toastSuccess(
-                'Delete All Tokens Success',
-                `All tokens for <u><i>${this.service.selected[
+              this.ui.alerts.notifySuccess({
+                title: 'Delete All Tokens Success',
+                body: `All tokens for <u><i>${this.service.selected[
                   'email'
-                ]}</u></i> have been deleted successfully`
-              )
+                ]}</u></i> have been deleted successfully`,
+              })
               this.refresh()
             },
             err =>
-              this.ui.alerts.toastError('Delete All Tokens Fail', err.message)
+              this.ui.alerts.notifyError({
+                title: 'Delete All Tokens Fail',
+                body: err.message,
+              }),
           )
         const question = {
           title: 'Are you sure?',
