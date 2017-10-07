@@ -16,7 +16,7 @@ export class UserEffects {
   constructor(
     private actions$: Actions,
     private api: AccountApi,
-    private ui: NgxUiService
+    private ui: NgxUiService,
   ) {}
 
   @Effect()
@@ -26,25 +26,28 @@ export class UserEffects {
       this.api
         .create(action.payload)
         .map((response: Account) => new UserActions.CreateUserSuccess(response))
-        .catch((error: any) => of(new UserActions.CreateUserFail(error)))
+        .catch((error: any) => of(new UserActions.CreateUserFail(error))),
     )
 
   @Effect({ dispatch: false })
   protected createUserSuccess = this.actions$
     .ofType(UserActions.CREATE_USER_SUCCESS)
     .map((action: UserActions.CreateUserSuccess) =>
-      this.ui.alerts.toastSuccess(
-        'Create User Success',
-        `User <u><i>${action.payload
-          .email}</i></u> has been created successfully.`
-      )
+      this.ui.alerts.notifySuccess({
+        title: 'Create User Success',
+        body: `User <u><i>${action.payload
+          .email}</i></u> has been created successfully.`,
+      }),
     )
 
   @Effect({ dispatch: false })
   protected createUserFail = this.actions$
     .ofType(UserActions.CREATE_USER_FAIL)
     .map((action: UserActions.CreateUserFail) =>
-      this.ui.alerts.toastError('Create User Fail', `${action.payload.message}`)
+      this.ui.alerts.notifyError({
+        title: 'Create User Fail',
+        body: `${action.payload.message}`,
+      }),
     )
 
   @Effect()
@@ -55,9 +58,9 @@ export class UserEffects {
         .find(action.payload)
         .map(
           (response: Array<Account>) =>
-            new UserActions.ReadUsersSuccess(response)
+            new UserActions.ReadUsersSuccess(response),
         )
-        .catch((error: any) => of(new UserActions.ReadUsersFail(error)))
+        .catch((error: any) => of(new UserActions.ReadUsersFail(error))),
     )
 
   @Effect()
@@ -68,27 +71,30 @@ export class UserEffects {
         .patchAttributes(action.payload.id, action.payload)
         .map(
           (response: Account) =>
-            new UserActions.UpdateUserSuccess(action.payload)
+            new UserActions.UpdateUserSuccess(action.payload),
         )
-        .catch((error: any) => of(new UserActions.UpdateUserFail(error)))
+        .catch((error: any) => of(new UserActions.UpdateUserFail(error))),
     )
 
   @Effect({ dispatch: false })
   protected updateUserSuccess = this.actions$
     .ofType(UserActions.UPDATE_USER_SUCCESS)
     .map((action: UserActions.UpdateUserSuccess) =>
-      this.ui.alerts.toastSuccess(
-        'Update User Success',
-        `User <u><i>${action.payload
-          .email}</i></u> has been updated successfully.`
-      )
+      this.ui.alerts.notifySuccess({
+        title: 'Update User Success',
+        body: `User <u><i>${action.payload
+          .email}</i></u> has been updated successfully.`,
+      }),
     )
 
   @Effect({ dispatch: false })
   protected updateUserFail = this.actions$
     .ofType(UserActions.UPDATE_USER_FAIL)
     .map((action: UserActions.UpdateUserFail) =>
-      this.ui.alerts.toastError('Update User Fail', `${action.payload.message}`)
+      this.ui.alerts.notifyError({
+        title: 'Update User Fail',
+        body: `${action.payload.message}`,
+      }),
     )
 
   @Effect()
@@ -99,27 +105,30 @@ export class UserEffects {
         .deleteById(action.payload.id)
         .map(
           (response: Account) =>
-            new UserActions.DeleteUserSuccess(action.payload)
+            new UserActions.DeleteUserSuccess(action.payload),
         )
-        .catch((error: any) => of(new UserActions.DeleteUserFail(error)))
+        .catch((error: any) => of(new UserActions.DeleteUserFail(error))),
     )
 
   @Effect({ dispatch: false })
   protected deleteUserSuccess = this.actions$
     .ofType(UserActions.DELETE_USER_SUCCESS)
     .map((action: UserActions.DeleteUserSuccess) =>
-      this.ui.alerts.toastSuccess(
-        'Delete User Success',
-        `User <u><i>${action.payload
-          .email}</i></u> has been deleted successfully.`
-      )
+      this.ui.alerts.notifySuccess({
+        title: 'Delete User Success',
+        body: `User <u><i>${action.payload
+          .email}</i></u> has been deleted successfully.`,
+      }),
     )
 
   @Effect({ dispatch: false })
   protected deleteUserFail = this.actions$
     .ofType(UserActions.DELETE_USER_FAIL)
     .map((action: UserActions.DeleteUserFail) =>
-      this.ui.alerts.toastError('Delete User Fail', `${action.payload.message}`)
+      this.ui.alerts.notifyError({
+        title: 'Delete User Fail',
+        body: `${action.payload.message}`,
+      }),
     )
 
   @Effect()
@@ -138,28 +147,31 @@ export class UserEffects {
               user: action.payload.user,
               role: action.payload.role,
               mapping: response,
-            })
+            }),
         )
-        .catch((error: any) => of(new UserActions.AddUserToRoleFail(error)))
+        .catch((error: any) => of(new UserActions.AddUserToRoleFail(error))),
     )
 
   @Effect({ dispatch: false })
   protected addUserToRoleSuccess = this.actions$
     .ofType(UserActions.ADD_USER_TO_ROLE_SUCCESS)
     .map((action: UserActions.AddUserToRoleSuccess) =>
-      this.ui.alerts.toastSuccess(
-        'Role Added',
-        `User <u><i>${action.payload.user
+      this.ui.alerts.notifySuccess({
+        title: 'Role Added',
+        body: `User <u><i>${action.payload.user
           .email}</i></u> has been successfully added to the <u><i>${action
-          .payload.role.name}</i></u> role.`
-      )
+          .payload.role.name}</i></u> role.`,
+      }),
     )
 
   @Effect({ dispatch: false })
   protected addUserToRoleFail = this.actions$
     .ofType(UserActions.ADD_USER_TO_ROLE_FAIL)
     .map((action: UserActions.AddUserToRoleFail) =>
-      this.ui.alerts.toastError('Add Role Fail', `${action.payload.message}`)
+      this.ui.alerts.notifyError({
+        title: 'Add Role Fail',
+        body: `${action.payload.message}`,
+      }),
     )
 
   @Effect()
@@ -170,29 +182,32 @@ export class UserEffects {
         .unlinkRoles(action.payload.user.id, action.payload.role.id)
         .map(
           (response: Account) =>
-            new UserActions.DeleteUserFromRoleSuccess(action.payload)
+            new UserActions.DeleteUserFromRoleSuccess(action.payload),
         )
         .catch((error: any) =>
-          of(new UserActions.DeleteUserFromRoleFail(error))
-        )
+          of(new UserActions.DeleteUserFromRoleFail(error)),
+        ),
     )
 
   @Effect({ dispatch: false })
   protected deleteUserFromRoleSuccess = this.actions$
     .ofType(UserActions.DELETE_USER_FROM_ROLE_SUCCESS)
     .map((action: UserActions.DeleteUserFromRoleSuccess) =>
-      this.ui.alerts.toastSuccess(
-        'Role Removed',
-        `User <u><i>${action.payload.user
+      this.ui.alerts.notifySuccess({
+        title: 'Role Removed',
+        body: `User <u><i>${action.payload.user
           .email}</i></u> has been successfully removed from the <u><i>${action
-          .payload.role.name}</i></u> role.`
-      )
+          .payload.role.name}</i></u> role.`,
+      }),
     )
 
   @Effect({ dispatch: false })
   protected deleteUserFromRoleFail = this.actions$
     .ofType(UserActions.DELETE_USER_FROM_ROLE_FAIL)
     .map((action: UserActions.DeleteUserFromRoleFail) =>
-      this.ui.alerts.toastError('Remove Role Fail', `${action.payload.message}`)
+      this.ui.alerts.notifyError({
+        title: 'Remove Role Fail',
+        body: `${action.payload.message}`,
+      }),
     )
 }

@@ -18,7 +18,7 @@ export class ControlEffects {
     private actions$: Actions,
     private store: Store<any>,
     private controlApi: ACLApi,
-    private ui: NgxUiService
+    private ui: NgxUiService,
   ) {}
 
   @Effect()
@@ -28,28 +28,28 @@ export class ControlEffects {
       this.controlApi
         .create(action.payload)
         .map((response: ACL) => new Control.CreateControlSuccess(response))
-        .catch((error: any) => of(new Control.CreateControlFail(error)))
+        .catch((error: any) => of(new Control.CreateControlFail(error))),
     )
 
   @Effect({ dispatch: false })
   protected createControlSuccess = this.actions$
     .ofType(Control.CREATE_CONTROL_SUCCESS)
     .map((action: Control.CreateControlSuccess) =>
-      this.ui.alerts.toastSuccess(
-        'Create Control Success',
-        `The control for the <u><i>${action.payload
-          .model}</i></u> model has been created successfully.`
-      )
+      this.ui.alerts.notifySuccess({
+        title: 'Create Control Success',
+        body: `The control for the <u><i>${action.payload
+          .model}</i></u> model has been created successfully.`,
+      }),
     )
 
   @Effect({ dispatch: false })
   protected createControlFail = this.actions$
     .ofType(Control.CREATE_CONTROL_FAIL)
     .map((action: Control.CreateControlFail) =>
-      this.ui.alerts.toastError(
-        'Create Control Fail',
-        `${action.payload.message}`
-      )
+      this.ui.alerts.notifyError({
+        title: 'Create Control Fail',
+        body: `${action.payload.message}`,
+      }),
     )
 
   @Effect()
@@ -59,9 +59,9 @@ export class ControlEffects {
       this.controlApi
         .find(action.payload)
         .map(
-          (response: Array<ACL>) => new Control.ReadControlsSuccess(response)
+          (response: Array<ACL>) => new Control.ReadControlsSuccess(response),
         )
-        .catch((error: any) => of(new Control.ReadControlsFail(error)))
+        .catch((error: any) => of(new Control.ReadControlsFail(error))),
     )
 
   @Effect()
@@ -71,30 +71,30 @@ export class ControlEffects {
       this.controlApi
         .patchAttributes(action.payload.id, action.payload)
         .map(
-          (response: ACL) => new Control.UpdateControlSuccess(action.payload)
+          (response: ACL) => new Control.UpdateControlSuccess(action.payload),
         )
-        .catch((error: any) => of(new Control.UpdateControlFail(error)))
+        .catch((error: any) => of(new Control.UpdateControlFail(error))),
     )
 
   @Effect({ dispatch: false })
   protected updateControlSuccess = this.actions$
     .ofType(Control.UPDATE_CONTROL_SUCCESS)
     .map((action: Control.UpdateControlSuccess) =>
-      this.ui.alerts.toastSuccess(
-        'Update Control Success',
-        `The control for the <u><i>${action.payload
-          .model}</i></u> model has been updated successfully.`
-      )
+      this.ui.alerts.notifySuccess({
+        title: 'Update Control Success',
+        body: `The control for the <u><i>${action.payload
+          .model}</i></u> model has been updated successfully.`,
+      }),
     )
 
   @Effect({ dispatch: false })
   protected updateControlFail = this.actions$
     .ofType(Control.UPDATE_CONTROL_FAIL)
     .map((action: Control.UpdateControlFail) =>
-      this.ui.alerts.toastError(
-        'Update Control Fail',
-        `${action.payload.message}`
-      )
+      this.ui.alerts.notifyError({
+        title: 'Update Control Fail',
+        body: `${action.payload.message}`,
+      }),
     )
 
   @Effect()
@@ -104,29 +104,29 @@ export class ControlEffects {
       this.controlApi
         .deleteById(action.payload.id)
         .map(
-          (response: ACL) => new Control.DeleteControlSuccess(action.payload)
+          (response: ACL) => new Control.DeleteControlSuccess(action.payload),
         )
-        .catch((error: any) => of(new Control.DeleteControlFail(error)))
+        .catch((error: any) => of(new Control.DeleteControlFail(error))),
     )
 
   @Effect({ dispatch: false })
   protected deleteControlSuccess = this.actions$
     .ofType(Control.DELETE_CONTROL_SUCCESS)
     .map((action: Control.DeleteControlSuccess) =>
-      this.ui.alerts.toastSuccess(
-        'Delete Control Success',
-        `The control for the <u><i>${action.payload
-          .model}</i></u> model has been deleted successfully.`
-      )
+      this.ui.alerts.notifySuccess({
+        title: 'Delete Control Success',
+        body: `The control for the <u><i>${action.payload
+          .model}</i></u> model has been deleted successfully.`,
+      }),
     )
 
   @Effect({ dispatch: false })
   protected deleteControlFail = this.actions$
     .ofType(Control.DELETE_CONTROL_FAIL)
     .map((action: Control.DeleteControlFail) =>
-      this.ui.alerts.toastError(
-        'Delete Control Fail',
-        `${action.payload.message}`
-      )
+      this.ui.alerts.notifyError({
+        title: 'Delete Control Fail',
+        body: `${action.payload.message}`,
+      }),
     )
 }

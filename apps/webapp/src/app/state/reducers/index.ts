@@ -5,9 +5,9 @@ import { AuthReducer } from './auth.reducers'
 import { UiReducer } from './ui.reducers'
 
 import * as Controls from './control.reducers'
-import * as Files from './file.reducers'
 import * as Projects from './project.reducers'
 import * as Roles from './role.reducers'
+import * as Storage from './storage.reducers'
 import * as Users from './user.reducers'
 
 export interface AdminState {
@@ -23,13 +23,13 @@ export const AdminReducer: ActionReducerMap<AdminState> = {
 }
 
 export interface HomeState {
-  files: Files.State
   projects: Projects.State
+  storage: Storage.State
 }
 
 export const HomeReducer: ActionReducerMap<HomeState> = {
-  files: Files.FileReducer,
   projects: Projects.ProjectReducer,
+  storage: Storage.StorageReducer,
 }
 
 export { AuthReducer, UiReducer }

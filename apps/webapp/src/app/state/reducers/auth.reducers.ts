@@ -35,8 +35,8 @@ export function AuthReducer(state = initialState, action: Auth.Actions): State {
     }
     case Auth.CHECK_TOKEN_SUCCESS: {
       const updateState = Object.assign({}, state, action.payload)
-      const roles = updateState.user.roles.map(role => role.name)
-      updateState.isAdmin = checkAdmin(roles)
+      const roles = updateState.user.roles || []
+      updateState.isAdmin = checkAdmin(roles.map(role => role.name))
       return updateState
     }
     case Auth.UPDATE_USER_SUCCESS: {

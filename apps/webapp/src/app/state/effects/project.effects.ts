@@ -16,8 +16,8 @@ export class ProjectEffects {
   constructor(
     private actions$: Actions,
     private api: ProjectApi,
-    private ui: NgxUiService
-  ) { }
+    private ui: NgxUiService,
+  ) {}
 
   @Effect()
   protected createProject: Observable<Action> = this.actions$
@@ -26,28 +26,28 @@ export class ProjectEffects {
       this.api
         .create(action.payload)
         .map((response: Project) => new Projects.CreateProjectSuccess(response))
-        .catch((error: any) => of(new Projects.CreateProjectFail(error)))
+        .catch((error: any) => of(new Projects.CreateProjectFail(error))),
     )
 
   @Effect({ dispatch: false })
   protected createProjectSuccess = this.actions$
     .ofType(Projects.CREATE_PROJECT_SUCCESS)
     .map((action: Projects.CreateProjectSuccess) =>
-      this.ui.alerts.toastSuccess(
-        'Create Project Success',
-        `The <u><i>${action.payload
-          .name}</i></u> project has been created successfully.`
-      )
+      this.ui.alerts.notifySuccess({
+        title: 'Create Project Success',
+        body: `The <u><i>${action.payload
+          .name}</i></u> project has been created successfully.`,
+      }),
     )
 
   @Effect({ dispatch: false })
   protected createProjectFail = this.actions$
     .ofType(Projects.CREATE_PROJECT_FAIL)
     .map((action: Projects.CreateProjectFail) =>
-      this.ui.alerts.toastError(
-        'Create Project Fail',
-        `${action.payload.message}`
-      )
+      this.ui.alerts.notifyError({
+        title: 'Create Project Fail',
+        body: `${action.payload.message}`,
+      }),
     )
 
   @Effect()
@@ -56,11 +56,8 @@ export class ProjectEffects {
     .mergeMap((action: Projects.ReadProjects) =>
       this.api
         .find(action.payload)
-        .map(
-        (response: any) =>
-          new Projects.ReadProjectsSuccess(response)
-        )
-        .catch((error: any) => of(new Projects.ReadProjectsFail(error)))
+        .map((response: any) => new Projects.ReadProjectsSuccess(response))
+        .catch((error: any) => of(new Projects.ReadProjectsFail(error))),
     )
 
   @Effect()
@@ -70,31 +67,31 @@ export class ProjectEffects {
       this.api
         .patchAttributes(action.payload.id, action.payload)
         .map(
-        (response: Project) =>
-          new Projects.UpdateProjectSuccess(action.payload)
+          (response: Project) =>
+            new Projects.UpdateProjectSuccess(action.payload),
         )
-        .catch((error: any) => of(new Projects.UpdateProjectFail(error)))
+        .catch((error: any) => of(new Projects.UpdateProjectFail(error))),
     )
 
   @Effect({ dispatch: false })
   protected updateProjectSuccess = this.actions$
     .ofType(Projects.UPDATE_PROJECT_SUCCESS)
     .map((action: Projects.UpdateProjectSuccess) =>
-      this.ui.alerts.toastSuccess(
-        'Update Project Success',
-        `The <u><i>${action.payload
-          .name}</i></u> project has been updated successfully.`
-      )
+      this.ui.alerts.notifySuccess({
+        title: 'Update Project Success',
+        body: `The <u><i>${action.payload
+          .name}</i></u> project has been updated successfully.`,
+      }),
     )
 
   @Effect({ dispatch: false })
   protected updateProjectFail = this.actions$
     .ofType(Projects.UPDATE_PROJECT_FAIL)
     .map((action: Projects.UpdateProjectFail) =>
-      this.ui.alerts.toastError(
-        'Update Project Fail',
-        `${action.payload.message}`
-      )
+      this.ui.alerts.notifyError({
+        title: 'Update Project Fail',
+        body: `${action.payload.message}`,
+      }),
     )
 
   @Effect()
@@ -104,30 +101,30 @@ export class ProjectEffects {
       this.api
         .deleteById(action.payload.id)
         .map(
-        (response: Project) =>
-          new Projects.DeleteProjectSuccess(action.payload)
+          (response: Project) =>
+            new Projects.DeleteProjectSuccess(action.payload),
         )
-        .catch((error: any) => of(new Projects.DeleteProjectFail(error)))
+        .catch((error: any) => of(new Projects.DeleteProjectFail(error))),
     )
 
   @Effect({ dispatch: false })
   protected deleteProjectSuccess = this.actions$
     .ofType(Projects.DELETE_PROJECT_SUCCESS)
     .map((action: Projects.DeleteProjectSuccess) =>
-      this.ui.alerts.toastSuccess(
-        'Delete Project Success',
-        `The <u><i>${action.payload
-          .name}</i></u> project has been deleted successfully.`
-      )
+      this.ui.alerts.notifySuccess({
+        title: 'Delete Project Success',
+        body: `The <u><i>${action.payload
+          .name}</i></u> project has been deleted successfully.`,
+      }),
     )
 
   @Effect({ dispatch: false })
   protected deleteProjectFail = this.actions$
     .ofType(Projects.DELETE_PROJECT_FAIL)
     .map((action: Projects.DeleteProjectFail) =>
-      this.ui.alerts.toastError(
-        'Delete Project Fail',
-        `${action.payload.message}`
-      )
+      this.ui.alerts.notifyError({
+        title: 'Delete Project Fail',
+        body: `${action.payload.message}`,
+      }),
     )
 }

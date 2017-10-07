@@ -30,7 +30,6 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
 
   isAuthenticated(): boolean {
     if (this.auth.getAccessTokenId() !== null) {
-      console.log('token: ', this.auth.getAccessTokenId())
       return true
     }
 

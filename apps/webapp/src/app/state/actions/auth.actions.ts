@@ -57,7 +57,6 @@ export class LogInFail implements Action {
 /** LOG_OUT **/
 export class LogOut implements Action {
   public readonly type = LOG_OUT
-  constructor(public payload: any) {}
 }
 
 export class LogOutSuccess implements Action {

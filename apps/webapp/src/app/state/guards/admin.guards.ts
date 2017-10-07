@@ -45,10 +45,10 @@ export class AdminGuard implements CanActivate, CanActivateChild, CanLoad {
       .take(1)
       .do(admin => {
         if (!admin) {
-          this.ui.alerts.toastError(
-            'Not Authorized',
-            'Only Admin users can view the Admin section!',
-          )
+          this.ui.alerts.notifyError({
+            title: 'Not Authorized',
+            body: 'Only Admin users can view the Admin section!',
+          })
         }
       })
   }

@@ -51,10 +51,10 @@ export class AuthEffects {
   protected checkTokenSuccess = this.actions$
     .ofType(Auth.CHECK_TOKEN_SUCCESS)
     .do((action: Auth.CheckTokenSuccess) =>
-      this.ui.alerts.toastSuccess(
-        'Valid Token',
-        `Your access token has been validated.`,
-      ),
+      this.ui.alerts.notifySuccess({
+        title: 'Valid Token',
+        body: `Your access token has been validated.`,
+      }),
     )
 
   @Effect({ dispatch: false })
@@ -62,7 +62,10 @@ export class AuthEffects {
     .ofType(Auth.CHECK_TOKEN_FAIL)
     .do((action: Auth.CheckTokenFail) => {
       this.router.navigate(['auth'])
-      this.ui.alerts.toastError('Invalid Token', 'Redirecting to Log In screen')
+      this.ui.alerts.notifyError({
+        title: 'Invalid Token',
+        body: 'Redirecting to Log In screen',
+      })
     })
 
   @Effect()
@@ -87,23 +90,26 @@ export class AuthEffects {
       this.store.dispatch(new Ui.ActivateSidebar())
     })
     .do((action: Auth.LogInSuccess) =>
-      setTimeout(() => this.store.dispatch(new Ui.DeactivateLoader()), 1000),
+      this.ui.alerts.notifySuccess({
+        title: 'Log In Success',
+        body: `You are logged in as ${action.payload.user.email}.`,
+      }),
     )
-    .do((action: Auth.LogInSuccess) =>
-      this.ui.alerts.toastSuccess(
-        'Log In Success',
-        `You are logged in as <u><i>${action.payload.user.email}</u></i>.`,
-      ),
+    .do(() =>
+      setTimeout(() => this.store.dispatch(new Ui.DeactivateLoader()), 1000),
     )
 
   @Effect({ dispatch: false })
   protected logInFail = this.actions$
     .ofType(Auth.LOG_IN_FAIL)
-    .do((action: Auth.LogInSuccess) =>
-      setTimeout(() => this.store.dispatch(new Ui.DeactivateLoader()), 1000),
-    )
     .do((action: Auth.LogInFail) =>
-      this.ui.alerts.toastError('Log In Failure', `${action.payload.message}`),
+      this.ui.alerts.notifyError({
+        title: 'Log In Failure',
+        body: `${action.payload.message}`,
+      }),
+    )
+    .do(() =>
+      setTimeout(() => this.store.dispatch(new Ui.DeactivateLoader()), 1000),
     )
 
   @Effect()
@@ -121,21 +127,20 @@ export class AuthEffects {
     .ofType(Auth.REGISTER_SUCCESS)
     .map((action: Auth.RegisterSuccess) => {
       this.router.navigate(['auth'])
-      this.ui.alerts.toastSuccess(
-        'Registration Success',
-        `You have registered successfully as <u><i>${action.payload
-          .email}</i></u>.`,
-      )
+      this.ui.alerts.notifySuccess({
+        title: 'Registration Success',
+        body: `You have registered successfully as ${action.payload.email}.`,
+      })
     })
 
   @Effect({ dispatch: false })
   protected registerFail = this.actions$
     .ofType(Auth.REGISTER_FAIL)
     .map((action: Auth.RegisterFail) =>
-      this.ui.alerts.toastError(
-        get(action, 'payload.name'),
-        get(action, 'payload.message'),
-      ),
+      this.ui.alerts.notifyError({
+        title: action.payload.name,
+        body: action.payload.message,
+      }),
     )
 
   @Effect()
@@ -153,28 +158,28 @@ export class AuthEffects {
   protected logOutSuccess = this.actions$
     .ofType(Auth.LOG_OUT_SUCCESS)
     .do((action: Auth.LogOutSuccess) => this.router.navigate(['auth']))
-    .do((action: Auth.LogInSuccess) =>
-      setTimeout(() => this.store.dispatch(new Ui.DeactivateLoader()), 1000),
-    )
     .do((action: Auth.LogOutSuccess) =>
-      this.ui.alerts.toastSuccess(
-        'Log Out Success',
-        `You have logged out successfully.`,
-      ),
+      this.ui.alerts.notifySuccess({
+        title: 'Log Out Success',
+        body: `You have logged out successfully.`,
+      }),
+    )
+    .do(() =>
+      setTimeout(() => this.store.dispatch(new Ui.DeactivateLoader()), 1000),
     )
 
   @Effect({ dispatch: false })
   protected logOutFail = this.actions$
     .ofType(Auth.LOG_OUT_FAIL)
     .do((action: Auth.LogOutFail) => this.router.navigate(['auth']))
-    .do((action: Auth.LogInSuccess) =>
-      setTimeout(() => this.store.dispatch(new Ui.DeactivateLoader()), 1000),
-    )
     .do((action: Auth.LogOutFail) =>
-      this.ui.alerts.toastSuccess(
-        'Log Out Success',
-        `You have logged out successfully.`,
-      ),
+      this.ui.alerts.notifySuccess({
+        title: 'Log Out Success',
+        body: `You have logged out successfully.`,
+      }),
+    )
+    .do(() =>
+      setTimeout(() => this.store.dispatch(new Ui.DeactivateLoader()), 1000),
     )
 
   @Effect()
