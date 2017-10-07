@@ -1,34 +1,34 @@
 /* tslint:disable */
 
 declare var Object: any;
-export interface ContainerInterface {
+export interface StorageInterface {
   "id"?: number;
   "createdAt"?: Date;
   "updatedAt"?: Date;
 }
 
-export class Container implements ContainerInterface {
+export class Storage implements StorageInterface {
   "id": number;
   "createdAt": Date;
   "updatedAt": Date;
-  constructor(data?: ContainerInterface) {
+  constructor(data?: StorageInterface) {
     Object.assign(this, data);
   }
   /**
    * The name of the model represented by this $resource,
-   * i.e. `Container`.
+   * i.e. `Storage`.
    */
   public static getModelName() {
-    return "Container";
+    return "Storage";
   }
   /**
   * @method factory
   * @author Jonathan Casarrubias
   * @license MIT
-  * This method creates an instance of Container for dynamic purposes.
+  * This method creates an instance of Storage for dynamic purposes.
   **/
-  public static factory(data: ContainerInterface): Container{
-    return new Container(data);
+  public static factory(data: StorageInterface): Storage{
+    return new Storage(data);
   }
   /**
   * @method getModelDefinition
@@ -39,9 +39,9 @@ export class Container implements ContainerInterface {
   **/
   public static getModelDefinition() {
     return {
-      name: 'Container',
-      plural: 'Containers',
-      path: 'Containers',
+      name: 'Storage',
+      plural: 'Storages',
+      path: 'Storages',
       properties: {
         "id": {
           name: 'id',

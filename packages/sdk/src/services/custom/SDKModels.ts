@@ -6,7 +6,9 @@ import { RoleMapping } from '../../models/RoleMapping';
 import { Role } from '../../models/Role';
 import { Account } from '../../models/Account';
 import { Project } from '../../models/Project';
-import { Container } from '../../models/Container';
+import { Storage } from '../../models/Storage';
+import { StorageContainer } from '../../models/StorageContainer';
+import { StorageFile } from '../../models/StorageFile';
 
 export interface Models { [name: string]: any }
 
@@ -20,7 +22,9 @@ export class SDKModels {
     Role: Role,
     Account: Account,
     Project: Project,
-    Container: Container,
+    Storage: Storage,
+    StorageContainer: StorageContainer,
+    StorageFile: StorageFile,
     
   };
 

@@ -54,7 +54,9 @@ import { RoleMappingApi } from './services/custom/RoleMapping';
 import { RoleApi } from './services/custom/Role';
 import { AccountApi } from './services/custom/Account';
 import { ProjectApi } from './services/custom/Project';
-import { ContainerApi } from './services/custom/Container';
+import { StorageApi } from './services/custom/Storage';
+import { StorageContainerApi } from './services/custom/StorageContainer';
+import { StorageFileApi } from './services/custom/StorageFile';
 /**
 * @module SDKBrowserModule
 * @description
@@ -92,7 +94,9 @@ export class SDKBrowserModule {
         RoleApi,
         AccountApi,
         ProjectApi,
-        ContainerApi,
+        StorageApi,
+        StorageContainerApi,
+        StorageFileApi,
         internalStorageProvider,
         { provide: SDKStorage, useClass: StorageBrowser },
         { provide: SocketDriver, useClass: SocketBrowser }
