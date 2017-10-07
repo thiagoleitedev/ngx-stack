@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core'
 import { NgxFormsService } from '@ngx-plus/ngx-forms'
 export { NgxFormConfig } from '@ngx-plus/ngx-forms'
 import { NgxAlertsService } from '@ngx-plus/ngx-alerts'
-import { assign, noop } from 'lodash'
 import { BreadcrumbService } from 'ng2-breadcrumb/ng2-breadcrumb'
 import {
   NgbModal,
@@ -38,7 +37,7 @@ export class NgxUiService {
     public alerts: NgxAlertsService,
     public breadcrumb: BreadcrumbService,
     public forms: NgxFormsService,
-    public modal: NgbModal
+    public modal: NgbModal,
   ) {
     this.checkScreenSize()
   }

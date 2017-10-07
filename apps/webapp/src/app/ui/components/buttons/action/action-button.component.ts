@@ -1,4 +1,10 @@
-import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core'
+import {
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+  ChangeDetectionStrategy,
+} from '@angular/core'
 import { ActionButton } from '../../../interfaces'
 
 @Component({
@@ -7,7 +13,10 @@ import { ActionButton } from '../../../interfaces'
     <button *ngIf="config"
             [class]="config.class || ''"
             (click)="handleAction({ type: config.action, payload: config.item || '' })">
-        <i [class]="config.icon"></i> {{ config.label }}
+        <i *ngIf="config.icon"
+           [class]="config.icon">
+        </i>
+        {{ config.label }}
     </button>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,

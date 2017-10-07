@@ -8,7 +8,7 @@ import { TableConfig } from '../../interfaces'
   <div class="container">
     <div class="row align-items-center justify-content-between">
       <div class="col">
-        <ngb-pagination [collectionSize]="config.count$ | async"
+        <ngb-pagination [collectionSize]="(config.count$ | async) || 0"
                         [(page)]="config.currentPage || default.currentPage"
                         [pageSize]="config.limit"
                         (pageChange)="handleAction({ type: 'PageChange', payload: $event })">
@@ -21,7 +21,7 @@ import { TableConfig } from '../../interfaces'
       </div>
       <div class="col">
       <h5 class="text-right m-0">
-        Total: <div class="badge badge-primary">{{ config.count$ | async }}</div>
+        Total: <div class="badge badge-primary">{{ (config.count$ | async) || 0 }}</div>
       </h5>
       </div>
     </div>

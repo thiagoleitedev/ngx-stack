@@ -1,10 +1,16 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core'
-import { UploadOutput, UploadInput, UploadFile, humanizeBytes } from 'ngx-uploader'
+import {
+  UploadOutput,
+  UploadInput,
+  UploadFile,
+  humanizeBytes,
+} from 'ngx-uploader'
 
 @Component({
   selector: 'ngx-file-uploader',
   templateUrl: './file-uploader.component.html',
-  styles: [`
+  styles: [
+    `
     .drop-container {
       background: #f5f5f5;
       border: 3px dashed #ccc;
@@ -19,19 +25,16 @@ import { UploadOutput, UploadInput, UploadFile, humanizeBytes } from 'ngx-upload
       cursor: pointer !important;
       text-align: center;
     }
-    .start-upload-btn {
-      color: #fff;
-      float: right;
-      margin-bottom: 15px;
-    }
-  `]
+  `,
+  ],
 })
 export class FileUploaderComponent {
-  @Input() config = {
+  @Input()
+  config = {
     concurrency: 1,
-    container: 'test',
+    container: '',
     showList: true,
-    url: 'http://localhost:3000/api/Containers',
+    url: '',
   }
   @Output() action
   @Output() uploadInput
@@ -47,32 +50,48 @@ export class FileUploaderComponent {
     this.humanizeBytes = humanizeBytes
   }
 
-  onUploadOutput(output: UploadOutput): void {
-    if (output.type === 'allAddedToQueue') { // when all files added in queue
-      // uncomment this if you want to auto upload files when added
-      // const event: UploadInput = {
-      //   type: 'uploadAll',
-      //   url: '/upload',
-      //   method: 'POST',
-      //   data: { foo: 'bar' },
-      //   concurrency: 0
-      // }
-      // this.uploadInput.emit(event)
-    } else if (output.type === 'addedToQueue' && typeof output.file !== 'undefined') { // add file to array when added
-      this.files.push(output.file)
-    } else if (output.type === 'uploading' && typeof output.file !== 'undefined') {
-      // update current data in files array for uploading file
-      const index = this.files.findIndex(file => typeof output.file !== 'undefined' && file.id === output.file.id)
-      this.files[index] = output.file
-    } else if (output.type === 'removed') {
-      // remove file from array when removed
-      this.files = this.files.filter((file: UploadFile) => file !== output.file)
-    } else if (output.type === 'dragOver') {
-      this.dragOver = true
-    } else if (output.type === 'dragOut') {
-      this.dragOver = false
-    } else if (output.type === 'drop') {
-      this.dragOver = false
+  onUploadOutput(output: UploadOutput) {
+    switch (output.type) {
+      case 'addedToQueue': {
+        if (typeof output.file !== 'undefined') {
+          this.files.push(output.file)
+        }
+        return this.action.emit({ type: 'AddedToQueue', payload: output })
+      }
+      case 'done': {
+        return this.action.emit({ type: 'Done', payload: output })
+      }
+      case 'dragOut':
+      case 'drop': {
+        return (this.dragOver = false)
+      }
+      case 'dragOver': {
+        return (this.dragOver = true)
+      }
+      case 'removed': {
+        // remove file from array when removed
+        this.files = this.files.filter(
+          (file: UploadFile) => file !== output.file,
+        )
+        return this.action.emit({ type: output.type, payload: output })
+      }
+      case 'start': {
+        return this.action.emit({ type: output.type, payload: output })
+      }
+      case 'uploading': {
+        if (typeof output.file !== 'undefined') {
+          // update current data in files array for uploading file
+          const index = this.files.findIndex(
+            file =>
+              typeof output.file !== 'undefined' && file.id === output.file.id,
+          )
+          this.files[index] = output.file
+        }
+        return this.action.emit({ type: output.type, payload: output })
+      }
+      default: {
+        return this.action.emit({ type: output.type, payload: output })
+      }
     }
   }
 
@@ -82,21 +101,22 @@ export class FileUploaderComponent {
 
   handleAction(event) {
     switch (event.type) {
-      case 'Cancel': {
+      case 'Exit': {
         return this.action.emit(event)
       }
       case 'RemoveAllFiles': {
-        return this.files.forEach(file => this.handleAction({ type: 'RemoveFile', payload: file.id }))
+        return this.files.forEach(file =>
+          this.handleAction({ type: 'RemoveFile', payload: file.id }),
+        )
       }
       case 'RemoveFile': {
         return this.uploadInput.emit({ type: 'remove', id: event.payload })
       }
       case 'StartUpload': {
-        const uploadUrl = `${this.config.url}/${this.config.container}/upload`
         const event: UploadInput = {
           concurrency: this.config.concurrency,
           type: 'uploadAll',
-          url: uploadUrl,
+          url: this.config.url,
           method: 'POST',
         }
         return this.uploadInput.emit(event)

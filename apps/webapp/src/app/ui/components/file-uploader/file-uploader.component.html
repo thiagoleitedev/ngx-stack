@@ -1,6 +1,36 @@
 <div class="container-fluid">
   <div class="row">
-    <div class="col-12">
+    <div class="col-12 mb-3">
+      <div class="row">
+        <div class="col-md-4">
+          <button type="button"
+                  class="btn btn-outline-danger btn-block"
+                  (click)="handleAction({ type: 'Exit' })">
+            Exit
+          </button>
+        </div>
+        <div class="col-md-4">
+          <button *ngIf="files?.length"
+                  type="button"
+                  class="btn btn-danger btn-block"
+                  (click)="handleAction({ type: 'RemoveAllFiles' })">
+          <i class="fa fa-fw fa-trash"></i>
+            Remove All
+          </button>
+        </div>
+        <div class="col-md-4">
+          <button type="button"
+                  class="btn btn-success btn-block text-white"
+                  [disabled]="!files?.length || files[0].responseStatus"
+                  (click)="handleAction({ type: 'StartUpload' })">
+          <i class="fa fa-fw fa-play-circle"></i>
+            Start Upload
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="col-12"
+         [class.d-none]="files.length">
       <div ngFileDrop
            class="drop-container"
            (uploadOutput)="onUploadOutput($event)"
@@ -17,35 +47,6 @@
                  [uploadInput]="uploadInput"
                  multiple>
         </label>
-      </div>
-    </div>
-    <div class="col-12">
-      <div class="row">
-        <div class="col-md-4">
-          <button type="button"
-                  class="btn btn-outline-danger btn-block"
-                  (click)="handleAction({ type: 'Cancel' })">
-            Cancel
-          </button>
-        </div>
-        <div class="col-md-4">
-          <button *ngIf="files?.length"
-                  type="button"
-                  class="btn btn-danger btn-block"
-                  (click)="handleAction({ type: 'RemoveAllFiles' })">
-          <i class="fa fa-fw fa-trash"></i>
-            Remove All
-          </button>
-        </div>
-        <div class="col-md-4">
-          <button type="button"
-                  class="btn btn-success btn-block start-upload-btn"
-                  [disabled]="!files?.length"
-                  (click)="handleAction({ type: 'StartUpload' })">
-          <i class="fa fa-fw fa-play-circle"></i>
-            Start Upload
-          </button>
-        </div>
       </div>
     </div>
     <div *ngIf="config.showList"
