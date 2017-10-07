@@ -10,7 +10,7 @@ body {
 }
 
 .full-screen {
-  z-index: 9999 !important;
+  z-index: 9000 !important;
 }
 
 .w-150 {
@@ -168,6 +168,10 @@ th {
     color: #ddd;
     margin-left: 3px;
     min-width: 100px;
+    @include ripple($primary);
+    &.active {
+      @include transition(all 0.5s linear);
+    }
   }
 
   .nav-link,

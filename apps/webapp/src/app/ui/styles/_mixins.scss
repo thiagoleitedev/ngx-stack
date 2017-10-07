@@ -17,7 +17,7 @@
     border: none;
     opacity: 0;
     pointer-events: none;
-    @include transition(background 0.5s, opacity 1s);
+    @include transition(background 0.5s linear, opacity 1s linear);
   }
 
   &:active:after {

@@ -1,4 +1,6 @@
-@import "mixins";
+@import 'mixins';
+$fa-font-path: '~font-awesome/fonts';
+$web-font-path: 'https://fonts.googleapis.com/css?family=Roboto|Roboto+Condensed';
 
 $white: #fff !default;
 $gray-100: #f8f9fa !default;
@@ -86,8 +88,8 @@ $enable-print-styles: true !default;
 $spacer: 1rem !default;
 $spacers: (
     0: 0,
-    1: ($spacer * .25),
-    2: ($spacer * .5),
+    1: ($spacer * 0.25),
+    2: ($spacer * 0.5),
     3: $spacer,
     4: ($spacer * 1.5),
     5: ($spacer * 3)
