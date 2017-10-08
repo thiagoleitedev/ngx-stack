@@ -26,7 +26,7 @@ export class AppComponent implements OnInit, AfterViewInit {
   public user$: Observable<Account>
 
   constructor(
-    private config: AppConfig,
+    public config: AppConfig,
     private ui: NgxUiService,
     private store: Store<any>,
   ) {

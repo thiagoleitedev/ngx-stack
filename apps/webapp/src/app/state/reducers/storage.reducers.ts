@@ -2,9 +2,11 @@ import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity'
 import { StorageContainer } from '@ngx-plus/ngx-sdk'
 import * as Storage from '../actions/storage.actions'
 
-export interface State extends EntityState<StorageContainer> {
-  selectedId: string | null
-  count: number | null
+export interface State {
+  ids: any[]
+  entities: {}
+  selectedId: any
+  count: number
 }
 
 export function sortByName(a: StorageContainer, b: StorageContainer): number {
@@ -14,17 +16,17 @@ export function sortByName(a: StorageContainer, b: StorageContainer): number {
 export const adapter: EntityAdapter<StorageContainer> = createEntityAdapter<
   StorageContainer
 >({
-  selectId: (container: StorageContainer) => container.id,
+  selectId: (container: StorageContainer) => container.id.toString(),
   sortComparer: sortByName,
 })
 
-export const initialState: State = adapter.getInitialState({
+export const initialState = adapter.getInitialState({
   selectedId: null,
-  count: null,
+  count: 0,
 })
 
 export function StorageReducer(
-  state: State = initialState,
+  state = initialState,
   action: Storage.Actions,
 ): State {
   switch (action.type) {

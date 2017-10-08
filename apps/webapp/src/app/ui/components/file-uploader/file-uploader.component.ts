@@ -1,10 +1,14 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core'
 import {
+  NgUploaderService,
   UploadOutput,
   UploadInput,
   UploadFile,
+  UploadStatus,
   humanizeBytes,
 } from 'ngx-uploader'
+
+import { FileUploader } from '../../interfaces'
 
 @Component({
   selector: 'ngx-file-uploader',
@@ -29,25 +33,30 @@ import {
   ],
 })
 export class FileUploaderComponent {
-  @Input()
-  config = {
-    concurrency: 1,
-    container: '',
-    showList: true,
-    url: '',
-  }
+  @Input() config: FileUploader
   @Output() action
   @Output() uploadInput
 
   files: UploadFile[]
   humanizeBytes: Function
   dragOver: boolean
+  percent: number
+  uploading: boolean
 
   constructor() {
     this.files = [] // local uploading files array
     this.action = new EventEmitter<any>()
     this.uploadInput = new EventEmitter<UploadInput>() // input events, we use this to emit data to ngx-uploader
     this.humanizeBytes = humanizeBytes
+    this.uploading = false
+    if (!this.config) {
+      this.config = {
+        concurrency: 1,
+        container: '',
+        showList: true,
+        url: '',
+      }
+    }
   }
 
   onUploadOutput(output: UploadOutput) {
@@ -114,7 +123,6 @@ export class FileUploaderComponent {
       }
       case 'StartUpload': {
         const event: UploadInput = {
-          concurrency: this.config.concurrency,
           type: 'uploadAll',
           url: this.config.url,
           method: 'POST',

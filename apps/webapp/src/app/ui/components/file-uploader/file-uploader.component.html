@@ -21,7 +21,7 @@
         <div class="col-md-4">
           <button type="button"
                   class="btn btn-success btn-block text-white"
-                  [disabled]="!files?.length || files[0].responseStatus"
+                  [disabled]="files?.length < 1 || files[0].responseStatus"
                   (click)="handleAction({ type: 'StartUpload' })">
           <i class="fa fa-fw fa-play-circle"></i>
             Start Upload
