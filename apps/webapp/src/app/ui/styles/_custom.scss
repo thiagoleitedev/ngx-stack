@@ -1,3 +1,4 @@
+@import 'variables';
 @import 'mixins';
 
 body {
@@ -156,11 +157,10 @@ th {
   .nav-link.active:focus,
   .nav-link.active:focus:hover,
   .nav-link.active:hover {
-    border: 1px solid;
+    border: 1px solid transparent !important;
     box-shadow: none;
     color: $primary;
     background-color: #fff;
-    border-color: #ddd #ddd #fff #ddd;
   }
 
   .nav-link {
@@ -169,9 +169,7 @@ th {
     margin-left: 3px;
     min-width: 100px;
     @include ripple($primary);
-    &.active {
-      @include transition(all 0.5s linear);
-    }
+    @include transition(all 0.5s linear, border 0s);
   }
 
   .nav-link,
@@ -182,7 +180,7 @@ th {
   .nav-link:focus:hover,
   .nav-link:hover {
     background-color: hsla(0, 0%, 100%, 0.1);
-    border: 1px solid $success;
+    border: 1px solid $success !important;
     border-bottom: 0;
     color: #fff;
   }

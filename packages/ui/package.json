@@ -6,7 +6,7 @@
     "@ng-bootstrap/ng-bootstrap": "^1.0.0-beta.5",
     "@ngx-plus/ngx-forms": "^0.3.1",
     "@ngx-plus/ngx-sdk": "^0.0.0",
-    "@swimlane/ngx-datatable": "^10.2.3",
+    "@swimlane/ngx-datatable": "^10.3.0",
     "bootstrap": "^4.0.0-beta",
     "font-awesome": "^4.7.0",
     "lodash": "^4.17.4",

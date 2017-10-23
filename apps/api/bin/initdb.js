@@ -10,7 +10,7 @@ const exit = delay =>
   }, delay * 1000)
 
 const booted = () => {
-  console.log('[initdb] waiting 5 seconds for images to be download!')
+  console.log('[initdb] waiting 5 seconds for images to be downloaded!')
   exit(5)
 }
 

@@ -1,13 +1,24 @@
 {
-  "name": "@ngx-plus/ngx-admin",
+  "name": "@ngx-plus/ngx-stack",
   "version": "0.0.0",
-  "description": "Advanced Angular Admin",
+  "description": "Advanced Angular Stack",
   "scripts": {
+    "app": "npm run app:start",
+    "app:logs": "docker-compose -f docker-compose.yml logs -f",
+    "app:start": "docker-compose -f docker-compose.yml up -d",
+    "app:stop": "docker-compose -f docker-compose.yml stop",
+    "app:rm": "npm run servers:stop && docker-compose rm -f",
     "build": "cd apps/webapp/ && npm run build",
     "clean": "lerna clean --yes",
     "dev": "lerna run dev --stream",
+    "docker:build": "docker build -t ngx-plus/ngx-stack:latest .",
+    "docker:db": "docker run --name ngx-db -d mongo --storageEngine wiredTiger",
+    "docker:run":
+      "docker run -it --name ngx-stack -p 3000:3000 --net bridge --rm ngx-plus/ngx-stack:latest",
+    "initdb": "cd apps/api && node bin/initdb",
     "postinstall": "lerna bootstrap",
     "sdk": "fireloop sdk",
+    "start": "cd apps/api && npm start",
     "test": "npm run build",
     "update": "ncu -a && lerna exec \"ncu -a\""
   },
@@ -15,6 +26,7 @@
     "angular",
     "angular 2",
     "angular 4",
+    "docker",
     "loopback",
     "fireloop",
     "realtime",
@@ -29,6 +41,7 @@
     "ngx",
     "ngx-plus",
     "ngx-admin",
+    "ngx-stack",
     "express",
     "static",
     "lerna"
