@@ -3,7 +3,7 @@
 <img src="https://github.com/ngx-plus/admin/blob/master/apps/webapp/src/assets/img/ngx-plus.png" width="150px" />
 
 ```console
-@ngx-plus/ngx-admin
+@ngx-plus/ngx-stack
 ```
 
 </h2>
@@ -12,8 +12,8 @@
   <a href="https://ngx-plus-slack.now.sh/">
     <img src="https://ngx-plus-slack.now.sh/badge.svg" />
   </a>
-  <a href="https://travis-ci.org/ngx-plus/ngx-admin">
-    <img src="https://travis-ci.org/ngx-plus/ngx-admin.svg?branch=master" />
+  <a href="https://travis-ci.org/ngx-plus/ngx-stack">
+    <img src="https://travis-ci.org/ngx-plus/ngx-stack.svg?branch=develop" />
   </a>
 </p>
 
@@ -48,7 +48,7 @@
 ### Clone the Repo
 
 ```sh
-> git clone https://github.com/ngx-plus/ngx-admin.git
+> git clone https://github.com/ngx-plus/ngx-stack.git
 ```
 
 # Install

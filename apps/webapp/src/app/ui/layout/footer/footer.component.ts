@@ -27,7 +27,7 @@ import { NgxUiService } from '../../services'
 export class FooterComponent {
   @Input() config
   @Input()
-  footerLeft = `<a href="https://github.com/ngx-plus/ngx-admin">@ngx-plus/ngx-admin</a>`
+  footerLeft = `<a href="https://github.com/ngx-plus/ngx-stack">@ngx-plus/ngx-stack</a>`
   @Input() footerRight
 
   constructor(public ui: NgxUiService) {}
