@@ -2,7 +2,7 @@ version:          '2'
 
 services:
   ngx-web:
-    image:        ngx-stack:latest
+    image:        ngxp/ngx-stack:latest
     ports:
       - 3000:3000
     environment:

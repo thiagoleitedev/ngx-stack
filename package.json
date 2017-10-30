@@ -11,10 +11,10 @@
     "build": "cd apps/webapp/ && npm run build",
     "clean": "lerna clean --yes",
     "dev": "lerna run dev --stream",
-    "docker:build": "docker build -t ngx-stack:latest .",
+    "docker:build": "docker build -t ngxp/ngx-stack:latest .",
     "docker:db": "docker run --name ngx-db -d mongo --storageEngine wiredTiger",
     "docker:run":
-      "docker run -it --name ngx-stack -p 3000:3000 --net bridge --rm ngx-plus/ngx-stack:latest",
+      "docker run -it --name ngx-stack -p 3000:3000 --net bridge --rm ngxp/ngx-stack:latest",
     "initdb": "cd apps/api && node bin/initdb",
     "postinstall": "lerna bootstrap",
     "sdk": "fireloop sdk",
