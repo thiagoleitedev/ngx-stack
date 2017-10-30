@@ -8,7 +8,7 @@
     "app:start": "docker-compose -f docker-compose.yml up -d",
     "app:stop": "docker-compose -f docker-compose.yml stop",
     "app:rm": "npm run app:stop && docker-compose rm -f",
-    "build": "cd apps/webapp/ && npm run build",
+    "build": "cd apps/web/ && npm run build",
     "clean": "lerna clean --yes",
     "dev": "lerna run dev --stream",
     "docker:build": "docker build -t ngxp/ngx-stack:latest .",
