@@ -33,11 +33,11 @@ import { NgxUiModule } from './ui'
     NgxUiModule.forRoot(),
     SDKBrowserModule.forRoot(),
     StoreModule.forRoot({
-      admin: AdminReducer,
       auth: AuthReducer,
-      home: HomeReducer,
       ui: UiReducer,
     }),
+    StoreModule.forFeature('home', HomeReducer),
+    StoreModule.forFeature('admin', AdminReducer),
     EffectsModule.forRoot([
       AuthEffects,
       ControlEffects,

@@ -82,7 +82,7 @@ export class AuthEffects {
   @Effect({ dispatch: false })
   protected logInSuccess = this.actions$
     .ofType(Auth.LOG_IN_SUCCESS)
-    .do((action: Auth.LogInSuccess) => this.router.navigate(['home']))
+    .do((action: Auth.LogInSuccess) => this.router.navigate(['dashboard']))
     .do((action: Auth.LogInSuccess) => {
       this.store.dispatch(new Auth.UpdateUser(action.payload.user.id))
       this.store.dispatch(new Ui.ActivateFooter())

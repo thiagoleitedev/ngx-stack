@@ -1,28 +1,24 @@
 import { Component, OnInit } from '@angular/core'
-import { DashCard, NgxUiService, NavItem } from '../ui'
+import { DashCard, NgxUiService, NavItem } from '../../ui'
 import { Store } from '@ngrx/store'
 import { Observable } from 'rxjs/Observable'
 import 'rxjs/add/operator/map'
 
-import { UserActions, RoleActions, ControlActions } from '../state'
+import { UserActions, RoleActions, ControlActions } from '../../state'
 
 @Component({
   selector: 'ngx-admin-dashboard',
   template: `
-  <ngx-card [config]="cardConfig">
-    <ngx-dash-cards *ngIf="admin$" [items]="dashCards"></ngx-dash-cards>
-  </ngx-card>
+    <ngx-dash-cards *ngIf="admin$"
+                    [items]="dashCards">
+    </ngx-dash-cards>
   `,
 })
 export class AdminDashboardComponent implements OnInit {
   public admin$: Observable<any>
   public dashCards: DashCard[]
-  public cardConfig = {
-    icon: 'fa fa-fw fa-tachometer',
-    cardTitle: 'Dashboard',
-  }
 
-  constructor(private ui: NgxUiService, private store: Store<any>) { }
+  constructor(private ui: NgxUiService, private store: Store<any>) {}
 
   ngOnInit() {
     this.admin$ = this.store.select('admin')

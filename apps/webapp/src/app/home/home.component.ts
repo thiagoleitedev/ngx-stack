@@ -16,7 +16,12 @@ export class HomeComponent implements OnInit {
     this.store.dispatch(new UiActions.ActivateHeader())
     this.store.dispatch(new UiActions.ActivateSidebar())
     this.store.dispatch(new UiActions.ActivateFooter())
-    this.store.dispatch(new ProjectActions.ReadProjects())
-    this.store.dispatch(new StorageActions.ReadContainers({ include: 'files' }))
+    this.store.dispatch(new ProjectActions.ReadProjects({ order: 'name ASC' }))
+    this.store.dispatch(
+      new StorageActions.ReadContainers({
+        include: 'files',
+        order: 'container ASC',
+      }),
+    )
   }
 }

@@ -50,7 +50,7 @@ import { GridConfig } from '../../interfaces'
       </div>
     </div>
   `,
-  // changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GridComponent implements OnInit {
   // TODO: implement cards view
@@ -61,7 +61,7 @@ export class GridComponent implements OnInit {
 
   public items: any[]
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit() {
     this.config.searchItem$ = new BehaviorSubject('')
@@ -88,11 +88,11 @@ export class GridComponent implements OnInit {
           return items
         }
         const filtered = items.filter(
-          item => this.getRowString(item).indexOf(searchItem) > -1
+          item => this.getRowString(item).indexOf(searchItem) > -1,
         )
         this.config.table.filteredCount = filtered.length
         return filtered
-      }
+      },
     )
   }
 

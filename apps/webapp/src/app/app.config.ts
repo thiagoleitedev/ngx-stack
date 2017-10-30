@@ -15,13 +15,18 @@ export class AppConfig {
     preHeaderImg: 'ngx',
     sidebarNav: [
       {
-        title: 'Home',
+        title: '',
         items: [
           {
             name: 'Dashboard',
-            link: '/home/dashboard',
+            link: '/dashboard',
             icon: 'fa fa-fw fa-tachometer',
           },
+        ],
+      },
+      {
+        title: 'Home',
+        items: [
           {
             name: 'Projects',
             link: '/home/projects',
@@ -37,11 +42,6 @@ export class AppConfig {
       {
         title: 'Admin',
         items: [
-          {
-            name: 'Dashboard',
-            link: '/admin/dashboard',
-            icon: 'fa fa-fw fa-tachometer',
-          },
           { name: 'Users', link: '/admin/users', icon: 'fa fa-fw fa-users' },
           { name: 'Roles', link: '/admin/roles', icon: 'fa fa-fw fa-tags' },
           {

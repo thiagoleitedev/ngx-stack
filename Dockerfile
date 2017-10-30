@@ -1,5 +1,5 @@
 # BASE IMAGE
-FROM node:latest
+FROM node:slim
 
 # DEFAULT ENVIRONMENT
 ENV API_HOST=0.0.0.0
