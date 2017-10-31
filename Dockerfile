@@ -3,7 +3,8 @@ FROM node:slim
 
 # DEFAULT ENVIRONMENT
 ENV API_HOST=0.0.0.0
-ENV API_PORT=3000
+ENV API_PORT=8080
+ENV API_BASE_URL=//localhost:8080
 
 # COPY APP
 WORKDIR /ngx-stack
@@ -29,7 +30,7 @@ RUN lerna bootstrap
 RUN npm run build
 
 # EXPOSE LISTENING PORT
-EXPOSE 3000
+EXPOSE 8080
 
 # START SERVER
 CMD ["pm2-docker", "start", "npm", "--", "start"]
