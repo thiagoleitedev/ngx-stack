@@ -9,7 +9,7 @@ import {
   OnDestroy,
 } from '@angular/core'
 import { BehaviorSubject } from 'rxjs/BehaviorSubject'
-import 'rxjs/add/operator/filter'
+import { combineLatest, filter } from 'rxjs/operators'
 
 import { TableComponent } from '../../components'
 import { NgxUiService } from '../../services'
@@ -80,19 +80,16 @@ export class GridComponent implements OnInit {
         selected: 'table',
       }
     }
-    this.config.table.filteredItems$ = this.config.table.items$.combineLatest(
-      this.config.searchItem$,
-      (items, searchItem) => {
+    this.config.table.filteredItems$ = this.config.table.items$.pipe(
+      combineLatest(this.config.searchItem$, (items, searchItem) => {
         if (!searchItem || searchItem === '') {
           this.config.table.filteredCount = null
           return items
         }
-        const filtered = items.filter(
-          item => this.getRowString(item).indexOf(searchItem) > -1,
-        )
+        const filtered = items.filter(item => this.getRowString(item).indexOf(searchItem) > -1)
         this.config.table.filteredCount = filtered.length
         return filtered
-      },
+      }),
     )
   }
 

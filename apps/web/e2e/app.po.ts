@@ -1,11 +1,11 @@
-import { browser, element, by } from 'protractor';
+import { browser, by, element } from 'protractor';
 
-export class WebappPage {
+export class AppPage {
   navigateTo() {
     return browser.get('/');
   }
 
-  getParagraphText() {
-    return element(by.css('fire-root h1')).getText();
+  text() {
+    return browser.findElement(by.css('body')).getText();
   }
 }

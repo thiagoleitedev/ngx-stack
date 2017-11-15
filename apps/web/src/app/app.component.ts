@@ -1,11 +1,12 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core'
 import { Store } from '@ngrx/store'
-import { Account } from '@ngx-plus/ngx-sdk'
+import { Account, AccountActions } from '@ngx-plus/ngx-sdk'
 import { NgxUiService } from './ui'
 import { Observable } from 'rxjs/Observable'
+import { map } from 'rxjs/operators'
 
 import { AppConfig } from './app.config'
-import { AuthActions, UiActions } from './state'
+import { UiActions } from './state'
 
 @Component({
   selector: 'ngx-root',
@@ -25,14 +26,10 @@ export class AppComponent implements OnInit, AfterViewInit {
   public ui$: Observable<any>
   public user$: Observable<Account>
 
-  constructor(
-    public config: AppConfig,
-    private ui: NgxUiService,
-    private store: Store<any>,
-  ) {
-    this.user$ = this.store.select('auth').map(auth => auth.user)
+  constructor(public config: AppConfig, private ui: NgxUiService, private store: Store<any>) {
+    this.user$ = this.store.select('auth').pipe(map(auth => auth.user))
     this.ui$ = this.store.select('ui')
-    this.loader$ = this.ui$.map(ui => ui.loader.active)
+    this.loader$ = this.ui$.pipe(map(ui => ui.loader.active))
   }
 
   ngOnInit() {
@@ -46,13 +43,13 @@ export class AppComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
     setTimeout(() => {
       this.store.dispatch(new UiActions.DeactivateLoader())
-    }, 1000)
+    }, 3000)
   }
 
   handleAction(event) {
     switch (event.type) {
       case 'LogOut':
-        return this.store.dispatch(new AuthActions.LogOut())
+        return this.store.dispatch(new AccountActions.logout())
       case 'ToggleMorebar':
         return this.store.dispatch(new UiActions.ToggleMorebar())
       case 'ToggleSidebar':

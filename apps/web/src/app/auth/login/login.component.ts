@@ -1,7 +1,6 @@
 import { Component } from '@angular/core'
 import { Store } from '@ngrx/store'
-
-import { AuthActions } from '../../state'
+import { AccountActions } from '@ngx-plus/ngx-sdk'
 
 @Component({
   selector: 'ngx-auth-login',
@@ -38,7 +37,7 @@ export class LoginComponent {
   handleAction(event) {
     switch (event.type) {
       case 'LogIn': {
-        return this.store.dispatch(new AuthActions.LogIn(event.payload))
+        return this.store.dispatch(new AccountActions.login(event.payload))
       }
       default: {
         return console.log('$event', event)

@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core'
 import { NgxFormsService } from '@ngx-plus/ngx-forms'
 export { NgxFormConfig } from '@ngx-plus/ngx-forms'
 import { NgxAlertsService } from '@ngx-plus/ngx-alerts'
-import { BreadcrumbService } from 'ng2-breadcrumb/ng2-breadcrumb'
 import {
   NgbModal,
   NgbActiveModal,
@@ -35,7 +34,6 @@ export class NgxUiService {
 
   constructor(
     public alerts: NgxAlertsService,
-    public breadcrumb: BreadcrumbService,
     public forms: NgxFormsService,
     public modal: NgbModal,
   ) {

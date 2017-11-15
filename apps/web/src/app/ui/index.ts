@@ -1,5 +1,5 @@
 import { NgxUiModule } from './ngx-ui.module'
-import { NgxUiService } from './services'
+import { NgxUiService } from './services/ngx-ui.service'
 
 export { NgxUiModule, NgxUiService }
 export * from './layout/'

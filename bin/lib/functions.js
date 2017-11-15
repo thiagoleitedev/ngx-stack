@@ -62,7 +62,7 @@ const rmDirRecursive = p => {
 }
 
 const getProjectPath = () => {
-  const projectName = '@ngx-plus/ngx-admin'
+  const projectName = '@ngx-plus/ngx-stack'
   const projectRoot = '../..'
   const projectPath = path.join(__dirname, projectRoot)
 
@@ -75,15 +75,13 @@ const getProjectPath = () => {
   return projectPath
 }
 
-const getLernaPaths = p => {
-  const lerna = ['apps', 'packages']
-
+const getProjectPaths = p => {
+  const directories = ['apps/api']
   const paths = []
 
-  lerna.forEach(dir => {
+  directories.forEach(dir => {
     const dirPath = path.join(p, dir)
-    const lernaDirs = getDirectories(dirPath).map(d => path.join(dirPath, d))
-    paths.push(...lernaDirs)
+    paths.push(dirPath)
   })
 
   return paths
@@ -99,26 +97,26 @@ const hasSubDir = (p, filter) =>
  * Clean the node_modules dir from a path
  */
 const clean = () => {
- const p = getProjectPath()
+  const p = getProjectPath()
 
- console.log(`[clean] Cleaning up project path ${p}`)
+  console.log(`@ngx-plus/ngx-stack: [clean] Cleaning up project path ${p}`)
 
- const paths = [p, ...getLernaPaths(p)]
+  const paths = [p, ...getProjectPaths(p)]
 
- hasSubDir(paths, 'node_modules').forEach(dir => {
-   rmDirRecursive(dir)
-   console.log(`[clean] Removed ${dir}`)
- })
+  hasSubDir(paths, 'node_modules').forEach(dir => {
+    rmDirRecursive(dir)
+    console.log(`@ngx-plus/ngx-stack: [clean] Removed ${dir}`)
+  })
 
- paths.forEach(p => {
-   const lockFile = path.join(p, 'package-lock.json')
-   if (exists(lockFile)) {
-     rmFile(lockFile)
-     console.log(`[clean] Removed ${lockFile}`)
-   }
- })
+  paths.forEach(p => {
+    const lockFile = path.join(p, 'package-lock.json')
+    if (exists(lockFile)) {
+      rmFile(lockFile)
+      console.log(`@ngx-plus/ngx-stack: [clean] Removed ${lockFile}`)
+    }
+  })
 
- console.log('[clean] Done.')
+  console.log('@ngx-plus/ngx-stack: [clean] Done.')
 }
 
 module.exports = {

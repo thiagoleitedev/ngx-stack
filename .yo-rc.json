@@ -6,11 +6,11 @@
         "path": "./apps/api",
         "type": "server"
       },
-      "webapp": {
-        "path": "./apps/webapp",
+      "web": {
+        "path": "./apps/web",
         "type": "ng2web",
-        "name": "webapp",
-        "sdkPath": "packages\\sdk\\src"
+        "name": "web",
+        "sdkPath": "libs/ngx-sdk/src"
       }
     },
     "promptValues": {

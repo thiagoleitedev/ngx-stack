@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core'
 import { Router, ActivatedRoute } from '@angular/router'
 import { NgxUiService, ModalComponent, GridConfig } from '../../../ui'
 import { Subscription } from 'rxjs/Subscription'
-import 'rxjs/operator/map'
+import { map } from 'rxjs/operators'
 
 import { UsersService, User } from '../users.service'
 
@@ -23,7 +23,7 @@ export class UserListComponent implements OnInit, OnDestroy {
     public service: UsersService,
     public ui: NgxUiService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
   ) {}
 
   ngOnInit() {
@@ -47,12 +47,9 @@ export class UserListComponent implements OnInit, OnDestroy {
             icon: 'fa fa-fw fa-trash',
           },
         ],
-        columns: [
-          { field: 'fullName', label: 'Full Name', action: 'Update' },
-          { field: 'email', label: 'Email' },
-        ],
-        count$: this.service.items$.map(r => r.count),
-        items$: this.service.items$.map(r => r.ids.map(id => r.entities[id])),
+        columns: [{ field: 'fullName', label: 'Full Name', action: 'Update' }, { field: 'email', label: 'Email' }],
+        count$: this.service.items$.pipe(map(r => r.count)),
+        items$: this.service.items$.pipe(map(r => r.ids.map(id => r.entities[id]))),
       },
       toolbar: {
         actionButton: {
@@ -74,11 +71,7 @@ export class UserListComponent implements OnInit, OnDestroy {
     this.ui.modalRef.componentInstance.item = item
     this.ui.modalRef.componentInstance.formConfig = form
     this.ui.modalRef.componentInstance.title = title
-    this.subscriptions.push(
-      this.ui.modalRef.componentInstance.action.subscribe(event =>
-        this.handleAction(event)
-      )
-    )
+    this.subscriptions.push(this.ui.modalRef.componentInstance.action.subscribe(event => this.handleAction(event)))
   }
 
   handleAction(event) {
@@ -92,8 +85,8 @@ export class UserListComponent implements OnInit, OnDestroy {
         return this.ui.modalRef.close()
       case 'Save':
         const fullName = new String(
-          `${event.payload.firstName} ${event.payload.middleName || ''} ${event
-            .payload.lastName} ${event.payload.suffix || ''}`
+          `${event.payload.firstName} ${event.payload.middleName || ''} ${event.payload.lastName} ${event.payload
+            .suffix || ''}`,
         ).trim()
         event.payload.fullName = fullName
         event.payload.roles = []

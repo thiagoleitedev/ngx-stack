@@ -1,10 +1,4 @@
-import {
-  Component,
-  Input,
-  Output,
-  EventEmitter,
-  ChangeDetectionStrategy,
-} from '@angular/core'
+import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core'
 
 @Component({
   selector: 'ngx-layout',
@@ -16,9 +10,11 @@ import {
                     [user]="user"
                     (action)="handleAction($event)">
         </ngx-header>
-        <breadcrumb [hidden]="!config.header.active"
-                    [class.open]="config.sidebar.open">
-        </breadcrumb>
+        <nav *ngIf="config.header.active" aria-label="breadcrumb" role="navigation">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item active" aria-current="page"></li>
+          </ol>
+        </nav>
         <ngx-sidebar [config]="config"></ngx-sidebar>
         <ngx-body [config]="config">
           <router-outlet></router-outlet>

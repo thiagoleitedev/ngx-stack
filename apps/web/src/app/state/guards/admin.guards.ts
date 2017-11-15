@@ -12,8 +12,7 @@ import {
 import { Store } from '@ngrx/store'
 import { LoopBackAuth } from '@ngx-plus/ngx-sdk'
 import { Observable } from 'rxjs/Observable'
-import 'rxjs/add/operator/map'
-import 'rxjs/add/operator/take'
+import { map, take, tap } from 'rxjs/operators'
 
 import { NgxUiService } from '../../ui'
 
@@ -39,17 +38,17 @@ export class AdminGuard implements CanActivate, CanActivateChild, CanLoad {
   }
 
   isAdmin(): Observable<boolean> {
-    return this.store
-      .select('auth')
-      .map(auth => auth.isAdmin)
-      .take(1)
-      .do(admin => {
+    return this.store.select('auth').pipe(
+      map(auth => auth.isAdmin),
+      take(1),
+      tap(admin => {
         if (!admin) {
           this.ui.alerts.notifyError({
             title: 'Not Authorized',
             body: 'Only Admin users can view the Admin section!',
           })
         }
-      })
+      }),
+    )
   }
 }
