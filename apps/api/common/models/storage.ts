@@ -26,13 +26,10 @@ class Storage {
 
   // Operation Hooks
   afterDestroy(ctx: any, modelInstance: any, next: Function): void {
-    this.model.app.models.StorageContainer.deleteById(
-      ctx.args.container,
-      (err, newContainer) => {
-        if (err) return next(err)
-        next()
-      },
-    )
+    this.model.app.models.StorageContainer.deleteById(ctx.args.container, (err, newContainer) => {
+      if (err) return next(err)
+      next()
+    })
   }
 
   afterRemoveFile(ctx: any, modelInstance: any, next: Function): void {
@@ -56,26 +53,17 @@ class Storage {
     // check if folder exists
     this.model.getContainer(container.name, (err, existingContainer) => {
       if (err) {
-        this.model.app.models.StorageContainer.create(
-          container,
-          (err, newContainer) => {
-            if (err) return next(err)
-            next()
-          },
-        )
+        this.model.app.models.StorageContainer.create(container, (err, newContainer) => {
+          if (err) return next(err)
+          next()
+        })
       }
       if (existingContainer) {
         // check if data exists in db
-        this.model.app.models.StorageContainer.findById(
-          container.id,
-          (err, existingContainer) => {
-            if (err)
-              return next(
-                this.model.app.models.StorageContainer.create(container),
-              )
-            return next(new Error('Container Already Exists!'))
-          },
-        )
+        this.model.app.models.StorageContainer.findById(container.id, (err, existingContainer) => {
+          if (err) return next(this.model.app.models.StorageContainer.create(container))
+          return next(new Error('Container Already Exists!'))
+        })
       }
     })
   }

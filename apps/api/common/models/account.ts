@@ -1,4 +1,4 @@
-import { Model } from '@mean-expert/model';
+import { Model } from '@mean-expert/model'
 /**
  * @module Account
  * @description
@@ -8,29 +8,28 @@ import { Model } from '@mean-expert/model';
  **/
 @Model({
   hooks: {
-    beforeSave: { name: 'before save', type: 'operation' }
+    beforeSave: { name: 'before save', type: 'operation' },
   },
   remotes: {
     myRemote: {
       returns: { arg: 'result', type: 'array' },
-      http: { path: '/my-remote', verb: 'get' }
-    }
-  }
+      http: { path: '/my-remote', verb: 'get' },
+    },
+  },
 })
-
 class Account {
   // LoopBack model instance is injected in constructor
-  constructor(public model: any) { }
+  constructor(public model: any) {}
 
   // Example Operation Hook
   beforeSave(ctx: any, next: Function): void {
-    console.log('Account: Before Save');
-    next();
+    console.log('Account: Before Save')
+    next()
   }
   // Example Remote Method
   myRemote(next: Function): void {
-    this.model.find(next);
+    this.model.find(next)
   }
 }
 
-module.exports = Account;
+module.exports = Account

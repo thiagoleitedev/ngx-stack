@@ -14,20 +14,19 @@ class TestData {
     const adminId = 'admin-user'
     const adminRole = 'Admin'
 
-    User.exists(adminId)
-      .then((res: any) => {
-        if (res) {
-          return console.log('[test-data]', 'admin-user already exists: skipping creation')
-        }
-        return Promise.all([
-          this.createData(User, [TestUsers]),
-          this.createData(Role, [TestRoles]),
-          this.createData(Control, [TestControls]),
-        ])
-          .then(() => Role.find({ where: { name: adminRole } }))
-          .then((role: any) => role[0].principals.create({ principalType: 'USER', principalId: adminId }))
-          .tap((res: any) => console.log('[test-data]', `${adminRole} role assigned to ${adminId}`))
-      })
+    User.exists(adminId).then((res: any) => {
+      if (res) {
+        return console.log('[test-data]', 'admin-user already exists: skipping creation')
+      }
+      return Promise.all([
+        this.createData(User, [TestUsers]),
+        this.createData(Role, [TestRoles]),
+        this.createData(Control, [TestControls]),
+      ])
+        .then(() => Role.find({ where: { name: adminRole } }))
+        .then((role: any) => role[0].principals.create({ principalType: 'USER', principalId: adminId }))
+        .tap((res: any) => console.log('[test-data]', `${adminRole} role assigned to ${adminId}`))
+    })
   }
 
   createData(Model: any, data: any[]) {

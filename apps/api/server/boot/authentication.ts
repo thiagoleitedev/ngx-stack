@@ -1,11 +1,11 @@
-import { BootScript } from '@mean-expert/boot-script';
+import { BootScript } from '@mean-expert/boot-script'
 
 @BootScript()
 class Authentication {
   constructor(app: any) {
-    app.enableAuth();
-    app.models.RoleMapping.settings.strictObjectIDCoercion = true;
+    app.enableAuth()
+    app.models.RoleMapping.settings.strictObjectIDCoercion = true
   }
 }
 
-module.exports = Authentication;
+module.exports = Authentication
