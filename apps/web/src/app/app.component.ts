@@ -1,12 +1,13 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core'
 import { Store } from '@ngrx/store'
-import { Account, AccountActions } from '@ngx-plus/ngx-sdk'
-import { NgxUiService } from './ui'
 import { Observable } from 'rxjs/Observable'
 import { map } from 'rxjs/operators'
 
+import { NgxAuthActions } from '@ngx-plus/ngx-auth'
+import { Account } from '@ngx-plus/ngx-sdk'
+import { NgxUiService, NgxUiActions } from '@ngx-plus/ngx-ui'
+
 import { AppConfig } from './app.config'
-import { UiActions } from './state'
 
 @Component({
   selector: 'ngx-root',
@@ -42,18 +43,18 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     setTimeout(() => {
-      this.store.dispatch(new UiActions.DeactivateLoader())
+      this.store.dispatch(new NgxUiActions.DeactivateLoader())
     }, 3000)
   }
 
   handleAction(event) {
     switch (event.type) {
       case 'LogOut':
-        return this.store.dispatch(new AccountActions.logout())
+        return this.store.dispatch(new NgxAuthActions.LogOut())
       case 'ToggleMorebar':
-        return this.store.dispatch(new UiActions.ToggleMorebar())
+        return this.store.dispatch(new NgxUiActions.ToggleMorebar())
       case 'ToggleSidebar':
-        return this.store.dispatch(new UiActions.ToggleSidebar())
+        return this.store.dispatch(new NgxUiActions.ToggleSidebar())
       default:
         return console.log('$event', event)
     }

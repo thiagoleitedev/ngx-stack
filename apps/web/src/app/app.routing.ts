@@ -1,27 +1,29 @@
 import { NgModule } from '@angular/core'
 import { PreloadAllModules, Routes, RouterModule } from '@angular/router'
-import { AdminGuard, AuthGuard } from './state'
+
+import { NgxAdminGuard } from '@ngx-plus/ngx-admin'
+import { NgxAuthGuard } from '@ngx-plus/ngx-auth'
 
 const routes: Routes = [
   {
     path: '',
     children: [
       { path: '', redirectTo: 'auth', pathMatch: 'full' },
-      { path: 'auth', loadChildren: './auth/auth.module#AuthModule' },
+      { path: 'auth', loadChildren: '@ngx-plus/ngx-auth#NgxAuthModule' },
       {
         path: 'dashboard',
-        loadChildren: './dashboard/dashboard.module#DashboardModule',
-        canLoad: [AuthGuard],
+        loadChildren: '@ngx-plus/ngx-dashboard#NgxDashboardModule',
+        canLoad: [NgxAuthGuard],
       },
       {
         path: 'home',
         loadChildren: './home/home.module#HomeModule',
-        canLoad: [AuthGuard],
+        canLoad: [NgxAuthGuard],
       },
       {
         path: 'admin',
-        loadChildren: './admin/admin.module#AdminModule',
-        canLoad: [AdminGuard],
+        loadChildren: '@ngx-plus/ngx-admin#NgxAdminModule',
+        canLoad: [NgxAdminGuard],
       },
     ],
   },

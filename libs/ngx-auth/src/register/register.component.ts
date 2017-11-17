@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core'
 import { Store } from '@ngrx/store'
-import { AuthActions } from '../../state'
+
 import { Account } from '@ngx-plus/ngx-sdk'
+
+import { NgxAuthActions } from '../state'
 
 @Component({
   selector: 'ngx-auth-register',
@@ -76,12 +78,12 @@ export class RegisterComponent implements OnInit {
     switch (event.type) {
       case 'Register': {
         const fullName = new String(
-          `${event.payload.firstName} ${event.payload.middleName || ''} ${event
-            .payload.lastName} ${event.payload.suffix || ''}`
+          `${event.payload.firstName} ${event.payload.middleName || ''} ${event.payload.lastName} ${event.payload
+            .suffix || ''}`,
         ).trim()
         event.payload.fullName = fullName
         event.payload.roles = []
-        return this.store.dispatch(new AuthActions.Register(event.payload))
+        return this.store.dispatch(new NgxAuthActions.Register(event.payload))
       }
       default: {
         return console.log('$event', event)

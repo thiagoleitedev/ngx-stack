@@ -1,11 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core'
 import { Router } from '@angular/router'
-import { AccountApi } from '@ngx-plus/ngx-sdk'
 import { Store } from '@ngrx/store'
 import { Subscription } from 'rxjs/Subscription'
 
-import { NgxUiService } from '../ui'
-import { UiActions } from '../state'
+import { AccountApi } from '@ngx-plus/ngx-sdk'
+import { NgxUiActions, NgxUiService } from '@ngx-plus/ngx-ui'
 
 @Component({
   selector: 'ngx-auth',
@@ -32,11 +31,7 @@ export class AuthComponent implements OnInit, OnDestroy {
   public cardConfig
   private subscriptions: Subscription[] = new Array<Subscription>()
 
-  constructor(
-    public router: Router,
-    private ui: NgxUiService,
-    private store: Store<any>
-  ) {}
+  constructor(public router: Router, private ui: NgxUiService, private store: Store<any>) {}
 
   ngOnInit() {
     this.cardConfig = {
@@ -56,14 +51,12 @@ export class AuthComponent implements OnInit, OnDestroy {
       preHeaderImg: this.ui.preHeaderImg,
     }
     // TODO: Consider moving Auth routes through a component without these components
-    this.store.dispatch(new UiActions.DeactivateHeader())
-    this.store.dispatch(new UiActions.DeactivateSidebar())
-    this.store.dispatch(new UiActions.DeactivateFooter())
+    this.store.dispatch(new NgxUiActions.DeactivateHeader())
+    this.store.dispatch(new NgxUiActions.DeactivateSidebar())
+    this.store.dispatch(new NgxUiActions.DeactivateFooter())
   }
 
   ngOnDestroy() {
-    this.subscriptions.forEach((subscription: Subscription) =>
-      subscription.unsubscribe()
-    )
+    this.subscriptions.forEach((subscription: Subscription) => subscription.unsubscribe())
   }
 }
