@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core'
 import { CommonModule } from '@angular/common'
-import { NgxUiModule } from './ui'
+
+import { NgxUiModule } from '@ngx-plus/ngx-ui'
 
 const modules = [CommonModule, NgxUiModule]
 
@@ -8,4 +9,4 @@ const modules = [CommonModule, NgxUiModule]
   imports: [...modules],
   exports: [...modules],
 })
-export class SharedModule {}
+export class NgxSharedModule {}
