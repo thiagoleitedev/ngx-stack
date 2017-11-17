@@ -8,7 +8,7 @@ export interface ACLInterface {
   "permission"?: string;
   "principalType"?: string;
   "principalId"?: string;
-  "id"?: number;
+  "id"?: any;
 }
 
 export class ACL implements ACLInterface {
@@ -18,7 +18,7 @@ export class ACL implements ACLInterface {
   "permission": string;
   "principalType": string;
   "principalId": string;
-  "id": number;
+  "id": any;
   constructor(data?: ACLInterface) {
     Object.assign(this, data);
   }
@@ -78,7 +78,7 @@ export class ACL implements ACLInterface {
         },
         "id": {
           name: 'id',
-          type: 'number'
+          type: 'any'
         },
       },
       relations: {

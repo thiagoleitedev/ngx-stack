@@ -5,18 +5,18 @@ import {
 
 declare var Object: any;
 export interface RoleMappingInterface {
-  "id"?: number;
+  "id"?: any;
   "principalType"?: string;
   "principalId"?: string;
-  "roleId"?: number;
+  "roleId"?: any;
   role?: Role;
 }
 
 export class RoleMapping implements RoleMappingInterface {
-  "id": number;
+  "id": any;
   "principalType": string;
   "principalId": string;
-  "roleId": number;
+  "roleId": any;
   role: Role;
   constructor(data?: RoleMappingInterface) {
     Object.assign(this, data);
@@ -53,7 +53,7 @@ export class RoleMapping implements RoleMappingInterface {
       properties: {
         "id": {
           name: 'id',
-          type: 'number'
+          type: 'any'
         },
         "principalType": {
           name: 'principalType',
@@ -65,7 +65,7 @@ export class RoleMapping implements RoleMappingInterface {
         },
         "roleId": {
           name: 'roleId',
-          type: 'number'
+          type: 'any'
         },
       },
       relations: {

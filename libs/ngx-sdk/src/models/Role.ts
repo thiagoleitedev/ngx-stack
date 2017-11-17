@@ -5,7 +5,7 @@ import {
 
 declare var Object: any;
 export interface RoleInterface {
-  "id"?: number;
+  "id"?: any;
   "name": string;
   "description"?: string;
   "created"?: Date;
@@ -14,7 +14,7 @@ export interface RoleInterface {
 }
 
 export class Role implements RoleInterface {
-  "id": number;
+  "id": any;
   "name": string;
   "description": string;
   "created": Date;
@@ -55,7 +55,7 @@ export class Role implements RoleInterface {
       properties: {
         "id": {
           name: 'id',
-          type: 'number'
+          type: 'any'
         },
         "name": {
           name: 'name',

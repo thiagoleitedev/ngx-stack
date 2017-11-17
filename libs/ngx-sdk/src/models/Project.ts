@@ -7,7 +7,7 @@ export interface ProjectInterface {
   "salesHandoff"?: string;
   "clientKickoff"?: string;
   "devKickoff"?: string;
-  "id"?: number;
+  "id"?: any;
   "createdAt"?: Date;
   "updatedAt"?: Date;
 }
@@ -18,7 +18,7 @@ export class Project implements ProjectInterface {
   "salesHandoff": string;
   "clientKickoff": string;
   "devKickoff": string;
-  "id": number;
+  "id": any;
   "createdAt": Date;
   "updatedAt": Date;
   constructor(data?: ProjectInterface) {
@@ -76,7 +76,7 @@ export class Project implements ProjectInterface {
         },
         "id": {
           name: 'id',
-          type: 'number'
+          type: 'any'
         },
         "createdAt": {
           name: 'createdAt',

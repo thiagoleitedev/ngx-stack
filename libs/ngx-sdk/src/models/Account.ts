@@ -15,7 +15,7 @@ export interface AccountInterface {
   "username"?: string;
   "email": string;
   "emailVerified"?: boolean;
-  "id"?: number;
+  "id"?: any;
   "createdAt"?: Date;
   "updatedAt"?: Date;
   "password"?: string;
@@ -33,7 +33,7 @@ export class Account implements AccountInterface {
   "username": string;
   "email": string;
   "emailVerified": boolean;
-  "id": number;
+  "id": any;
   "createdAt": Date;
   "updatedAt": Date;
   "password": string;
@@ -110,7 +110,7 @@ export class Account implements AccountInterface {
         },
         "id": {
           name: 'id',
-          type: 'number'
+          type: 'any'
         },
         "createdAt": {
           name: 'createdAt',
