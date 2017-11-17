@@ -1,16 +1,11 @@
 import { Injectable } from '@angular/core'
 import { Store } from '@ngrx/store'
-import {
-  LoopBackConfig,
-  StorageApi,
-  StorageContainerApi,
-  StorageContainer,
-} from '@ngx-plus/ngx-sdk'
-export { StorageContainer as Container } from '@ngx-plus/ngx-sdk'
 import { Observable } from 'rxjs/Observable'
 import { Subscription } from 'rxjs/Subscription'
-import 'rxjs/add/operator/distinctUntilChanged'
-import 'rxjs/add/operator/map'
+import { map } from 'rxjs/operators'
+
+import { LoopBackConfig, StorageApi, StorageContainerApi, StorageContainer } from '@ngx-plus/ngx-sdk'
+export { StorageContainer as Container } from '@ngx-plus/ngx-sdk'
 
 import { StorageActions } from '../../state'
 
@@ -45,11 +40,7 @@ export class StorageService {
     url: '',
   }
 
-  constructor(
-    private api: StorageApi,
-    private containerApi: StorageContainerApi,
-    private store: Store<any>,
-  ) {
+  constructor(private api: StorageApi, private containerApi: StorageContainerApi, private store: Store<any>) {
     this.items$ = this.store.select('home').map(home => home.storage)
     this.selected$ = this.items$.map(items => items.entities[items.selectedId])
   }
@@ -100,8 +91,6 @@ export class StorageService {
   }
 
   download(item, successCb, errorCb): Subscription {
-    return this.api
-      .download(item.container, item.file)
-      .subscribe(successCb, errorCb)
+    return this.api.download(item.container, item.file).subscribe(successCb, errorCb)
   }
 }

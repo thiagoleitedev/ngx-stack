@@ -5,7 +5,8 @@ import { Project } from '@ngx-plus/ngx-sdk'
 import { Subscription } from 'rxjs/Subscription'
 import 'rxjs/add/operator/map'
 
-import { NgxUiService, ModalComponent, GridConfig } from '../../../ui'
+import { NgxUiService, ModalComponent, GridConfig } from '@ngx-plus/ngx-ui'
+
 import { ProjectActions } from '../../../state'
 import { ProjectsService } from '../projects.service'
 
@@ -28,7 +29,7 @@ export class ProjectListComponent implements OnInit {
     public ui: NgxUiService,
     private router: Router,
     private route: ActivatedRoute,
-    private store: Store<any>,
+    private store: Store<any>
   ) {}
 
   ngOnInit() {
@@ -52,14 +53,9 @@ export class ProjectListComponent implements OnInit {
             icon: 'fa fa-fw fa-trash',
           },
         ],
-        columns: [
-          { field: 'name', label: 'Name', action: 'Update' },
-          { field: 'description', label: 'Description' },
-        ],
+        columns: [{ field: 'name', label: 'Name', action: 'Update' }, { field: 'description', label: 'Description' }],
         count$: this.service.items$.map(item => item.count),
-        items$: this.service.items$.map(item =>
-          item.ids.map(id => item.entities[id]),
-        ),
+        items$: this.service.items$.map(item => item.ids.map(id => item.entities[id])),
       },
       toolbar: {
         actionButton: {
@@ -81,11 +77,7 @@ export class ProjectListComponent implements OnInit {
     this.ui.modalRef.componentInstance.item = item
     this.ui.modalRef.componentInstance.formConfig = form
     this.ui.modalRef.componentInstance.title = title
-    this.subscriptions.push(
-      this.ui.modalRef.componentInstance.action.subscribe(event =>
-        this.handleAction(event),
-      ),
-    )
+    this.subscriptions.push(this.ui.modalRef.componentInstance.action.subscribe(event => this.handleAction(event)))
   }
 
   handleAction(event) {

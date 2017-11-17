@@ -11,13 +11,13 @@ const routes: Routes = [
   { path: '', redirectTo: 'list', pathMatch: 'full' },
   {
     path: 'list',
-    component: ProjectListComponent
+    component: ProjectListComponent,
   },
   {
     path: ':id',
     component: ProjectDetailComponent,
     resolve: {
-      project: ProjectResolver
+      project: ProjectResolver,
     },
     children: [
       {
@@ -25,14 +25,13 @@ const routes: Routes = [
         component: ProjectFormComponent,
       },
       { path: '', redirectTo: 'edit', pathMatch: 'full' },
-    ]
+    ],
   },
-
 ]
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
-  providers: [ProjectResolver]
+  providers: [ProjectResolver],
 })
-export class ProjectsRoutingModule { }
+export class ProjectsRoutingModule {}

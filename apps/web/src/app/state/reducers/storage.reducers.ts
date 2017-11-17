@@ -13,9 +13,7 @@ export function sortByName(a: StorageContainer, b: StorageContainer): number {
   return a.name.localeCompare(b.name)
 }
 
-export const adapter: EntityAdapter<StorageContainer> = createEntityAdapter<
-  StorageContainer
->({
+export const adapter: EntityAdapter<StorageContainer> = createEntityAdapter<StorageContainer>({
   selectId: (container: StorageContainer) => container.id.toString(),
   sortComparer: sortByName,
 })
@@ -25,10 +23,7 @@ export const initialState = adapter.getInitialState({
   count: 0,
 })
 
-export function StorageReducer(
-  state = initialState,
-  action: Storage.Actions,
-): State {
+export function StorageReducer(state = initialState, action: Storage.Actions): State {
   switch (action.type) {
     case Storage.CREATE_CONTAINER_SUCCESS: {
       const container = action.payload
@@ -58,9 +53,9 @@ export function StorageReducer(
       const container = action.payload.container
       const deletedFile = action.payload
       const updateState = Object.assign({}, state)
-      updateState.entities[container].files = updateState.entities[
-        container
-      ].files.filter(file => file.id !== deletedFile.id)
+      updateState.entities[container].files = updateState.entities[container].files.filter(
+        file => file.id !== deletedFile.id
+      )
       return updateState
     }
     case Storage.SELECT_CONTAINER: {

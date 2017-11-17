@@ -1,7 +1,8 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core'
 import { Router } from '@angular/router'
 
-import { NgxFormConfig } from '../../../ui'
+import { NgxFormConfig } from '@ngx-plus/ngx-ui'
+
 import { ProjectsService } from '../projects.service'
 
 @Component({
@@ -18,10 +19,7 @@ import { ProjectsService } from '../projects.service'
 export class ProjectFormComponent implements OnInit {
   public formConfig: NgxFormConfig
 
-  constructor(
-    public service: ProjectsService,
-    private router: Router,
-  ) {}
+  constructor(public service: ProjectsService, private router: Router) {}
 
   ngOnInit() {
     this.formConfig = this.service.formConfig

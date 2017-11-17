@@ -1,28 +1,14 @@
 import { ActionReducerMap } from '@ngrx/store'
-import { LoopbackStateInterface, LoopbackReducer } from '@ngx-plus/ngx-sdk'
-import { UiReducer } from './ui.reducers'
 
-
-export interface AdminState {
-  users: LoopbackStateInterface['Accounts']
-  roles: LoopbackStateInterface['Roles']
-  controls: LoopbackStateInterface['ACLs']
-}
-
-export const AdminReducer: ActionReducerMap<AdminState> = {
-  users: LoopbackReducer['Accounts'],
-  roles: LoopbackReducer['Roles'],
-  controls: LoopbackReducer['ACLs'],
-}
+import * as Project from './project.reducers'
+import * as Storage from './storage.reducers'
 
 export interface HomeState {
-  projects: LoopbackStateInterface['Projects']
-  storage: LoopbackStateInterface['Storages']
+  projects: Project.State
+  storage: Storage.State
 }
 
 export const HomeReducer: ActionReducerMap<HomeState> = {
-  projects: LoopbackReducer['Projects'],
-  storage: LoopbackReducer['Storages'],
+  projects: Project.ProjectReducer,
+  storage: Storage.StorageReducer,
 }
-
-export { UiReducer }

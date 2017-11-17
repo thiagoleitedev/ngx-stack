@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core'
 import { Store } from '@ngrx/store'
+import { Observable } from 'rxjs/Observable'
+import { map } from 'rxjs/operators'
+
 import { ProjectApi, Project } from '@ngx-plus/ngx-sdk'
 export { Project } from '@ngx-plus/ngx-sdk'
-import { Observable } from 'rxjs/Observable'
-import 'rxjs/add/operator/distinctUntilChanged'
-import 'rxjs/add/operator/map'
 
 import { ProjectActions } from '../../state'
 
@@ -46,10 +46,7 @@ export class ProjectsService {
     ],
   }
 
-  constructor(
-    private api: ProjectApi,
-    private store: Store<any>
-  ) {
+  constructor(private api: ProjectApi, private store: Store<any>) {
     this.items$ = this.store.select('home').map(home => home.projects)
     this.selected$ = this.items$.map(items => items.selected)
   }

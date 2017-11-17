@@ -2,13 +2,13 @@ import { NgModule } from '@angular/core'
 import { Routes, RouterModule } from '@angular/router'
 import { HomeComponent } from './home.component'
 
-import { AuthGuard } from '../state'
+import { NgxAuthGuard } from '@ngx-plus/ngx-auth'
 
 const routes: Routes = [
   {
     path: '',
     component: HomeComponent,
-    canActivate: [AuthGuard],
+    canActivate: [NgxAuthGuard],
     children: [
       {
         path: 'projects',

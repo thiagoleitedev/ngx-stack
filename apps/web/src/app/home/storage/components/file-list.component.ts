@@ -1,14 +1,9 @@
-import {
-  Component,
-  OnInit,
-  ChangeDetectionStrategy,
-  ViewChild,
-  TemplateRef,
-} from '@angular/core'
+import { Component, OnInit, ChangeDetectionStrategy, ViewChild, TemplateRef } from '@angular/core'
 import { Router } from '@angular/router'
-import 'rxjs/add/operator/map'
+import { map } from 'rxjs/operators'
 
-import { GridConfig, NgxUiService } from '../../../ui'
+import { GridConfig, NgxUiService } from '@ngx-plus/ngx-ui'
+
 import { StorageService } from '../storage.service'
 
 @Component({
@@ -25,11 +20,7 @@ export class FileListComponent implements OnInit {
   public gridConfig: GridConfig
   public item
 
-  constructor(
-    private service: StorageService,
-    private router: Router,
-    private ui: NgxUiService,
-  ) {}
+  constructor(private service: StorageService, private router: Router, private ui: NgxUiService) {}
 
   ngOnInit() {
     this.item = this.service.selected
@@ -86,7 +77,7 @@ export class FileListComponent implements OnInit {
             this.ui.alerts.notifyError({
               title: 'Download Error',
               body: err.message,
-            }),
+            })
         )
       }
       default: {

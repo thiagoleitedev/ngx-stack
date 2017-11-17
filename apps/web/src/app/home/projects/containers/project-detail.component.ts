@@ -1,6 +1,7 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core'
 import { ActivatedRoute } from '@angular/router'
-import { CardConfig } from '../../../ui'
+
+import { CardConfig } from '@ngx-plus/ngx-ui'
 
 import { ProjectsService, Project } from '../projects.service'
 
@@ -18,7 +19,7 @@ export class ProjectDetailComponent implements OnInit {
   public cardConfig: CardConfig
   public item: Project
 
-  constructor(public service: ProjectsService, private route: ActivatedRoute) { }
+  constructor(public service: ProjectsService, private route: ActivatedRoute) {}
 
   ngOnInit() {
     const project = this.route.snapshot.data.project[0]
@@ -29,9 +30,7 @@ export class ProjectDetailComponent implements OnInit {
       icon: 'fa fa-fw fa-tag',
       nav: {
         title: 'Project Detail',
-        items: [
-          { icon: 'fa fa-fw fa-pencil-square-o', name: 'Edit', link: 'edit' },
-        ],
+        items: [{ icon: 'fa fa-fw fa-pencil-square-o', name: 'Edit', link: 'edit' }],
       },
       subTitle: this.item.description,
     }

@@ -1,15 +1,10 @@
-import {
-  Component,
-  OnInit,
-  ChangeDetectionStrategy,
-  ViewChild,
-  TemplateRef,
-} from '@angular/core'
+import { Component, OnInit, ChangeDetectionStrategy, ViewChild, TemplateRef } from '@angular/core'
 import { Router, ActivatedRoute } from '@angular/router'
 import { Subscription } from 'rxjs/Subscription'
-import 'rxjs/add/operator/map'
+import { map } from 'rxjs/operators'
 
-import { NgxUiService, ModalComponent, GridConfig } from '../../../ui'
+import { NgxUiService, ModalComponent, GridConfig } from '@ngx-plus/ngx-ui'
+
 import { StorageService, Container } from '../storage.service'
 
 @Component({
@@ -38,7 +33,7 @@ export class ContainerListComponent implements OnInit {
     public service: StorageService,
     public ui: NgxUiService,
     private router: Router,
-    private route: ActivatedRoute,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit() {
@@ -67,9 +62,7 @@ export class ContainerListComponent implements OnInit {
           { field: 'files', label: 'Files', cellTemplate: this.filesTRef },
         ],
         count$: this.service.items$.map(items => items.count),
-        items$: this.service.items$.map(items =>
-          items.ids.map(id => items.entities[id]),
-        ),
+        items$: this.service.items$.map(items => items.ids.map(id => items.entities[id])),
       },
       toolbar: {
         actionButton: {
@@ -91,11 +84,7 @@ export class ContainerListComponent implements OnInit {
     this.ui.modalRef.componentInstance.item = item
     this.ui.modalRef.componentInstance.formConfig = form
     this.ui.modalRef.componentInstance.title = title
-    this.subscriptions.push(
-      this.ui.modalRef.componentInstance.action.subscribe(event =>
-        this.handleAction(event),
-      ),
-    )
+    this.subscriptions.push(this.ui.modalRef.componentInstance.action.subscribe(event => this.handleAction(event)))
   }
 
   handleAction(event) {

@@ -1,6 +1,7 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core'
 import { ActivatedRoute } from '@angular/router'
-import { CardConfig } from '../../../ui'
+
+import { CardConfig } from '@ngx-plus/ngx-ui'
 
 import { StorageService } from '../storage.service'
 

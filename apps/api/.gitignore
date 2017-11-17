@@ -22,3 +22,4 @@ db.json
 config/local*
 config/production*
 client/*
+dist/*
