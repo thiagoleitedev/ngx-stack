@@ -6,7 +6,7 @@
   "apps": [
     {
       "name": "web",
-      "root": "apps\\web\\src",
+      "root": "apps/web/src",
       "outDir": "dist/apps/web",
       "assets": ["assets", "favicon.ico"],
       "index": "index.html",
@@ -25,8 +25,44 @@
       }
     },
     {
+      "name": "ngx-admin",
+      "root": "libs/ngx-admin/src",
+      "test": "../../../test.js",
+      "appRoot": ""
+    },
+    {
+      "name": "ngx-auth",
+      "root": "libs/ngx-auth/src",
+      "test": "../../../test.js",
+      "appRoot": ""
+    },
+    {
+      "name": "ngx-core",
+      "root": "libs/ngx-core/src",
+      "test": "../../../test.js",
+      "appRoot": ""
+    },
+    {
+      "name": "ngx-dashboard",
+      "root": "libs/ngx-dashboard/src",
+      "test": "../../../test.js",
+      "appRoot": ""
+    },
+    {
       "name": "ngx-sdk",
-      "root": "libs\\ngx-sdk\\src",
+      "root": "libs/ngx-sdk/src",
+      "test": "../../../test.js",
+      "appRoot": ""
+    },
+    {
+      "name": "ngx-shared",
+      "root": "libs/ngx-shared/src",
+      "test": "../../../test.js",
+      "appRoot": ""
+    },
+    {
+      "name": "ngx-ui",
+      "root": "libs/ngx-ui/src",
       "test": "../../../test.js",
       "appRoot": ""
     }
