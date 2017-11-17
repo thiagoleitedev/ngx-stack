@@ -5,13 +5,14 @@ import { DashboardComponent } from './dashboard.component'
 import { AdminDashboardComponent } from './components/admin-dashboard.component'
 import { HomeDashboardComponent } from './components/home-dashboard.component'
 
-import { AuthGuard } from '../state'
+import { NgxAdminGuard } from '@ngx-plus/ngx-admin'
+import { NgxAuthGuard } from '@ngx-plus/ngx-auth'
 
 const routes: Routes = [
   {
     path: '',
     component: DashboardComponent,
-    canActivate: [AuthGuard],
+    canActivate: [NgxAuthGuard],
     children: [
       {
         path: 'home',
@@ -20,6 +21,7 @@ const routes: Routes = [
       {
         path: 'admin',
         component: AdminDashboardComponent,
+        canActivate: [NgxAdminGuard],
       },
       { path: '', redirectTo: 'home', pathMatch: 'full' },
     ],

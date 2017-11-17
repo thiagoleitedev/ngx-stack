@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core'
-import { DashCard, NgxUiService, NavItem } from '../../ui'
 import { Store } from '@ngrx/store'
 import { Observable } from 'rxjs/Observable'
 import 'rxjs/add/operator/map'
 
-import { UserActions, RoleActions, ControlActions } from '../../state'
+import { DashCard, NgxUiService, NavItem } from '@ngx-plus/ngx-ui'
 
 @Component({
   selector: 'ngx-admin-dashboard',

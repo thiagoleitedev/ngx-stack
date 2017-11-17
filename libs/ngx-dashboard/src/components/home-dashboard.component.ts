@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core'
-import { DashCard } from '../../ui'
 import { Store } from '@ngrx/store'
 import { Observable } from 'rxjs/Observable'
-import 'rxjs/add/operator/map'
+import { map } from 'rxjs/operators'
 
-import { ProjectActions } from '../../state'
+import { DashCard } from '@ngx-plus/ngx-ui'
 
 @Component({
   selector: 'home-dashboard',
@@ -30,14 +29,14 @@ export class HomeDashboardComponent implements OnInit {
       {
         name: 'Projects',
         icon: 'fa fa-fw fa-calendar-check-o',
-        data: this.items$.map(home => home.projects.count),
+        data: this.items$.pipe(map(home => home.projects.count)),
         link: '/home/projects',
         class: 'success',
       },
       {
         name: 'Storage',
         icon: 'fa fa-fw fa-server',
-        data: this.items$.map(home => home.storage.count),
+        data: this.items$.pipe(map(home => home.storage.count)),
         link: '/home/storage',
         class: 'info',
       },

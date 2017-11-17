@@ -1,21 +1,16 @@
 import { NgModule } from '@angular/core'
 import { StoreModule } from '@ngrx/store'
 
-import { SharedModule } from '../shared.module'
+import { NgxSharedModule } from '@ngx-plus/ngx-shared'
 
 import { DashboardComponent } from './dashboard.component'
 import { DashboardRoutingModule } from './dashboard.routing'
-
 import { AdminDashboardComponent } from './components/admin-dashboard.component'
 import { HomeDashboardComponent } from './components/home-dashboard.component'
 
 @NgModule({
-  imports: [SharedModule, DashboardRoutingModule],
+  imports: [NgxSharedModule, DashboardRoutingModule],
   providers: [],
-  declarations: [
-    DashboardComponent,
-    AdminDashboardComponent,
-    HomeDashboardComponent,
-  ],
+  declarations: [DashboardComponent, AdminDashboardComponent, HomeDashboardComponent],
 })
-export class DashboardModule {}
+export class NgxDashboardModule {}
