@@ -18,7 +18,8 @@ import { AppConfig } from './app.config'
     </ngx-layout>
     <ngx-alert-templates></ngx-alert-templates>
     <ngx-loading [show]="loader$ | async"
-                 [config]="config.loader">
+                 [config]="appConfig.loader">
+                 ngx-plus
     </ngx-loading>
   `,
 })
@@ -27,18 +28,18 @@ export class AppComponent implements OnInit, AfterViewInit {
   public ui$: Observable<any>
   public user$: Observable<Account>
 
-  constructor(public config: AppConfig, private ui: NgxUiService, private store: Store<any>) {
+  constructor(public appConfig: AppConfig, private ui: NgxUiService, private store: Store<any>) {
     this.user$ = this.store.select('auth').pipe(map(auth => auth.user))
     this.ui$ = this.store.select('ui')
     this.loader$ = this.ui$.pipe(map(ui => ui.loader.active))
   }
 
   ngOnInit() {
-    this.ui.setHeaderImg(this.config.ui.headerImg)
-    this.ui.setAuthHeaderImg(this.config.ui.authHeaderImg)
-    this.ui.setPreHeaderImg(this.config.ui.preHeaderImg)
-    this.ui.setPostHeaderImg(this.config.ui.postHeaderImg)
-    this.ui.setSidebarNav(this.config.ui.sidebarNav)
+    this.ui.setHeaderImg(this.appConfig.ui.headerImg)
+    this.ui.setAuthHeaderImg(this.appConfig.ui.authHeaderImg)
+    this.ui.setPreHeaderImg(this.appConfig.ui.preHeaderImg)
+    this.ui.setPostHeaderImg(this.appConfig.ui.postHeaderImg)
+    this.ui.setSidebarNav(this.appConfig.ui.sidebarNav)
   }
 
   ngAfterViewInit() {
