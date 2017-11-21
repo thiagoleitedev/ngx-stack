@@ -12,11 +12,16 @@ export const DEACTIVATE_LOADER = '[Ui] DeactivateLoader'
 export const ACTIVATE_SIDEBAR = '[Ui] ActivateSidebar'
 export const DEACTIVATE_SIDEBAR = '[Ui] DeactivateSidebar'
 export const TOGGLE_SIDEBAR = '[Ui] ToggleSidebar'
+export const OPEN_SIDEBAR = '[Ui] OpenSidebar'
+export const CLOSE_SIDEBAR = '[Ui] CloseSidebar'
 
 export const ACTIVATE_MOREBAR = '[Ui] ActivateMorebar'
 export const DEACTIVATE_MOREBAR = '[Ui] DeactivateMorebar'
 export const TOGGLE_MOREBAR = '[Ui] ToggleMorebar'
+export const OPEN_MOREBAR = '[Ui] OpenMorebar'
+export const CLOSE_MOREBAR = '[Ui] CloseMorebar'
 
+// FOOTER
 export class ActivateFooter implements Action {
   public readonly type = ACTIVATE_FOOTER
   constructor() {}
@@ -27,6 +32,7 @@ export class DeactivateFooter implements Action {
   constructor() {}
 }
 
+// HEADER
 export class ActivateHeader implements Action {
   public readonly type = ACTIVATE_HEADER
   constructor() {}
@@ -37,6 +43,7 @@ export class DeactivateHeader implements Action {
   constructor() {}
 }
 
+// LOADER
 export class ActivateLoader implements Action {
   public readonly type = ACTIVATE_LOADER
   constructor() {}
@@ -47,6 +54,7 @@ export class DeactivateLoader implements Action {
   constructor() {}
 }
 
+// SIDEBAR
 export class ActivateSidebar implements Action {
   public readonly type = ACTIVATE_SIDEBAR
   constructor() {}
@@ -62,6 +70,17 @@ export class ToggleSidebar implements Action {
   constructor() {}
 }
 
+export class OpenSidebar implements Action {
+  public readonly type = OPEN_SIDEBAR
+  constructor() {}
+}
+
+export class CloseSidebar implements Action {
+  public readonly type = CLOSE_SIDEBAR
+  constructor() {}
+}
+
+// MOREBAR
 export class ActivateMorebar implements Action {
   public readonly type = ACTIVATE_MOREBAR
   constructor() {}
@@ -77,6 +96,16 @@ export class ToggleMorebar implements Action {
   constructor() {}
 }
 
+export class OpenMorebar implements Action {
+  public readonly type = OPEN_MOREBAR
+  constructor() {}
+}
+
+export class CloseMorebar implements Action {
+  public readonly type = CLOSE_MOREBAR
+  constructor() {}
+}
+
 export type Actions =
   | ActivateFooter
   | DeactivateFooter
@@ -87,6 +116,10 @@ export type Actions =
   | ActivateSidebar
   | DeactivateSidebar
   | ToggleSidebar
+  | OpenSidebar
+  | CloseSidebar
   | ActivateMorebar
   | DeactivateMorebar
   | ToggleMorebar
+  | OpenMorebar
+  | CloseMorebar

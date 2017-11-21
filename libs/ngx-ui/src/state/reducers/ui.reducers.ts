@@ -87,6 +87,16 @@ export function NgxUiReducer(state = initialState, action: Ui.Actions): State {
       updateState.sidebar.open = !updateState.sidebar.open
       return updateState
     }
+    case Ui.OPEN_SIDEBAR: {
+      const updateState = Object.assign({}, state)
+      updateState.sidebar.open = true
+      return updateState
+    }
+    case Ui.CLOSE_SIDEBAR: {
+      const updateState = Object.assign({}, state)
+      updateState.sidebar.open = false
+      return updateState
+    }
     case Ui.ACTIVATE_MOREBAR: {
       const updateState = Object.assign({}, state)
       updateState.morebar.active = true
@@ -102,7 +112,18 @@ export function NgxUiReducer(state = initialState, action: Ui.Actions): State {
       updateState.morebar.open = !updateState.morebar.open
       return updateState
     }
-    default:
+    case Ui.OPEN_MOREBAR: {
+      const updateState = Object.assign({}, state)
+      updateState.morebar.open = true
+      return updateState
+    }
+    case Ui.CLOSE_MOREBAR: {
+      const updateState = Object.assign({}, state)
+      updateState.morebar.open = false
+      return updateState
+    }
+    default: {
       return state
+    }
   }
 }
