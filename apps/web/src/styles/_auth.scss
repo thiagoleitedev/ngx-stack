@@ -1,0 +1,73 @@
+@import 'mixins';
+@import 'variables';
+
+.auth-header {
+  background: $primary;
+  padding: 5px;
+  z-index: 7;
+  ngx-action-button.active .btn {
+    background: #eee;
+    color: $primary;
+  }
+}
+.auth-container {
+  align-items: center;
+  display: flex;
+  min-height: calc(100vh - 276px);
+  justify-content: center;
+  margin-top: 120px;
+  padding-bottom: 40px;
+  width: 100%;
+  z-index: 5;
+}
+.auth-tabs {
+  z-index: 5;
+  ul {
+    width: 80vw;
+    a:hover {
+      color: white;
+    }
+  }
+}
+.auth-body {
+  height: 100%;
+  margin: auto;
+  max-width: 500px;
+  width: 100%;
+}
+.auth-bg img {
+  position: absolute;
+  z-index: 0;
+  height: 100%;
+  width: 100%;
+  display: block;
+  top: 0;
+  left: 0;
+  background-size: cover;
+  background-position: center center;
+}
+.auth-bg:after {
+  opacity: 0.85;
+  @include gradient-radial(lighten($success, 20%), lighten($success, 10%));
+}
+.auth-bg:after,
+.auth-bg:before {
+  display: block;
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+.login-social-icons,
+.register-social-icons {
+  align-items: center;
+  background: #fff;
+  border-color: $primary;
+  justify-content: center;
+  margin-bottom: -20px;
+  max-width: 250px;
+  padding: 10px;
+  z-index: 7;
+}

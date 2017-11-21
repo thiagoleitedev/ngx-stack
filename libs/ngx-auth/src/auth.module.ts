@@ -1,16 +1,17 @@
 import { NgModule } from '@angular/core'
 
-import { NgxUiModule } from '@ngx-plus/ngx-ui'
+import { NgxSharedModule } from '@ngx-plus/ngx-shared'
 
 import { LoginComponent } from './login/login.component'
 import { RegisterComponent } from './register/register.component'
 import { AuthComponent } from './auth.component'
+import { AuthHeaderComponent } from './header/auth-header.component'
 import { AuthRoutingModule } from './auth.routing'
 
-const components = [AuthComponent, LoginComponent, RegisterComponent]
+const components = [AuthComponent, AuthHeaderComponent, LoginComponent, RegisterComponent]
 
 @NgModule({
-  imports: [NgxUiModule, AuthRoutingModule],
+  imports: [NgxSharedModule, AuthRoutingModule],
   declarations: [...components],
   exports: [...components],
 })

@@ -1,13 +1,24 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core'
 import { Store } from '@ngrx/store'
 
 import { Account } from '@ngx-plus/ngx-sdk'
+import { NgxActionButton } from '@ngx-plus/ngx-ui'
 
 import { NgxAuthActions } from '../state'
 
 @Component({
   selector: 'ngx-auth-register',
   template: `
+    <div class="row justify-content-center">
+      <div class="col-12 card register-social-icons">
+        <div class="row">
+          <ngx-action-button *ngFor="let item of socialIcons"
+                             [config]="item"
+                             (action)="handleAction($event)">
+          </ngx-action-button>
+        </div>
+      </div>
+    </div>
     <ngx-form [config]="formConfig"
               [item]="registration"
               (action)="handleAction($event)">
@@ -15,6 +26,38 @@ import { NgxAuthActions } from '../state'
   `,
 })
 export class RegisterComponent implements OnInit {
+  @Input()
+  socialIcons: NgxActionButton[] = [
+    {
+      action: 'TwitterRegister',
+      class: 'btn btn-sm btn-success text-white mr-2',
+      icon: 'fa fa-fw fa-twitter',
+      item: '',
+      label: '',
+    },
+    {
+      action: 'FacebookRegister',
+      class: 'btn btn-sm btn-primary text-white mr-2',
+      icon: 'fa fa-fw fa-facebook',
+      item: '',
+      label: '',
+    },
+    {
+      action: 'GoogleRegister',
+      class: 'btn btn-sm btn-info text-white mr-2',
+      icon: 'fa fa-fw fa-google-plus',
+      item: '',
+      label: '',
+    },
+    {
+      action: 'LinkedInRegister',
+      class: 'btn btn-sm btn-success text-white',
+      icon: 'fa fa-fw fa-linkedin',
+      item: '',
+      label: '',
+    },
+  ]
+
   public registration: Account
   public formConfig: {}
 
