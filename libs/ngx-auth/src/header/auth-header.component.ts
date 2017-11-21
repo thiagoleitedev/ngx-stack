@@ -48,7 +48,7 @@ export class AuthHeaderComponent implements OnInit {
     },
   ]
 
-  constructor(private ui: NgxUiService, private store: Store<any>) {}
+  constructor(public ui: NgxUiService, private store: Store<any>) {}
 
   ngOnInit() {}
 }
