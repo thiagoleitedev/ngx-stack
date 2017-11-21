@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core'
-import { DropButton } from '../../../interfaces'
+import { NgxDropButton } from '../../../interfaces'
 
 @Component({
   selector: 'ngx-drop-button',
@@ -42,7 +42,7 @@ import { DropButton } from '../../../interfaces'
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DropButtonComponent {
-  @Input() config: DropButton
+  @Input() config: NgxDropButton
   @Output() action = new EventEmitter()
 
   public default = {

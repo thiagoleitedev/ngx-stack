@@ -1,4 +1,5 @@
 import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core'
+import { NgxDropButton } from '../../interfaces'
 
 @Component({
   selector: 'ngx-toolbar-drop',
@@ -11,10 +12,10 @@ import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from 
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ToolbarDropComponent {
-  @Input() config
+  @Input() config: NgxDropButton
   @Output() action = new EventEmitter()
 
-  public default = {
+  public default: NgxDropButton = {
     class: 'btn btn-outline-success w-150',
     label: null,
     selected: 10,

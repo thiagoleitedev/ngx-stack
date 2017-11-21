@@ -4,8 +4,7 @@ import { Component, Input, ChangeDetectionStrategy } from '@angular/core'
   selector: 'ngx-body',
   template: `
     <div class="app-body"
-         [class.open]="config.sidebar.open && config.sidebar.active"
-         [class.no-header]="!config.header.active">
+         [class.open]="config.sidebar.open && config.sidebar.active">
       <router-outlet></router-outlet>
     </div>
   `,

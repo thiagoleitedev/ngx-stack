@@ -1,13 +1,13 @@
 import { Observable } from 'rxjs/Observable'
 
-export interface ActionButton {
+export interface NgxActionButton {
   action: string
   class?: string
   icon?: string
   item?: any
   label?: string
 }
-export interface DropButton {
+export interface NgxDropButton {
   action?: string
   class?: string
   icon?: string
@@ -18,7 +18,7 @@ export interface DropButton {
   }[]
   selected?: any
 }
-export interface RadioButtons {
+export interface NgxRadioButtons {
   options: {
     value: string
     icon: string

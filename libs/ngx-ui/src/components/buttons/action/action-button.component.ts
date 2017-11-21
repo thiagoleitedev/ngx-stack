@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core'
-import { ActionButton } from '../../../interfaces'
+import { NgxActionButton } from '../../../interfaces'
 
 @Component({
   selector: 'ngx-action-button',
@@ -16,16 +16,15 @@ import { ActionButton } from '../../../interfaces'
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ActionButtonComponent {
-  @Input() config: ActionButton
+  @Input() config: NgxActionButton
   @Output() action = new EventEmitter()
 
   public search: string
 
   handleAction(event) {
     switch (event.type) {
-      default: {
+      default:
         return this.action.emit(event)
-      }
     }
   }
 }

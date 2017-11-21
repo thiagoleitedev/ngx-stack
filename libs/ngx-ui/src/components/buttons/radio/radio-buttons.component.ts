@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core'
 import { FormBuilder, FormGroup } from '@angular/forms'
 
-import { RadioButtons } from '../../../interfaces'
+import { NgxRadioButtons } from '../../../interfaces'
 
 @Component({
   selector: 'ngx-radio-buttons',
@@ -37,7 +37,7 @@ import { RadioButtons } from '../../../interfaces'
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RadioButtonsComponent implements OnInit {
-  @Input() config: RadioButtons
+  @Input() config: NgxRadioButtons
   @Output() action = new EventEmitter()
 
   public radioGroup: FormGroup

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core'
 import { Observable } from 'rxjs/Observable'
 
-import { DropButton } from '@ngx-plus/ngx-ui'
+import { NgxDropButton } from '@ngx-plus/ngx-ui'
 
 import { UsersService } from '../users.service'
 
@@ -49,7 +49,7 @@ export class UserRolesComponent implements OnInit {
       field: 'description',
     },
   ]
-  public dropConfig: DropButton
+  public dropConfig: NgxDropButton
 
   constructor(public service: UsersService) {}
 

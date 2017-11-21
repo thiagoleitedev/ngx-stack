@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core'
 
-import { ActionButton } from '../../interfaces'
+import { NgxActionButton } from '../../interfaces'
 
 @Component({
   selector: 'ngx-toolbar-action',
@@ -10,7 +10,7 @@ import { ActionButton } from '../../interfaces'
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ToolbarActionComponent {
-  @Input() actionButton: ActionButton
+  @Input() actionButton: NgxActionButton
   @Output() action = new EventEmitter()
 
   handleAction(event) {

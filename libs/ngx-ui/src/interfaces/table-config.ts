@@ -2,10 +2,10 @@ import { TemplateRef } from '@angular/core'
 import { BehaviorSubject } from 'rxjs/BehaviorSubject'
 import { Observable } from 'rxjs/Observable'
 
-import { ActionButton } from './buttons'
+import { NgxActionButton } from './buttons'
 
 export interface TableConfig {
-  actionButtons?: ActionButton[]
+  actionButtons?: NgxActionButton[]
   columnMode?: string
   columns: {
     field: string

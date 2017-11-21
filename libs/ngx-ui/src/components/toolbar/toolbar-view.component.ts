@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core'
-import { RadioButtons } from '../../interfaces'
+import { NgxRadioButtons } from '../../interfaces'
 
 @Component({
   selector: 'ngx-toolbar-view',
@@ -11,7 +11,7 @@ import { RadioButtons } from '../../interfaces'
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ToolbarViewComponent {
-  @Input() config: RadioButtons
+  @Input() config: NgxRadioButtons
   @Output() action = new EventEmitter()
 
   handleAction(event) {

@@ -1,7 +1,7 @@
-import { ActionButton, RadioButtons } from './buttons'
+import { NgxActionButton, NgxRadioButtons } from './buttons'
 
 export interface ToolbarConfig {
-  actionButton?: ActionButton
+  actionButton?: NgxActionButton
   filter?: boolean
-  radioButtons?: RadioButtons
+  radioButtons?: NgxRadioButtons
 }

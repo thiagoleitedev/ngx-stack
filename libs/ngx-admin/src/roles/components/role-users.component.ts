@@ -3,7 +3,7 @@ import { Account } from '@ngx-plus/ngx-sdk'
 import { Observable } from 'rxjs/Observable'
 import { combineLatest, map } from 'rxjs/operators'
 
-import { NgxUiService, DropButton } from '@ngx-plus/ngx-ui'
+import { NgxUiService, NgxDropButton } from '@ngx-plus/ngx-ui'
 
 import { RolesService } from '../roles.service'
 
@@ -53,7 +53,7 @@ export class RoleUsersComponent implements OnInit {
       field: 'description',
     },
   ]
-  public dropConfig: DropButton
+  public dropConfig: NgxDropButton
 
   constructor(public service: RolesService, public ui: NgxUiService) {}
 

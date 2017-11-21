@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core'
 import { Observable } from 'rxjs/Observable'
 import { Subscription } from 'rxjs/Subscription'
 
-import { NgxUiService, DropButton } from '@ngx-plus/ngx-ui'
+import { NgxUiService, NgxDropButton } from '@ngx-plus/ngx-ui'
 
 import { UsersService } from '../users.service'
 
@@ -13,7 +13,7 @@ import { UsersService } from '../users.service'
 export class UserAccessTokensComponent implements OnInit {
   public item$: Observable<any>
   public items$: Observable<any[]>
-  public dropConfig: DropButton
+  public dropConfig: NgxDropButton
   private subscriptions: Subscription[]
 
   constructor(public service: UsersService, public ui: NgxUiService) {
@@ -43,7 +43,7 @@ export class UserAccessTokensComponent implements OnInit {
         this.ui.alerts.notifyError({
           title: 'Read Tokens Failure',
           body: err.message,
-        })
+        }),
     )
   }
 
@@ -63,7 +63,7 @@ export class UserAccessTokensComponent implements OnInit {
             this.ui.alerts.notifyError({
               title: 'Generate Token Fail',
               body: err.message,
-            })
+            }),
         )
       }
       case 'DeleteToken': {
@@ -83,7 +83,7 @@ export class UserAccessTokensComponent implements OnInit {
             this.ui.alerts.notifyError({
               title: 'Delete Token Fail',
               body: err.message,
-            })
+            }),
         )
       }
       case 'RemoveTtl': {
@@ -103,7 +103,7 @@ export class UserAccessTokensComponent implements OnInit {
             this.ui.alerts.notifyError({
               title: 'Remove TTL Fail',
               body: err.message,
-            })
+            }),
         )
       }
       case 'DeleteAllTokens': {
@@ -121,7 +121,7 @@ export class UserAccessTokensComponent implements OnInit {
               this.ui.alerts.notifyError({
                 title: 'Delete All Tokens Fail',
                 body: err.message,
-              })
+              }),
           )
         const question = {
           title: 'Are you sure?',
